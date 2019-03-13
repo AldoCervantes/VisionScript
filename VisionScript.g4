@@ -1,7 +1,7 @@
 grammar VisionScript;
 
 /*
- * Parser Rules
+ * Parser Ruless
 */
 
 visionscript        : programa EOF ;
