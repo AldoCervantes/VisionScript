@@ -1,0 +1,288 @@
+number n = 10
+number n = 1.1
+number n = 1.2 + 3
+number n = 1.2 + 3 - 3 * 2 / 1
+number n = (1+2)/(16*4/2)-13
+number n = a + b
+number n = (a+a)/(b*a/c)-13
+
+bool b = true
+bool b = false
+
+text t = ""
+text t = "A+B"
+text t = "12213.123"
+text t = "12213.123" + ""
+text t = "" + "" + "" + "" + ""
+
+container (10) c = []
+container (10.2) c = []
+container (10) c = [1,"A",true]
+container (10) c = [1,"A",true] + []
+container (10) c = [] + [] + [] + []
+
+if A > B
+begin
+    else
+end
+
+if A > B
+begin
+    else
+end
+
+if A < B
+begin
+    else
+end
+
+if A equal B
+begin
+    else
+end
+
+if A not_equal B
+begin
+    else
+end
+
+if A >= B
+begin
+    else
+end
+
+if A <= B
+begin
+    else
+end
+
+if A > B and B < C
+begin
+    else
+end
+if A > B or B < C
+begin
+    else
+end
+
+if x > y or z < w and i < j
+begin
+    else
+end
+
+if "A" equal "B"
+begin
+    else
+end
+
+if 1 equal 2
+begin
+    else
+end
+
+repeat 10 times
+begin
+end
+
+repeat 10.2 times
+begin
+end
+
+repeat 10 + 2 times
+begin
+end
+
+repeat (a+a)/(b*a/c)-13 times
+begin
+end
+
+repeat (a+a)/(b*a/c)-13 times
+begin
+end
+
+repeat until x > y or z < w and i < j
+begin
+end
+
+read(a)
+
+print(10)
+braille(1.1)
+hear("")
+
+print("90")
+print(true)
+print(false)
+print(a)
+print(a+b)
+print((a+a)/(b*a/c)-13)
+print( x > y or z < w and i < j)
+print("" + "" + "" + "" + "" + "")
+
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    number a = 10
+    text b = "Hola"
+    return()
+end
+
+text function add(number a, text b, bool c, container (10) d )
+begin
+    return()
+end
+
+bool function add(number a, text b, bool c, container (10) d )
+begin
+    return()
+end
+
+container (10) function add(number a, text b, bool c, container (10) d )
+begin
+    return()
+end
+
+void function add(number a, text b, bool c, container (10) d )
+begin
+    return()
+end
+
+a = 10
+a = 10.1
+
+a = true
+a = false
+
+a = "A"
+
+a = a
+
+a = []
+a = [1,"A",false]
+
+contact_containers = [] + []
+
+contact_strings = "A" + "A"
+
+operacion = (1+2)/(16*4/2)-13
+operacion = (a+a)/(b*a/c)-13
+
+expresion = (1+2)/(16*4/2)-13 > y or 10 < w and 1 < j
+
+func = add(10,20.1,[],"",true,false)
+
+func = add()
+
+add()
+
+if A > B
+begin
+    a = 10
+    if A > B
+    begin
+        else
+    end
+    repeat 10 times
+    begin 
+    end
+    repeat until a > b
+    begin
+    end
+    read(a)
+    print(10)
+    add()
+    else
+end
+
+
+
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    number a = 20
+    
+    a = 10  
+    
+    if A > B
+    begin
+        else
+    end
+    
+    repeat 10 times
+    begin 
+    end
+    
+    repeat until a > b
+    begin
+    end
+    
+    read(a)
+    
+    print(10)
+    
+    add()
+    
+    return(10)
+end
+
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    return(10.2)
+end
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    return(a)
+end
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    return("")
+end
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    return([])
+end
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    return(true)
+end
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    return(false)
+end
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    return(a+b/2)
+end
+
+number function add(number a, text b, bool c, container (10) d )
+begin
+    return(a+b/2 > 10)
+end
+
+
+a.get(i+1)
+
+a.get(10+10/2)
+a.get_back()
+a.get_front()
+
+a.insert(i+1,i+1)   
+a.insert_front(10+10/2)
+a.insert_back(10+10/2)
+
+a.length()
+
+
+
+a.insert(1,10)
+a = a.get(10)
+
+
+number n = 10.1
