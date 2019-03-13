@@ -242,8 +242,13 @@ class VisionScriptLexer(Lexer):
     modeNames = [ "DEFAULT_MODE" ]
 
     literalNames = [ "<INVALID>",
-            "'='", "'('", "')'", "','", "'['", "']'", "'.'", "'+'", "'-'", 
-            "'/'", "'*'", "'>'", "'<'" ]
+            "'='", "'('", "')'", "','", "'['", "']'", "'.'", "'read'", "'print'", 
+            "'hear'", "'braille'", "'if'", "'else'", "'number'", "'text'", 
+            "'bool'", "'false'", "'true'", "'and'", "'or'", "'equal'", "'not_equal'", 
+            "'container'", "'begin'", "'end'", "'repeat'", "'times'", "'until'", 
+            "'function'", "'return'", "'get_back'", "'get_front'", "'get'", 
+            "'insert_back'", "'insert_front'", "'insert'", "'void'", "'length'", 
+            "'+'", "'-'", "'/'", "'*'", "'>'", "'>='", "'<'", "'<='" ]
 
     symbolicNames = [ "<INVALID>",
             "READ", "PRINT", "HEAR", "BRAILLE", "IF", "ELSE", "NUMBER", 

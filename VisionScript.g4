@@ -16,7 +16,7 @@ programa            : (variable
                     | asignacion 
                     | op_contenedor)*;
 
-variable            : tipo ID '=' todo {System.out.print($ID.text + " => " + $tipo.text + " => " + $todo.text + '\n');} ;
+variable            : tipo ID '=' todo {print($ID.text + " => " + $tipo.text + " => " + $todo.text + '\n')} ;
 
 tipo                : NUMBER 
                     | TEXT 
@@ -71,10 +71,10 @@ op_termino          : op_factor (( MULTIPLICATION | DIVISION) op_factor)* ;
 
 op_factor           : '(' operacion ')' | (PLUS | MINUS)? (CTN | ID) ;
 
-function            :{System.out.print("--- FUNCTION --- \n" );} function_type FUNCTION ID  {System.out.print($ID.text + " => " + $function_type.text + " => ");} 
-                    '(' ( tipo ID {System.out.print("[" + $ID.text + " : " + $tipo.text);} 
-                    (',' tipo ID {System.out.print(" " + $ID.text + " : " + $tipo.text);} )* )? ')' {System.out.print(" ]\n");}
-                    BEGIN func_bloque RETURN '(' (todo)? ')' END  {System.out.print("--- END FUNCTION --- \n" );} ;
+function            :{print("--- FUNCTION --- \n" )} function_type FUNCTION ID  {print($ID.text + " => " + $function_type.text + " => ")} 
+                    '(' ( tipo ID {print("[" + $ID.text + " : " + $tipo.text)} 
+                    (',' tipo ID {print(" " + $ID.text + " : " + $tipo.text)} )* )? ')' {print(" ]\n")}
+                    BEGIN func_bloque RETURN '(' (todo)? ')' END  {print("--- END FUNCTION --- \n" )} ;
 
 function_type       : tipo | VOID ;
 

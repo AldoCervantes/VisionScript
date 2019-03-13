@@ -188,6 +188,15 @@ class VisionScriptListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by VisionScriptParser#function_type.
+    def enterFunction_type(self, ctx:VisionScriptParser.Function_typeContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#function_type.
+    def exitFunction_type(self, ctx:VisionScriptParser.Function_typeContext):
+        pass
+
+
     # Enter a parse tree produced by VisionScriptParser#func_bloque.
     def enterFunc_bloque(self, ctx:VisionScriptParser.Func_bloqueContext):
         pass
