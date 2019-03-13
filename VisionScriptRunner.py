@@ -11,7 +11,7 @@ def main(argv):
     stream = CommonTokenStream(lexer)
     parser = VisionScriptParser(stream)
     # Nombre de la primer regla de la gramática
-    tree = parser.programa()
+    tree = parser.visionscript()
     # Imprimiendo el árbol
     #print(tree.toStringTree(recog=parser))
 
