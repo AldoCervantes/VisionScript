@@ -5,6 +5,10 @@ if __name__ is not None and "." in __name__:
 else:
     from VisionScriptParser import VisionScriptParser
 
+from VisionScriptCompiler import FunctionDirectory
+func_dir = FunctionDirectory()
+
+
 # This class defines a complete listener for a parse tree produced by VisionScriptParser.
 class VisionScriptListener(ParseTreeListener):
 
@@ -50,24 +54,6 @@ class VisionScriptListener(ParseTreeListener):
 
     # Exit a parse tree produced by VisionScriptParser#todo.
     def exitTodo(self, ctx:VisionScriptParser.TodoContext):
-        pass
-
-
-    # Enter a parse tree produced by VisionScriptParser#seccion.
-    def enterSeccion(self, ctx:VisionScriptParser.SeccionContext):
-        pass
-
-    # Exit a parse tree produced by VisionScriptParser#seccion.
-    def exitSeccion(self, ctx:VisionScriptParser.SeccionContext):
-        pass
-
-
-    # Enter a parse tree produced by VisionScriptParser#ct.
-    def enterCt(self, ctx:VisionScriptParser.CtContext):
-        pass
-
-    # Exit a parse tree produced by VisionScriptParser#ct.
-    def exitCt(self, ctx:VisionScriptParser.CtContext):
         pass
 
 
@@ -125,6 +111,15 @@ class VisionScriptListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by VisionScriptParser#mega_expresion.
+    def enterMega_expresion(self, ctx:VisionScriptParser.Mega_expresionContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#mega_expresion.
+    def exitMega_expresion(self, ctx:VisionScriptParser.Mega_expresionContext):
+        pass
+
+
     # Enter a parse tree produced by VisionScriptParser#expresion.
     def enterExpresion(self, ctx:VisionScriptParser.ExpresionContext):
         pass
@@ -152,30 +147,30 @@ class VisionScriptListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by VisionScriptParser#operacion.
-    def enterOperacion(self, ctx:VisionScriptParser.OperacionContext):
+    # Enter a parse tree produced by VisionScriptParser#termino.
+    def enterTermino(self, ctx:VisionScriptParser.TerminoContext):
         pass
 
-    # Exit a parse tree produced by VisionScriptParser#operacion.
-    def exitOperacion(self, ctx:VisionScriptParser.OperacionContext):
-        pass
-
-
-    # Enter a parse tree produced by VisionScriptParser#op_termino.
-    def enterOp_termino(self, ctx:VisionScriptParser.Op_terminoContext):
-        pass
-
-    # Exit a parse tree produced by VisionScriptParser#op_termino.
-    def exitOp_termino(self, ctx:VisionScriptParser.Op_terminoContext):
+    # Exit a parse tree produced by VisionScriptParser#termino.
+    def exitTermino(self, ctx:VisionScriptParser.TerminoContext):
         pass
 
 
-    # Enter a parse tree produced by VisionScriptParser#op_factor.
-    def enterOp_factor(self, ctx:VisionScriptParser.Op_factorContext):
+    # Enter a parse tree produced by VisionScriptParser#factor.
+    def enterFactor(self, ctx:VisionScriptParser.FactorContext):
         pass
 
-    # Exit a parse tree produced by VisionScriptParser#op_factor.
-    def exitOp_factor(self, ctx:VisionScriptParser.Op_factorContext):
+    # Exit a parse tree produced by VisionScriptParser#factor.
+    def exitFactor(self, ctx:VisionScriptParser.FactorContext):
+        pass
+
+
+    # Enter a parse tree produced by VisionScriptParser#ct.
+    def enterCt(self, ctx:VisionScriptParser.CtContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#ct.
+    def exitCt(self, ctx:VisionScriptParser.CtContext):
         pass
 
 
@@ -239,15 +234,6 @@ class VisionScriptListener(ParseTreeListener):
 
     # Exit a parse tree produced by VisionScriptParser#concat_contenedor.
     def exitConcat_contenedor(self, ctx:VisionScriptParser.Concat_contenedorContext):
-        pass
-
-
-    # Enter a parse tree produced by VisionScriptParser#concat_text.
-    def enterConcat_text(self, ctx:VisionScriptParser.Concat_textContext):
-        pass
-
-    # Exit a parse tree produced by VisionScriptParser#concat_text.
-    def exitConcat_text(self, ctx:VisionScriptParser.Concat_textContext):
         pass
 
 

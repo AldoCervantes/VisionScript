@@ -1,195 +1,226 @@
 grammar VisionScript;
 
+@header {
+from VisionScriptCompiler import FunctionDirectory
+func_dir = FunctionDirectory()
+}
 /*
  * Parser Ruless
-*/
+ */
 
-visionscript        : programa EOF ;
+visionscript:
+	{func_dir.FuncDeclaration('@global','void')} programa EOF {func_dir.showFunctionDirectory()};
 
-programa            : (variable
-                    | condicion 
-                    | ciclo 
-                    | read 
-                    | imprimir 
-                    | function 
-                    | function_call 
-                    | asignacion 
-                    | op_contenedor)*;
+programa: (
+		variable
+		| condicion
+		| ciclo
+		| read
+		| imprimir
+		| function
+		| function_call
+		| asignacion
+		| op_contenedor
+	)*;
 
-variable            : tipo ID '=' todo {print($ID.text + " => " + $tipo.text + " => " + $todo.text + '\n')} ;
+variable:
+	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)
+		};
 
-tipo                : NUMBER 
-                    | TEXT 
-                    | BOOL 
-                    | CONTAINER '(' operacion ')';
+tipo
+	returns[Object type]:
+	NUMBER {$type = $NUMBER.text}
+	| TEXT {$type = $TEXT.text}
+	| BOOL {$type = $BOOL.text}
+	| CONTAINER '(' mega_expresion ')' {$type = $CONTAINER.text};
 
-todo                : seccion 
-                    | concat_contenedor 
-                    | concat_text 
-                    | contenedor ;
+todo:
+	mega_expresion
+	| concat_contenedor
+	| contenedor
+	| function_call
+	| op_contenedor;
 
-seccion             : ct 
-                    | expresion 
-                    | operacion ;
+asignacion:
+	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)};
 
-ct                  : CTBF 
-                    | CTBT 
-                    | CTT ;
+condicion: IF mega_expresion BEGIN bloque ELSE bloque END;
 
-asignacion          : ID '=' ( todo | function_call | op_contenedor); 
+ciclo:
+	REPEAT (mega_expresion TIMES | UNTIL mega_expresion) BEGIN bloque END;
 
-condicion           : IF expresion BEGIN bloque ELSE bloque END ;
+bloque: (
+		condicion
+		| ciclo
+		| read
+		| imprimir
+		| asignacion
+		| op_contenedor
+		| function_call
+	)*;
 
-ciclo               : REPEAT (operacion TIMES | UNTIL expresion) BEGIN bloque END ; 
+read: READ '(' ID ')';
 
-bloque              : ( condicion 
-                    | ciclo 
-                    | read 
-                    | imprimir 
-                    | asignacion 
-                    | op_contenedor 
-                    | function_call)* ;
+imprimir: (BRAILLE | PRINT | HEAR) '(' todo ')';
 
-read                : READ '(' ID ')' ;
+mega_expresion: expresion ( (AND | OR) expresion)*;
 
-imprimir            : (BRAILLE | PRINT | HEAR) '(' todo ')' ;
+expresion: exp (exp_todo exp)*;
 
-expresion           : exp  exp_todo  exp ( (AND | OR ) exp  exp_todo  exp )* ;
+exp_todo:
+	GREATER
+	| GREATER_EQUAL
+	| LESS
+	| LESS_EQUAL
+	| EQUAL
+	| NOT_EQUAL;
 
-exp_todo            : GREATER 
-                    | GREATER_EQUAL 
-                    | LESS 
-                    | LESS_EQUAL 
-                    | EQUAL 
-                    | NOT_EQUAL ;
+exp: termino ((PLUS | MINUS) termino)*;
 
-exp                 :  operacion | ct ;
+termino: factor (( MULTIPLICATION | DIVISION) factor)*;
 
-operacion           : op_termino ((PLUS | MINUS) op_termino)* ;
+factor: '(' mega_expresion ')' | ( PLUS | MINUS)? ct;
 
-op_termino          : op_factor (( MULTIPLICATION | DIVISION) op_factor)* ;
+ct: CTBF | CTBT | CTT | CTN | ID;
 
-op_factor           : '(' operacion ')' | (PLUS | MINUS)? (CTN | ID) ;
+function:
+	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} '(' (
+		tipo ID (',' tipo ID)*
+	)? ')' {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)} BEGIN
+		func_bloque RETURN '(' (todo)? ')' END {func_dir.currentFunction = '@global'};
 
-function            :{print("--- FUNCTION --- \n" )} function_type FUNCTION ID  {print($ID.text + " => " + $function_type.text + " => ")} 
-                    '(' ( tipo ID {print("[" + $ID.text + " : " + $tipo.text)} 
-                    (',' tipo ID {print(" " + $ID.text + " : " + $tipo.text)} )* )? ')' {print(" ]\n")}
-                    BEGIN func_bloque RETURN '(' (todo)? ')' END  {print("--- END FUNCTION --- \n" )} ;
+function_type
+	returns[Object type]:
+	tipo {$type = $tipo.type}
+	| VOID {$type = $VOID.text};
 
-function_type       : tipo | VOID ;
+func_bloque: (
+		variable
+		| condicion
+		| ciclo
+		| read
+		| imprimir
+		| asignacion
+		| op_contenedor
+		| function_call
+	)*;
 
-func_bloque         : ( variable 
-                    | condicion 
-                    | ciclo 
-                    | read 
-                    | imprimir 
-                    | asignacion 
-                    | op_contenedor 
-                    | function_call)* ;
+function_call:
+	ID '(' (
+		todo {func_dir.VarAssignment($ID.text,$ID.text,$todo.text)} (
+			',' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)}
+		)*
+	)? ')';
 
-function_call       : ID '(' ( todo (',' todo)* )? ')';
+contenedor: '[' ( mega_expresion (',' mega_expresion)*)? ']';
 
-contenedor          : '[' ( seccion (',' seccion)* )? ']' ;
+op_contenedor:
+	ID '.' (
+		(GET_BACK | GET_FRONT | LENGTH) '(' ')'
+		| (GET | INSERT_BACK | INSERT_FRONT) '(' mega_expresion ')'
+		| INSERT '(' mega_expresion ',' mega_expresion ')'
+	);
 
-op_contenedor       : ID '.' ( (GET_BACK | GET_FRONT | LENGTH) '(' ')'| (GET | INSERT_BACK | INSERT_FRONT) '(' operacion ')' | INSERT '(' operacion ',' operacion ')') ;
-
-concat_contenedor   : contenedor (PLUS contenedor)+ ;
-
-concat_text         : CTT (PLUS CTT)+ ;
+concat_contenedor: contenedor (PLUS contenedor)+;
 
 /*
  * Lexer Rules
-*/
-fragment LOWERCASE  : [a-z] ;
+ */
+fragment LOWERCASE: [a-z];
 
-fragment UPPERCASE  : [A-Z] ;
+fragment UPPERCASE: [A-Z];
 
-fragment DIGIT      : [0-9];
+fragment DIGIT: [0-9];
 
-READ                : 'read' ;
+READ: 'read';
 
-PRINT               : 'print' ;
+PRINT: 'print';
 
-HEAR                : 'hear' ;
+HEAR: 'hear';
 
-BRAILLE             : 'braille' ;
+BRAILLE: 'braille';
 
-IF                  : 'if' ;
+IF: 'if';
 
-ELSE                : 'else' ;
+ELSE: 'else';
 
-NUMBER              : 'number' ;
+NUMBER: 'number';
 
-TEXT                : 'text' ;
+TEXT: 'text';
 
-BOOL                : 'bool' ;
+BOOL: 'bool';
 
-CTBF                : 'false' ;
+CTBF: 'false';
 
-CTBT                : 'true' ;
+CTBT: 'true';
 
-AND                 : 'and' ;
+AND: 'and';
 
-OR                  : 'or' ;
+OR: 'or';
 
-EQUAL               : 'equal' ;
+EQUAL: 'equal';
 
-NOT_EQUAL           : 'not_equal' ;
+NOT_EQUAL: 'not_equal';
 
-CONTAINER           : 'container' ;
+CONTAINER: 'container';
 
-BEGIN               : 'begin' ;
+BEGIN: 'begin';
 
-END                 : 'end' ;
+END: 'end';
 
-REPEAT              : 'repeat' ;
+REPEAT: 'repeat';
 
-TIMES               : 'times' ;
+TIMES: 'times';
 
-UNTIL               : 'until' ;
+UNTIL: 'until';
 
-FUNCTION            : 'function' ;
+FUNCTION: 'function';
 
-RETURN              : 'return' ;
+RETURN: 'return';
 
-GET_BACK            : 'get_back' ;
+GET_BACK: 'get_back';
 
-GET_FRONT           : 'get_front' ;
+GET_FRONT: 'get_front';
 
-GET                 : 'get' ;
+GET: 'get';
 
-INSERT_BACK         : 'insert_back' ;
+INSERT_BACK: 'insert_back';
 
-INSERT_FRONT        : 'insert_front' ;
+INSERT_FRONT: 'insert_front';
 
-INSERT              : 'insert' ;
+INSERT: 'insert';
 
-VOID                : 'void' ;
+VOID: 'void';
 
-LENGTH              : 'length' ;
+LENGTH: 'length';
 
-ID                  : (UPPERCASE | LOWERCASE)+ (UPPERCASE | LOWERCASE | DIGIT | '_' )* ;
+ID: (UPPERCASE | LOWERCASE)+ (
+		UPPERCASE
+		| LOWERCASE
+		| DIGIT
+		| '_'
+	)*;
 
-CTN                 : DIGIT+ ( '.' DIGIT+ )* ;
+CTN: DIGIT+ ( '.' DIGIT+)*;
 
-CTT                 : '"' .*? '"' ;
+CTT: '"' .*? '"';
 
-PLUS                : '+' ;
+PLUS: '+';
 
-MINUS               : '-' ;
+MINUS: '-';
 
-DIVISION            : '/' ;
+DIVISION: '/';
 
-MULTIPLICATION      : '*' ;
+MULTIPLICATION: '*';
 
-GREATER             : '>' ;
+GREATER: '>';
 
-GREATER_EQUAL       : '>=' ;
+GREATER_EQUAL: '>=';
 
-LESS                : '<' ;
+LESS: '<';
 
-LESS_EQUAL          : '<=' ;
+LESS_EQUAL: '<=';
 
-WHITESPACE          : (' ' | '\t') -> skip ;
+WHITESPACE: (' ' | '\t') -> skip;
 
-NEWLINE             : ('\r'? '\n' | '\r') -> skip ;
+NEWLINE: ('\r'? '\n' | '\r') -> skip;

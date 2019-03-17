@@ -5,6 +5,10 @@ from typing.io import TextIO
 import sys
 
 
+from VisionScriptCompiler import FunctionDirectory
+func_dir = FunctionDirectory()
+
+
 
 def serializedATN():
     with StringIO() as buf:

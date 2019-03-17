@@ -1,25 +1,29 @@
-number n = 10
-number n = 1.1
-number n = 1.2 + 3
-number n = 1.2 + 3 - 3 * 2 / 1
-number n = (1+2)/(16*4/2)-13
-number n = a + b
-number n = (a+a)/(b*a/c)-13
+number n = -10
+number n1 = 1.1
+number n2 = 1.2 + 3
+number n3 = 1.2 + 3 - 3 * 2 / 1
+number n4 = (1+2)/(16*4/2)-13
+number n5 = a + b
+number n6 = (a+a)/(b*a/c)-13
+
+number n7 = add(10,2)
+
+number n8 = a.get(10)
 
 bool b = true
-bool b = false
+bool b1 = false
 
 text t = ""
-text t = "A+B"
-text t = "12213.123"
-text t = "12213.123" + ""
-text t = "" + "" + "" + "" + ""
+text t1 = "A+B"
+text t2 = "12213.123"
+text t3 = "12213.123" + ""
+text t4 = "" + "" + "" + "" + ""
 
 container (10) c = []
-container (10.2) c = []
-container (10) c = [1,"A",true]
-container (10) c = [1,"A",true] + []
-container (10) c = [] + [] + [] + []
+container (10.2) c1 = []
+container (10) c2 = [1,"A",true]
+container (10) c3 = [1,"A",true] + []
+container (10) c4 = [] + [] + [] + []
 
 if A > B
 begin
@@ -122,8 +126,8 @@ print("" + "" + "" + "" + "" + "")
 
 number function add(number a, text b, bool c, container (10) d )
 begin
-    number a = 10
-    text b = "Hola"
+    number a1 = 10
+    text b2 = "Hola"
     return()
 end
 
@@ -148,17 +152,17 @@ begin
 end
 
 a = 10
-a = 10.1
+a1 = 10.1
 
-a = true
-a = false
+a2 = true
+a3 = false
 
-a = "A"
+a4 = "A"
 
-a = a
+a5 = a
 
-a = []
-a = [1,"A",false]
+a6 = []
+a7 = [1,"A",false]
 
 contact_containers = [] + []
 
@@ -199,7 +203,7 @@ end
 
 number function add(number a, text b, bool c, container (10) d )
 begin
-    number a = 20
+    number a10 = 20
     
     a = 10  
     
@@ -285,4 +289,4 @@ a.insert(1,10)
 a = a.get(10)
 
 
-number n = 10.1
+number n2 = 10.1

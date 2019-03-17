@@ -1,0 +1,56 @@
+number n = 44.1
+
+text t = "HOLA"
+
+bool b = true
+
+container (10) c = [1,2,3,4]
+
+
+n = 11
+
+n = 15
+n = 16
+
+n = 11 + 11
+
+n = 1
+
+t = "ADIOS"
+
+b = false
+
+c = []
+
+
+number function add()
+begin
+    number n = 44.1
+    return()
+end
+
+text function stringconverter()
+begin
+    text t = "HOLA"
+    return()
+end
+
+bool function yesOrno()
+begin
+    bool b = true
+    return()
+end
+
+container(10) function list()
+begin
+    container (10) c = [1,2,3,4]
+    return()
+end
+
+void function nada(number a)
+begin
+    return()
+end
+
+
+n = (11 + 11) / 2
