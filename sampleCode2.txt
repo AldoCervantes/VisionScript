@@ -12,7 +12,7 @@ n = 11
 n = 15
 n = 16
 
-n = 11 + 11
+n = a + 11
 
 n = 1
 
@@ -51,6 +51,3 @@ void function nada(number a)
 begin
     return()
 end
-
-
-n = (11 + 11) / 2
