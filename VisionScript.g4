@@ -107,8 +107,8 @@ func_bloque: (
 
 function_call:
 	ID '(' (
-		todo {func_dir.VarAssignment($ID.text,$ID.text,$todo.text)} (
-			',' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)}
+		todo {#func_dir.VarAssignment($ID.text,$ID.text,$todo.text)} (
+			',' todo {#func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)}
 		)*
 	)? ')';
 

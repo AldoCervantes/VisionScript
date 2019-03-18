@@ -131,51 +131,52 @@ begin
     return()
 end
 
-text function add(number a, text b, bool c, container (10) d )
+text function add2(number a, text b, bool c, container (10) d )
 begin
     return()
 end
 
-bool function add(number a, text b, bool c, container (10) d )
+bool function add3(number a, text b, bool c, container (10) d )
 begin
     return()
 end
 
-container (10) function add(number a, text b, bool c, container (10) d )
+container (10) function add4(number a, text b, bool c, container (10) d )
 begin
     return()
 end
 
-void function add(number a, text b, bool c, container (10) d )
+void function add5(number a, text b, bool c, container (10) d )
 begin
     return()
 end
 
+number a = 1
 a = 10
-a1 = 10.1
+a = 10.1
 
-a2 = true
-a3 = false
+a = true
+a = false
 
-a4 = "A"
+a = "A"
 
-a5 = a
+a = a
 
-a6 = []
-a7 = [1,"A",false]
+a = []
+a = [1,"A",false]
 
-contact_containers = [] + []
+container (80) contact_containers = [] + []
 
-contact_strings = "A" + "A"
+text contact_strings = "A" + "A"
 
-operacion = (1+2)/(16*4/2)-13
-operacion = (a+a)/(b*a/c)-13
+number operacion = (1+2)/(16*4/2)-13
+number operacion1 = (a+a)/(b*a/c)-13
 
-expresion = (1+2)/(16*4/2)-13 > y or 10 < w and 1 < j
+bool expresion = (1+2)/(16*4/2)-13 > y or 10 < w and 1 < j
 
-func = add(10,20.1,[],"",true,false)
+bool func = add(10,20.1,[],"",true,false)
 
-func = add()
+bool func2 = add()
 
 add()
 
@@ -201,9 +202,9 @@ end
 
 
 
-number function add(number a, text b, bool c, container (10) d )
+number function addd(number a, text b, bool c, container (10) d )
 begin
-    number a10 = 20
+    number a = 20
     
     a = 10  
     
@@ -230,42 +231,42 @@ begin
 end
 
 
-number function add(number a, text b, bool c, container (10) d )
+number function ad(number a, text b, bool c, container (10) d )
 begin
     return(10.2)
 end
 
-number function add(number a, text b, bool c, container (10) d )
+number function a123(number a, text b, bool c, container (10) d )
 begin
     return(a)
 end
 
-number function add(number a, text b, bool c, container (10) d )
+number function a556(number a, text b, bool c, container (10) d )
 begin
     return("")
 end
 
-number function add(number a, text b, bool c, container (10) d )
+number function t3(number a, text b, bool c, container (10) d )
 begin
     return([])
 end
 
-number function add(number a, text b, bool c, container (10) d )
+number function r(number a, text b, bool c, container (10) d )
 begin
     return(true)
 end
 
-number function add(number a, text b, bool c, container (10) d )
+number function o(number a, text b, bool c, container (10) d )
 begin
     return(false)
 end
 
-number function add(number a, text b, bool c, container (10) d )
+number function w(number a, text b, bool c, container (10) d )
 begin
     return(a+b/2)
 end
 
-number function add(number a, text b, bool c, container (10) d )
+number function s(number a, text b, bool c, container (10) d )
 begin
     return(a+b/2 > 10)
 end
@@ -289,4 +290,4 @@ a.insert(1,10)
 a = a.get(10)
 
 
-number n2 = 10.1
+number n2asd = 10.1

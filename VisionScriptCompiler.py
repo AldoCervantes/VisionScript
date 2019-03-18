@@ -39,5 +39,5 @@ class FunctionDirectory:
     def showFunctionDirectory(self):
         print("______________")
         for key , value in self.funDirectory.items():
-            print(key,":",value)
+            print(key,"=>",value)
             print("______________")

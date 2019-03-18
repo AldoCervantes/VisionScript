@@ -14,7 +14,7 @@ n = 16
 
 n = a + 11
 
-n = 1
+n = add()
 
 t = "ADIOS"
 
@@ -51,3 +51,5 @@ void function nada(number a)
 begin
     return()
 end
+
+n = add()

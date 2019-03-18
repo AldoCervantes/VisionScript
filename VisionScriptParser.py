@@ -2044,7 +2044,7 @@ class VisionScriptParser ( Parser ):
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << VisionScriptParser.T__1) | (1 << VisionScriptParser.T__4) | (1 << VisionScriptParser.CTBF) | (1 << VisionScriptParser.CTBT) | (1 << VisionScriptParser.ID) | (1 << VisionScriptParser.CTN) | (1 << VisionScriptParser.CTT) | (1 << VisionScriptParser.PLUS) | (1 << VisionScriptParser.MINUS))) != 0):
                 self.state = 243
                 localctx._todo = self.todo()
-                func_dir.VarAssignment((None if localctx._ID is None else localctx._ID.text),(None if localctx._ID is None else localctx._ID.text),(None if localctx._todo is None else self._input.getText((localctx._todo.start,localctx._todo.stop))))
+                #func_dir.VarAssignment((None if localctx._ID is None else localctx._ID.text),(None if localctx._ID is None else localctx._ID.text),(None if localctx._todo is None else self._input.getText((localctx._todo.start,localctx._todo.stop))))
                 self.state = 251
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -2053,7 +2053,7 @@ class VisionScriptParser ( Parser ):
                     self.match(VisionScriptParser.T__3)
                     self.state = 246
                     localctx._todo = self.todo()
-                    func_dir.VarAssignment(func_dir.currentFunction,(None if localctx._ID is None else localctx._ID.text),(None if localctx._todo is None else self._input.getText((localctx._todo.start,localctx._todo.stop))))
+                    #func_dir.VarAssignment(func_dir.currentFunction,(None if localctx._ID is None else localctx._ID.text),(None if localctx._todo is None else self._input.getText((localctx._todo.start,localctx._todo.stop))))
                     self.state = 253
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
