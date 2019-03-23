@@ -1,4 +1,7 @@
+from Cuadruplos import Cuadruplos
+#Clase para crear el directorio de funciones
 class FunctionDirectory:
+    Cuad = Cuadruplos()
     #Variable que sirve como flag para distinguir en que función estamos
     currentFunction = '@global'
     #Inicialización del directorio de funciones
@@ -6,19 +9,19 @@ class FunctionDirectory:
         self.funDirectory = {}
 
     #Funcion que sirve para crear una nueva funcion en el directorio de funciones
-    def FuncDeclaration(self, functionId , type):
+    def FuncDeclaration(self, functionId , FunctionType):
         if functionId in self.funDirectory:
             print("Error: la funcion ",functionId," ya existe")
         else:
-            self.funDirectory[functionId] = [type, {}]
+            self.funDirectory[functionId] = [FunctionType, {}]
 
     #Funcion que sirve para crear una nueva variable 
-    def VarDeclaration(self , functionId , varId , type , value):
+    def VarDeclaration(self , functionId , varId , VarType , value):
         if functionId  in self.funDirectory:
             if varId in self.funDirectory[functionId][1]:
                 print("Error: La variable ",varId," ya existe")
             else:
-                self.funDirectory[functionId][1][varId] = [type, value]
+                self.funDirectory[functionId][1][varId] = [VarType, value]
         else:
             print("Error: La funcion ",functionId," no existe")
 

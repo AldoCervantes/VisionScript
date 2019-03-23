@@ -6,7 +6,9 @@ import sys
 
 
 from VisionScriptCompiler import FunctionDirectory
+from Cuadruplos import Cuadruplos
 func_dir = FunctionDirectory()
+cuadruplos = Cuadruplos() 
 
 
 

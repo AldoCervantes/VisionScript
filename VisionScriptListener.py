@@ -6,7 +6,9 @@ else:
     from VisionScriptParser import VisionScriptParser
 
 from VisionScriptCompiler import FunctionDirectory
+from Cuadruplos import Cuadruplos
 func_dir = FunctionDirectory()
+cuadruplos = Cuadruplos() 
 
 
 # This class defines a complete listener for a parse tree produced by VisionScriptParser.

@@ -2,7 +2,9 @@ grammar VisionScript;
 
 @header {
 from VisionScriptCompiler import FunctionDirectory
+from Cuadruplos import Cuadruplos
 func_dir = FunctionDirectory()
+cuadruplos = Cuadruplos() 
 }
 /*
  * Parser Ruless
@@ -25,6 +27,7 @@ programa: (
 
 variable:
 	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)
+		} {cuadruplos.printCuad()
 		};
 
 tipo
@@ -63,9 +66,19 @@ read: READ '(' ID ')';
 
 imprimir: (BRAILLE | PRINT | HEAR) '(' todo ')';
 
-mega_expresion: expresion ( (AND | OR) expresion)*;
+mega_expresion:
+	expresion {cuadruplos.GenerateCuad('Mega_Expresion')} (
+		(
+			AND {cuadruplos.InsertOperator($AND.text)}
+			| OR {cuadruplos.InsertOperator($OR.text)}
+		) expresion {cuadruplos.GenerateCuad('Mega_Expresion')}
+	)*;
 
-expresion: exp (exp_todo exp)*;
+expresion:
+	exp (
+		exp_todo {cuadruplos.InsertOperator($exp_todo.text)} exp {cuadruplos.GenerateCuad('Expresion')
+			}
+	)?;
 
 exp_todo:
 	GREATER
@@ -75,13 +88,34 @@ exp_todo:
 	| EQUAL
 	| NOT_EQUAL;
 
-exp: termino ((PLUS | MINUS) termino)*;
+exp:
+	termino {cuadruplos.GenerateCuad('Termino')} (
+		(
+			PLUS {cuadruplos.InsertOperator($PLUS.text)}
+			| MINUS {cuadruplos.InsertOperator($MINUS.text)}
+		) termino {cuadruplos.GenerateCuad('Termino')}
+	)*;
 
-termino: factor (( MULTIPLICATION | DIVISION) factor)*;
+termino:
+	factor {cuadruplos.GenerateCuad('Factor')} (
+		(
+			MULTIPLICATION {cuadruplos.InsertOperator($MULTIPLICATION.text)}
+			| DIVISION {cuadruplos.InsertOperator($DIVISION.text)}
+		) factor {cuadruplos.GenerateCuad('Factor')}
+	)*;
 
-factor: '(' mega_expresion ')' | ( PLUS | MINUS)? ct;
+factor:
+	'(' {cuadruplos.InsertParentesis()} mega_expresion ')' {cuadruplos.RemoveParentesis()}
+	| ct {cuadruplos.InsertIdType($ct.text,$ct.type)};
 
-ct: CTBF | CTBT | CTT | CTN | ID;
+ct
+	returns[Object type]:
+	MINUS CTN {$type = 'number'}
+	| CTN {$type = 'number'}
+	| CTBF {$type = 'bool'}
+	| CTBT {$type = 'bool'}
+	| CTT {$type = 'text'}
+	| ID {$type = 'id'};
 
 function:
 	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} '(' (

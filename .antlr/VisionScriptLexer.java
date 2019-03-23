@@ -1,7 +1,9 @@
 // Generated from c:\Users\Aldo Cervantes\Desktop\8 Semestre\Compiladores\VisionScript.g4 by ANTLR 4.7.1
 
 from VisionScriptCompiler import FunctionDirectory
+from Cuadruplos import Cuadruplos
 func_dir = FunctionDirectory()
+cuadruplos = Cuadruplos() 
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
