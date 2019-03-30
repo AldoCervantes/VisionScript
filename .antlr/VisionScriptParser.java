@@ -1280,6 +1280,7 @@ public class VisionScriptParser extends Parser {
 
 	public static class CtContext extends ParserRuleContext {
 		public Object type;
+		public Token ID;
 		public TerminalNode MINUS() { return getToken(VisionScriptParser.MINUS, 0); }
 		public TerminalNode CTN() { return getToken(VisionScriptParser.CTN, 0); }
 		public TerminalNode CTBF() { return getToken(VisionScriptParser.CTBF, 0); }
@@ -1345,8 +1346,8 @@ public class VisionScriptParser extends Parser {
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(224);
-				match(ID);
-				_localctx.type = 'id'
+				((CtContext)_localctx).ID = match(ID);
+				_localctx.type = func_dir.returnIDType(func_dir.currentFunction, (((CtContext)_localctx).ID!=null?((CtContext)_localctx).ID.getText():null))
 				}
 				break;
 			default:

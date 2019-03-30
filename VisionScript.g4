@@ -115,7 +115,7 @@ ct
 	| CTBF {$type = 'bool'}
 	| CTBT {$type = 'bool'}
 	| CTT {$type = 'text'}
-	| ID {$type = 'id'};
+	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)};
 
 function:
 	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} '(' (
