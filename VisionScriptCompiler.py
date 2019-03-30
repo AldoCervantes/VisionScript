@@ -1,6 +1,10 @@
 from Cuadruplos import Cuadruplos
+
 #Clase para crear el directorio de funciones
 class FunctionDirectory:
+    memLocal  =  9000
+    memGlobal =  5000
+    memConst  =  20000
     Cuad = Cuadruplos()
     #Variable que sirve como flag para distinguir en que función estamos
     currentFunction = '@global'
@@ -21,7 +25,12 @@ class FunctionDirectory:
             if varId in self.funDirectory[functionId][1]:
                 print("Error: La variable ",varId," ya existe")
             else:
-                self.funDirectory[functionId][1][varId] = [VarType, value]
+                if functionId == '@global':
+                    self.funDirectory[functionId][1][varId] = [VarType, value, memGlobal]
+                    memGlobal+=1
+                elif functionId == '@local':
+                    self.funDirectory[functionId][1][varId] = [VarType, value, memLocal]
+                    memLocal+=1
         else:
             print("Error: La funcion ",functionId," no existe")
 
