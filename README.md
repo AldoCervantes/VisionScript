@@ -43,3 +43,16 @@ Nos faltaría:
 number n = 1
 
 n = ((1*2-3*4) > n + 2 * 5 / 6 ) and ( 7 * 8 - 9 > 10 - 1 ) and 2 + 3 > 4 * 6
+
+
+
+
+
+number function add(number a, number x)
+begin
+    a = 10
+    return()
+end
+
+
+number x = add(10,2)

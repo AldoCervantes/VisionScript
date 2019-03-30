@@ -117,10 +117,15 @@ ct
 	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)};
 
 function:
-	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} '(' (
-		tipo ID (',' tipo ID)*
-	)? ')' {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)} BEGIN
-		func_bloque RETURN '(' (todo)? ')' END {func_dir.currentFunction = '@global'};
+	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)
+		} '(' (
+		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')
+		} (
+			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')
+		}
+		)*
+	)? ')' BEGIN func_bloque RETURN '(' (todo)? ')' END {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000
+		};
 
 function_type
 	returns[Object type]:
@@ -140,8 +145,8 @@ func_bloque: (
 
 function_call:
 	ID '(' (
-		todo {#func_dir.VarAssignment($ID.text,$ID.text,$todo.text)} (
-			',' todo {#func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)}
+		todo {func_dir.VarAssignment($ID.text,$ID.text,$todo.text)} (
+			',' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)}
 		)*
 	)? ')';
 

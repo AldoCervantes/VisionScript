@@ -9,7 +9,7 @@ class Cuadruplos:
         self.PTypes = [] #Pila de tipos (number,text,bool,container)
         self.POper = [] #Pila de Operadores (+,-,*,/,...)
         self.Quad = deque([]) #Fila de Cuadruplos
-        self.resultVector = ['t30','t29','t28','t27','t26','t25','t24','t23','t22','t21','t20','t19','t18','t17','t16','t15','t14','t13','t12','t11','t10','t9','t8','t7','t6','t5','t4','t3','t2','t1']
+        self.memTemporal = 30000
 
     def InsertIdType(self,varId,VarType): #Funcion 1
         self.PilaO.append(varId)
@@ -18,6 +18,7 @@ class Cuadruplos:
     def InsertOperator(self,operator): #Funcion 2, 3 , 8 y 10
         self.POper.append(operator)
     
+    #Para operaciones aritmeticas
     def GenerateCuad(self,flag): # Funcion 4 , 5 , 9 y 11
        if len(self.POper) > 0:
             top = self.POper[len(self.POper)-1]
@@ -30,14 +31,19 @@ class Cuadruplos:
                     result_type = SemanticCube.semanticCube[operator][left_type][right_type]
                     if result_type != 'error':
                         # result <- AVAIL.next()
-                        result = self.resultVector.pop()
-                        cuadruplo = [operator, left_operand, right_operand, result]
+                        result = self.memTemporal
+                        self.memTemporal = self.memTemporal + 1
+                        cuadruplo = [SemanticCube.opToKey[operator], left_operand, right_operand, result]
                         self.Quad.append(cuadruplo)
                         self.PilaO.append(result)
                         self.PTypes.append(result_type)
                         # If any operands were a temporal space, return into AVAIL
                     else:
                         print("Error:",left_operand,operator,right_operand,"genera",result_type)
+
+    def GenerateCuadVarAssignment(self,vaule,target):
+        cuadruplo = [SemanticCube.opToKey['='],value,-1,target]
+        self.Quad.append(cuadruplo)
 
 
     def InsertParentesis(self): #Funcion 6
