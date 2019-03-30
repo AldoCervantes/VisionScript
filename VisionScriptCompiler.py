@@ -38,6 +38,19 @@ class FunctionDirectory:
         else:
             print("Error: La funcion",varId,"no existe")
     
+    #Funcion que retorna el tipo de dato de una variable
+    def returnIDType(self, functionId, varId):
+        if functionId  in self.funDirectory:
+            if varId in self.funDirectory[functionId][1]:
+                return self.funDirectory[functionId][1][varId][0]
+            else:
+                if functionId != '@global':
+                    print("Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                else:
+                    print("Error: La variable",varId,"no esta declarada")
+        else:
+            print("Error: La funcion",varId,"no existe")
+
     #Funcion para debug, sirve para imprimir nuestro directorio 
     def showFunctionDirectory(self):
         print("______________")
