@@ -27,8 +27,7 @@ programa: (
 
 variable:
 	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)
-		} {cuadruplos.printCuad()
-		};
+		} {cuadruplos.printCuad()};
 
 tipo
 	returns[Object type]:

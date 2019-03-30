@@ -38,3 +38,8 @@ Nos faltaría:
 
 # print (self.funDirectory['@global'][0]['n'][1])
 - 1 => variable value
+
+
+number n = 1
+
+n = ((1*2-3*4) > n + 2 * 5 / 6 ) and ( 7 * 8 - 9 > 10 - 1 ) and 2 + 3 > 4 * 6

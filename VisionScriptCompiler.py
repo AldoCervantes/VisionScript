@@ -50,6 +50,7 @@ class FunctionDirectory:
                     print("Error: La variable",varId,"no esta declarada")
         else:
             print("Error: La funcion",varId,"no existe")
+        return 'error'
 
     #Funcion para debug, sirve para imprimir nuestro directorio 
     def showFunctionDirectory(self):

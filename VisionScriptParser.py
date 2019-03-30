@@ -1651,6 +1651,7 @@ class VisionScriptParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
             self.type = None
+            self._ID = None # Token
 
         def MINUS(self):
             return self.getToken(VisionScriptParser.MINUS, 0)
@@ -1727,8 +1728,8 @@ class VisionScriptParser ( Parser ):
             elif token in [VisionScriptParser.ID]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 224
-                self.match(VisionScriptParser.ID)
-                localctx.type = 'id'
+                localctx._ID = self.match(VisionScriptParser.ID)
+                localctx.type = func_dir.returnIDType(func_dir.currentFunction, (None if localctx._ID is None else localctx._ID.text))
                 pass
             else:
                 raise NoViableAltException(self)

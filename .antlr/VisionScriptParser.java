@@ -331,7 +331,6 @@ public class VisionScriptParser extends Parser {
 			func_dir.VarDeclaration(func_dir.currentFunction,(((VariableContext)_localctx).ID!=null?((VariableContext)_localctx).ID.getText():null),((VariableContext)_localctx).tipo.type,(((VariableContext)_localctx).todo!=null?_input.getText(((VariableContext)_localctx).todo.start,((VariableContext)_localctx).todo.stop):null))
 					
 			cuadruplos.printCuad()
-					
 			}
 		}
 		catch (RecognitionException re) {
