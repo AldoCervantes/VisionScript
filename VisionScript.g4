@@ -11,7 +11,8 @@ cuadruplos = Cuadruplos()
  */
 
 visionscript:
-	{func_dir.FuncDeclaration('@global','void')} programa EOF {func_dir.showFunctionDirectory()};
+	{func_dir.FuncDeclaration('@global','void')} programa EOF {cuadruplos.printCuad()} {func_dir.showFunctionDirectory()
+		};
 
 programa: (
 		variable
@@ -27,7 +28,7 @@ programa: (
 
 variable:
 	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)
-		} {cuadruplos.printCuad()};
+		} {cuadruplos.GenerateCuad('Assignment')};
 
 tipo
 	returns[Object type]:
