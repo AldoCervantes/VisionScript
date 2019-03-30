@@ -1,4 +1,4 @@
-number A = 1
+number A = "ALDO"
 number B = 1
 number C = 1
 number D = 1
@@ -8,5 +8,33 @@ number G = 1
 number H = 1
 number J = 1
 number L = 1
-
 number n = (( A * B - C * D ) > C + D * E / F ) and ( G * H - J > L - A ) and B + C > D * F
+
+
+number function uno(number i, number j)
+begin
+   j = 40
+    return()
+end
+
+
+number function dos(number i, number j)
+begin
+    i = 20
+    return()
+end
+
+
+number function tres(number i, number j)
+begin
+   j = 40
+    return()
+end
+
+
+number function cuatro(number i, number j)
+begin
+    i = 20
+    number a = 40
+    return()
+end
