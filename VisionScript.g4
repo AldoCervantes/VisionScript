@@ -28,7 +28,8 @@ programa: (
 
 variable:
 	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)
-		} {cuadruplos.GenerateCuad('Assignment')};
+		} {cuadruplos.GenerateAssignmentCuad('Assignment',func_dir.returnIDAddress(func_dir.currentFunction,$ID.text))
+		};
 
 tipo
 	returns[Object type]:

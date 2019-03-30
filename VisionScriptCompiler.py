@@ -67,3 +67,17 @@ class FunctionDirectory:
         for key , value in self.funDirectory.items():
             print(key,"=>",value)
             print("______________")
+
+    #Funcion que regresa la direccion de memoria de una variable
+    def returnIDAddress(self, functionId, varId):
+        if functionId  in self.funDirectory:
+            if varId in self.funDirectory[functionId][1]:
+                return self.funDirectory[functionId][1][varId][2]
+            else:
+                if functionId != '@global':
+                    print("Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                else:
+                    print("Error: La variable",varId,"no esta declarada")
+        else:
+            print("Error: La funcion",varId,"no existe")
+        return -999
