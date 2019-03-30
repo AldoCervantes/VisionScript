@@ -19,8 +19,8 @@ def serializedATN():
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
-        buf.write("\t\31\4\32\t\32\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3")
-        buf.write("\3\3\3\3\3\3\3\3\3\7\3C\n\3\f\3\16\3F\13\3\3\4\3\4\3\4")
+        buf.write("\t\31\4\32\t\32\3\2\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3")
+        buf.write("\3\3\3\3\3\3\3\3\3\3\3\7\3D\n\3\f\3\16\3G\13\3\3\4\3\4")
         buf.write("\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3")
         buf.write("\5\3\5\3\5\3\5\5\5\\\n\5\3\6\3\6\3\6\3\6\3\6\5\6c\n\6")
         buf.write("\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3")
@@ -50,21 +50,21 @@ def serializedATN():
         buf.write("\n\31\3\32\3\32\3\32\6\32\u0152\n\32\r\32\16\32\u0153")
         buf.write("\3\32\2\2\33\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"")
         buf.write("$&(*,.\60\62\2\6\3\2\13\r\4\2\27\30\60\63\4\2!\"((\3\2")
-        buf.write("#%\2\u0174\2\64\3\2\2\2\4D\3\2\2\2\6G\3\2\2\2\b[\3\2\2")
+        buf.write("#%\2\u0174\2\64\3\2\2\2\4E\3\2\2\2\6H\3\2\2\2\b[\3\2\2")
         buf.write("\2\nb\3\2\2\2\fd\3\2\2\2\16i\3\2\2\2\20q\3\2\2\2\22\u0086")
         buf.write("\3\2\2\2\24\u0089\3\2\2\2\26\u008e\3\2\2\2\30\u0093\3")
         buf.write("\2\2\2\32\u00a3\3\2\2\2\34\u00ab\3\2\2\2\36\u00ad\3\2")
         buf.write("\2\2 \u00bd\3\2\2\2\"\u00d6\3\2\2\2$\u00e5\3\2\2\2&\u00e7")
         buf.write("\3\2\2\2(\u010e\3\2\2\2*\u011a\3\2\2\2,\u011d\3\2\2\2")
         buf.write(".\u012e\3\2\2\2\60\u013b\3\2\2\2\62\u014e\3\2\2\2\64\65")
-        buf.write("\b\2\1\2\65\66\5\4\3\2\66\67\7\2\2\3\678\b\2\1\28\3\3")
-        buf.write("\2\2\29C\5\6\4\2:C\5\16\b\2;C\5\20\t\2<C\5\24\13\2=C\5")
-        buf.write("\26\f\2>C\5&\24\2?C\5,\27\2@C\5\f\7\2AC\5\60\31\2B9\3")
-        buf.write("\2\2\2B:\3\2\2\2B;\3\2\2\2B<\3\2\2\2B=\3\2\2\2B>\3\2\2")
-        buf.write("\2B?\3\2\2\2B@\3\2\2\2BA\3\2\2\2CF\3\2\2\2DB\3\2\2\2D")
-        buf.write("E\3\2\2\2E\5\3\2\2\2FD\3\2\2\2GH\5\b\5\2HI\7)\2\2IJ\7")
-        buf.write("\3\2\2JK\b\4\1\2KL\5\n\6\2LM\b\4\1\2MN\b\4\1\2N\7\3\2")
-        buf.write("\2\2OP\7\20\2\2P\\\b\5\1\2QR\7\21\2\2R\\\b\5\1\2ST\7\22")
+        buf.write("\b\2\1\2\65\66\5\4\3\2\66\67\7\2\2\3\678\b\2\1\289\b\2")
+        buf.write("\1\29\3\3\2\2\2:D\5\6\4\2;D\5\16\b\2<D\5\20\t\2=D\5\24")
+        buf.write("\13\2>D\5\26\f\2?D\5&\24\2@D\5,\27\2AD\5\f\7\2BD\5\60")
+        buf.write("\31\2C:\3\2\2\2C;\3\2\2\2C<\3\2\2\2C=\3\2\2\2C>\3\2\2")
+        buf.write("\2C?\3\2\2\2C@\3\2\2\2CA\3\2\2\2CB\3\2\2\2DG\3\2\2\2E")
+        buf.write("C\3\2\2\2EF\3\2\2\2F\5\3\2\2\2GE\3\2\2\2HI\5\b\5\2IJ\7")
+        buf.write(")\2\2JK\7\3\2\2KL\5\n\6\2LM\b\4\1\2MN\b\4\1\2N\7\3\2\2")
+        buf.write("\2OP\7\20\2\2P\\\b\5\1\2QR\7\21\2\2R\\\b\5\1\2ST\7\22")
         buf.write("\2\2T\\\b\5\1\2UV\7\31\2\2VW\7\4\2\2WX\5\30\r\2XY\7\5")
         buf.write("\2\2YZ\b\5\1\2Z\\\3\2\2\2[O\3\2\2\2[Q\3\2\2\2[S\3\2\2")
         buf.write("\2[U\3\2\2\2\\\t\3\2\2\2]c\5\30\r\2^c\5\62\32\2_c\5.\30")
@@ -167,7 +167,7 @@ def serializedATN():
         buf.write("\u0140\3\2\2\2\u014c\u0145\3\2\2\2\u014d\61\3\2\2\2\u014e")
         buf.write("\u0151\5.\30\2\u014f\u0150\7,\2\2\u0150\u0152\5.\30\2")
         buf.write("\u0151\u014f\3\2\2\2\u0152\u0153\3\2\2\2\u0153\u0151\3")
-        buf.write("\2\2\2\u0153\u0154\3\2\2\2\u0154\63\3\2\2\2\36BD[bw\u0084")
+        buf.write("\2\2\2\u0153\u0154\3\2\2\2\u0154\63\3\2\2\2\36CE[bw\u0084")
         buf.write("\u0086\u0099\u00a0\u00a9\u00b3\u00ba\u00c3\u00ca\u00d6")
         buf.write("\u00e5\u00f7\u00fa\u0102\u010e\u0118\u011a\u0127\u012a")
         buf.write("\u0134\u0137\u014c\u0153")
@@ -340,7 +340,9 @@ class VisionScriptParser ( Parser ):
             self.programa()
             self.state = 52
             self.match(VisionScriptParser.EOF)
+            cuadruplos.printCuad()
             func_dir.showFunctionDirectory()
+            		
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -440,60 +442,60 @@ class VisionScriptParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 66
+            self.state = 67
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << VisionScriptParser.READ) | (1 << VisionScriptParser.PRINT) | (1 << VisionScriptParser.HEAR) | (1 << VisionScriptParser.BRAILLE) | (1 << VisionScriptParser.IF) | (1 << VisionScriptParser.NUMBER) | (1 << VisionScriptParser.TEXT) | (1 << VisionScriptParser.BOOL) | (1 << VisionScriptParser.CONTAINER) | (1 << VisionScriptParser.REPEAT) | (1 << VisionScriptParser.VOID) | (1 << VisionScriptParser.ID))) != 0):
-                self.state = 64
+                self.state = 65
                 self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
                 if la_ == 1:
-                    self.state = 55
+                    self.state = 56
                     self.variable()
                     pass
 
                 elif la_ == 2:
-                    self.state = 56
+                    self.state = 57
                     self.condicion()
                     pass
 
                 elif la_ == 3:
-                    self.state = 57
+                    self.state = 58
                     self.ciclo()
                     pass
 
                 elif la_ == 4:
-                    self.state = 58
+                    self.state = 59
                     self.read()
                     pass
 
                 elif la_ == 5:
-                    self.state = 59
+                    self.state = 60
                     self.imprimir()
                     pass
 
                 elif la_ == 6:
-                    self.state = 60
+                    self.state = 61
                     self.function()
                     pass
 
                 elif la_ == 7:
-                    self.state = 61
+                    self.state = 62
                     self.function_call()
                     pass
 
                 elif la_ == 8:
-                    self.state = 62
+                    self.state = 63
                     self.asignacion()
                     pass
 
                 elif la_ == 9:
-                    self.state = 63
+                    self.state = 64
                     self.op_contenedor()
                     pass
 
 
-                self.state = 68
+                self.state = 69
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -546,18 +548,18 @@ class VisionScriptParser ( Parser ):
         self.enterRule(localctx, 4, self.RULE_variable)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 69
-            localctx._tipo = self.tipo()
             self.state = 70
-            localctx._ID = self.match(VisionScriptParser.ID)
+            localctx._tipo = self.tipo()
             self.state = 71
+            localctx._ID = self.match(VisionScriptParser.ID)
+            self.state = 72
             self.match(VisionScriptParser.T__0)
-            cuadruplos.GenerateCuad('Assignment')
             self.state = 73
             localctx._todo = self.todo()
             func_dir.VarDeclaration(func_dir.currentFunction,(None if localctx._ID is None else localctx._ID.text),localctx._tipo.type,(None if localctx._todo is None else self._input.getText((localctx._todo.start,localctx._todo.stop))))
             		
-            cuadruplos.printCuad()
+            cuadruplos.GenerateAssignmentCuad('Assignment',func_dir.returnIDAddress(func_dir.currentFunction,(None if localctx._ID is None else localctx._ID.text)))
+            		
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

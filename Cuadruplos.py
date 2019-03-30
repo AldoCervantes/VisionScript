@@ -39,15 +39,14 @@ class Cuadruplos:
                         self.PTypes.append(result_type)
                         # If any operands were a temporal space, return into AVAIL
                     else:
-                        print("Error:",left_operand,operator,right_operand,"genera",result_type)
+                        print("Error:",left_operand,"=>",left_type,operator,right_operand,"=>",right_type,"genera",result_type)
+           
+    def GenerateAssignmentCuad(self,flag,varId):
         if flag == 'Assignment':
             if len(self.PilaO) > 0:
-                print("=",self.PilaO.pop())
-            #print("=",self.PilaO) ESTO TE DA LOS VALORES FINALES 
-            #EN TEORIA ASI DEBERIA SER CUANDO LLEGA UN =
-            # cuadruplo = [SemanticCube.opToKey['='],value,-1,target]
-            # self.Quad.append(cuadruplo) 
-           
+                cuadruplo = [SemanticCube.opToKey['='],self.PilaO.pop(),-1,varId]
+                self.Quad.append(cuadruplo) 
+    
     def InsertParentesis(self): #Funcion 6
         self.POper.append('(')
     

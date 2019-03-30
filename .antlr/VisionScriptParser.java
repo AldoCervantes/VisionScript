@@ -332,7 +332,8 @@ public class VisionScriptParser extends Parser {
 			((VariableContext)_localctx).todo = todo();
 			func_dir.VarDeclaration(func_dir.currentFunction,(((VariableContext)_localctx).ID!=null?((VariableContext)_localctx).ID.getText():null),((VariableContext)_localctx).tipo.type,(((VariableContext)_localctx).todo!=null?_input.getText(((VariableContext)_localctx).todo.start,((VariableContext)_localctx).todo.stop):null))
 					
-			cuadruplos.GenerateCuad('Assignment')
+			cuadruplos.GenerateAssignmentCuad('Assignment',func_dir.returnIDAddress(func_dir.currentFunction,(((VariableContext)_localctx).ID!=null?((VariableContext)_localctx).ID.getText():null)))
+					
 			}
 		}
 		catch (RecognitionException re) {
