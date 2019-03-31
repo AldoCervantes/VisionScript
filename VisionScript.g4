@@ -107,16 +107,17 @@ termino:
 
 factor:
 	'(' {cuadruplos.InsertParentesis()} mega_expresion ')' {cuadruplos.RemoveParentesis()}
-	| ct {cuadruplos.InsertIdType($ct.text,$ct.type)};
+	| ct {cuadruplos.InsertIdType($ct.value,$ct.type)};
 
 ct
-	returns[Object type]:
-	MINUS CTN {$type = 'number'}
-	| CTN {$type = 'number'}
-	| CTBF {$type = 'bool'}
-	| CTBT {$type = 'bool'}
-	| CTT {$type = 'text'}
-	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)};
+	returns[Object type, value]:
+	MINUS CTN {$type = 'number'} {$value = '-'+$CTN.text}
+	| CTN {$type = 'number'} {$value = $CTN.text}
+	| CTBF {$type = 'bool'} {$value = $CTBF.text}
+	| CTBT {$type = 'bool'} {$value = $CTBT.text}
+	| CTT {$type = 'text'} {$value = $CTT.text}
+	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(func_dir.currentFunction, $ID.text)
+		};
 
 function:
 	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)
