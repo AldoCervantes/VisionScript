@@ -9,6 +9,7 @@ class FunctionDirectory:
     #Inicialización del directorio de funciones
     def __init__(self):
         self.funDirectory = {}
+        # self.tablaConstantes = {}
         self.memGlobal =  5000
         self.memLocal  =  9000
         self.memConst  =  20000
@@ -18,7 +19,17 @@ class FunctionDirectory:
             print("Error: la funcion ",functionId," ya existe")
         else:
             self.funDirectory[functionId] = [FunctionType, {}]
-
+'''
+    #Funcion que sirve para crear constantes 
+    def ConstDeclaration(self , VarType , value):
+        if VarType == 'number':
+            float(value)
+            self.funDirectory[self.memConst] = [VarType, value]
+            self.memConst+=1
+        else:
+            self.funDirectory[self.memConst] = [VarType, value]
+            self.memConst+=1
+'''
     #Funcion que sirve para crear una nueva variable 
     def VarDeclaration(self , functionId , varId , VarType , value):
         if functionId  in self.funDirectory:

@@ -118,6 +118,16 @@ ct
 	| CTT {$type = 'text'} {$value = $CTT.text}
 	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(func_dir.currentFunction, $ID.text)
 		};
+/* ct
+*	returns[Object type, value]:
+*	MINUS CTN {$type = 'number'} {$value = '-'+$CTN.text} {func_dir.ConstDeclaration($type , $value )}
+*	| CTN {$type = 'number'} {$value = $CTN.text}  		  {func_dir.ConstDeclaration($type , $value )}
+*	| CTBF {$type = 'bool'} {$value = $CTBF.text}  		  {func_dir.ConstDeclaration($type , $value )}
+*	| CTBT {$type = 'bool'} {$value = $CTBT.text}  		  {func_dir.ConstDeclaration($type , $value )}
+*	| CTT {$type = 'text'} {$value = $CTT.text}    		  {func_dir.ConstDeclaration($type , $value )}
+*	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(				*    func_dir.currentFunction, $ID.text)
+*		};
+*/
 
 function:
 	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)
