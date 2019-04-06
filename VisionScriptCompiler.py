@@ -51,7 +51,10 @@ class FunctionDirectory:
                 self.funDirectory[functionId][1][varId][1] = value
             else:
                 if functionId != '@global':
-                    print("#VarAssignment Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                    if varId in self.funDirectory['@global'][1]:
+                        self.funDirectory['@global'][1][varId][1] = value
+                    else:
+                        print("#VarAssignment Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
                 else:
                     print("#VarAssignment Error: La variable",varId,"no esta declarada")
         else:
@@ -64,7 +67,10 @@ class FunctionDirectory:
                 return self.funDirectory[functionId][1][varId][0]
             else:
                 if functionId != '@global':
-                    print("#returnIDType Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                    if varId in self.funDirectory['@global'][1]:
+                        return self.funDirectory['@global'][1][varId][0]
+                    else:
+                        print("#returnIDType Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
                 else:
                     print("#returnIDType Error: La variable",varId,"no esta declarada")
         else:
@@ -91,7 +97,10 @@ class FunctionDirectory:
                 return self.funDirectory[functionId][1][varId][2]
             else:
                 if functionId != '@global':
-                    print("#returnIDAddress Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                    if varId in self.funDirectory['@global'][1]:
+                        return self.funDirectory['@global'][1][varId][2]
+                    else:
+                        print("#returnIDAddress Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
                 else:
                     print("#returnIDAddress Error: La variable",varId,"no esta declarada")
         else:

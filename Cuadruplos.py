@@ -39,17 +39,18 @@ class Cuadruplos:
                         self.PTypes.append(result_type)
                         # If any operands were a temporal space, return into AVAIL
                     else:
-                        print("Error:",left_operand,"=>",left_type,operator,right_operand,"=>",right_type,"genera",result_type)
+                        print("#GenerateCuad Error:",left_operand,"=>",left_type,operator,right_operand,"=>",right_type,"genera",result_type)
     
     #Funcion que genera un cuaduplo de asignacion [=,valor,-1,id]
     def GenerateAssignmentCuad(self,varId,targetType):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             valueType = self.PTypes.pop()
+            value = self.PilaO.pop()
             if valueType == targetType:
-                cuadruplo = [SemanticCube.opToKey['='],self.PilaO.pop(),-1,varId]
+                cuadruplo = [SemanticCube.opToKey['='],value,-1,varId]
                 self.Quad.append(cuadruplo) 
             else:
-                print("Error: Se esta intentando asignar un valor de tipo",valueType,"a una variable de tipo",targetType)
+                print("#GenerateAssignmentCuad Error: Se esta intentando asignar un valor de tipo",valueType,"a una variable de tipo",targetType)
     
     def GenerateGotoF(self):
         if len(self.PilaO) > 0:
@@ -64,8 +65,15 @@ class Cuadruplos:
     def FillCuad(self, cuadruplo,pos):
         self.Quad[cuadruplo][3].append(pos)
 
-
+    #Funcion para Generar los cuadruplos de los 3 tipos de print
     def GeneratePrintCuad(self,flag):
+        if len(self.PilaO) > 0 and len(self.PTypes) > 0:
+            self.PTypes.pop()
+            cuadruplo = [SemanticCube.opToKey[flag],self.PilaO.pop(),-1,-1]
+            self.Quad.append(cuadruplo)
+
+    #Funcion para generar los cuadruplos de la funcion read
+    def GenerateReadCuad(self,flag):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             self.PTypes.pop()
             cuadruplo = [SemanticCube.opToKey[flag],-1,-1,self.PilaO.pop()]

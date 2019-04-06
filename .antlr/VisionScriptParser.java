@@ -796,6 +796,8 @@ public class VisionScriptParser extends Parser {
 	}
 
 	public static class ReadContext extends ParserRuleContext {
+		public Token READ;
+		public Token ID;
 		public TerminalNode READ() { return getToken(VisionScriptParser.READ, 0); }
 		public TerminalNode ID() { return getToken(VisionScriptParser.ID, 0); }
 		public ReadContext(ParserRuleContext parent, int invokingState) {
@@ -811,13 +813,16 @@ public class VisionScriptParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(136);
-			match(READ);
+			((ReadContext)_localctx).READ = match(READ);
 			setState(137);
 			match(T__1);
 			setState(138);
-			match(ID);
-			setState(139);
+			((ReadContext)_localctx).ID = match(ID);
+			cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, (((ReadContext)_localctx).ID!=null?((ReadContext)_localctx).ID.getText():null)),func_dir.returnIDType(func_dir.currentFunction, (((ReadContext)_localctx).ID!=null?((ReadContext)_localctx).ID.getText():null)))
+					
+			setState(140);
 			match(T__2);
+			cuadruplos.GenerateReadCuad((((ReadContext)_localctx).READ!=null?((ReadContext)_localctx).READ.getText():null))
 			}
 		}
 		catch (RecognitionException re) {
@@ -854,26 +859,26 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(147);
+			setState(149);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case BRAILLE:
 				{
-				setState(141);
+				setState(143);
 				((ImprimirContext)_localctx).BRAILLE = match(BRAILLE);
 				_localctx.flag = (((ImprimirContext)_localctx).BRAILLE!=null?((ImprimirContext)_localctx).BRAILLE.getText():null)
 				}
 				break;
 			case PRINT:
 				{
-				setState(143);
+				setState(145);
 				((ImprimirContext)_localctx).PRINT = match(PRINT);
 				_localctx.flag = (((ImprimirContext)_localctx).PRINT!=null?((ImprimirContext)_localctx).PRINT.getText():null)
 				}
 				break;
 			case HEAR:
 				{
-				setState(145);
+				setState(147);
 				((ImprimirContext)_localctx).HEAR = match(HEAR);
 				_localctx.flag = (((ImprimirContext)_localctx).HEAR!=null?((ImprimirContext)_localctx).HEAR.getText():null)
 				}
@@ -881,11 +886,11 @@ public class VisionScriptParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(149);
-			match(T__1);
-			setState(150);
-			todo();
 			setState(151);
+			match(T__1);
+			setState(152);
+			todo();
+			setState(153);
 			match(T__2);
 			cuadruplos.GeneratePrintCuad(_localctx.flag)
 			}
@@ -931,28 +936,28 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(154);
+			setState(156);
 			expresion();
 			cuadruplos.GenerateCuad('Mega_Expresion')
-			setState(167);
+			setState(169);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==AND || _la==OR) {
 				{
 				{
-				setState(160);
+				setState(162);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case AND:
 					{
-					setState(156);
+					setState(158);
 					((Mega_expresionContext)_localctx).AND = match(AND);
 					cuadruplos.InsertOperator((((Mega_expresionContext)_localctx).AND!=null?((Mega_expresionContext)_localctx).AND.getText():null))
 					}
 					break;
 				case OR:
 					{
-					setState(158);
+					setState(160);
 					((Mega_expresionContext)_localctx).OR = match(OR);
 					cuadruplos.InsertOperator((((Mega_expresionContext)_localctx).OR!=null?((Mega_expresionContext)_localctx).OR.getText():null))
 					}
@@ -960,12 +965,12 @@ public class VisionScriptParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(162);
+				setState(164);
 				expresion();
 				cuadruplos.GenerateCuad('Mega_Expresion')
 				}
 				}
-				setState(169);
+				setState(171);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1006,17 +1011,17 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(170);
+			setState(172);
 			exp();
-			setState(176);
+			setState(178);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQUAL) | (1L << NOT_EQUAL) | (1L << GREATER) | (1L << GREATER_EQUAL) | (1L << LESS) | (1L << LESS_EQUAL))) != 0)) {
 				{
-				setState(171);
+				setState(173);
 				((ExpresionContext)_localctx).exp_todo = exp_todo();
 				cuadruplos.InsertOperator((((ExpresionContext)_localctx).exp_todo!=null?_input.getText(((ExpresionContext)_localctx).exp_todo.start,((ExpresionContext)_localctx).exp_todo.stop):null))
-				setState(173);
+				setState(175);
 				exp();
 				cuadruplos.GenerateCuad('Expresion')
 							
@@ -1056,7 +1061,7 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(178);
+			setState(180);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQUAL) | (1L << NOT_EQUAL) | (1L << GREATER) | (1L << GREATER_EQUAL) | (1L << LESS) | (1L << LESS_EQUAL))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1109,28 +1114,28 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(180);
+			setState(182);
 			termino();
 			cuadruplos.GenerateCuad('Termino')
-			setState(193);
+			setState(195);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==PLUS || _la==MINUS) {
 				{
 				{
-				setState(186);
+				setState(188);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case PLUS:
 					{
-					setState(182);
+					setState(184);
 					((ExpContext)_localctx).PLUS = match(PLUS);
 					cuadruplos.InsertOperator((((ExpContext)_localctx).PLUS!=null?((ExpContext)_localctx).PLUS.getText():null))
 					}
 					break;
 				case MINUS:
 					{
-					setState(184);
+					setState(186);
 					((ExpContext)_localctx).MINUS = match(MINUS);
 					cuadruplos.InsertOperator((((ExpContext)_localctx).MINUS!=null?((ExpContext)_localctx).MINUS.getText():null))
 					}
@@ -1138,12 +1143,12 @@ public class VisionScriptParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(188);
+				setState(190);
 				termino();
 				cuadruplos.GenerateCuad('Termino')
 				}
 				}
-				setState(195);
+				setState(197);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1190,28 +1195,28 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(196);
+			setState(198);
 			factor();
 			cuadruplos.GenerateCuad('Factor')
-			setState(209);
+			setState(211);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==DIVISION || _la==MULTIPLICATION) {
 				{
 				{
-				setState(202);
+				setState(204);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case MULTIPLICATION:
 					{
-					setState(198);
+					setState(200);
 					((TerminoContext)_localctx).MULTIPLICATION = match(MULTIPLICATION);
 					cuadruplos.InsertOperator((((TerminoContext)_localctx).MULTIPLICATION!=null?((TerminoContext)_localctx).MULTIPLICATION.getText():null))
 					}
 					break;
 				case DIVISION:
 					{
-					setState(200);
+					setState(202);
 					((TerminoContext)_localctx).DIVISION = match(DIVISION);
 					cuadruplos.InsertOperator((((TerminoContext)_localctx).DIVISION!=null?((TerminoContext)_localctx).DIVISION.getText():null))
 					}
@@ -1219,12 +1224,12 @@ public class VisionScriptParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(204);
+				setState(206);
 				factor();
 				cuadruplos.GenerateCuad('Factor')
 				}
 				}
-				setState(211);
+				setState(213);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1259,18 +1264,18 @@ public class VisionScriptParser extends Parser {
 		FactorContext _localctx = new FactorContext(_ctx, getState());
 		enterRule(_localctx, 32, RULE_factor);
 		try {
-			setState(221);
+			setState(223);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case T__1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(212);
+				setState(214);
 				match(T__1);
 				cuadruplos.InsertParentesis()
-				setState(214);
+				setState(216);
 				mega_expresion();
-				setState(215);
+				setState(217);
 				match(T__2);
 				cuadruplos.RemoveParentesis()
 				}
@@ -1283,7 +1288,7 @@ public class VisionScriptParser extends Parser {
 			case MINUS:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(218);
+				setState(220);
 				((FactorContext)_localctx).ct = ct();
 				cuadruplos.InsertIdType(((FactorContext)_localctx).ct.value,((FactorContext)_localctx).ct.type)
 				}
@@ -1327,15 +1332,15 @@ public class VisionScriptParser extends Parser {
 		CtContext _localctx = new CtContext(_ctx, getState());
 		enterRule(_localctx, 34, RULE_ct);
 		try {
-			setState(242);
+			setState(244);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case MINUS:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(223);
+				setState(225);
 				match(MINUS);
-				setState(224);
+				setState(226);
 				((CtContext)_localctx).CTN = match(CTN);
 				_localctx.type = 'number'
 				_localctx.value = func_dir.ConstDeclaration(_localctx.type , '-'+(((CtContext)_localctx).CTN!=null?((CtContext)_localctx).CTN.getText():null) )
@@ -1344,7 +1349,7 @@ public class VisionScriptParser extends Parser {
 			case CTN:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(227);
+				setState(229);
 				((CtContext)_localctx).CTN = match(CTN);
 				_localctx.type = 'number'
 				_localctx.value = func_dir.ConstDeclaration(_localctx.type , (((CtContext)_localctx).CTN!=null?((CtContext)_localctx).CTN.getText():null) )
@@ -1353,7 +1358,7 @@ public class VisionScriptParser extends Parser {
 			case CTBF:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(230);
+				setState(232);
 				((CtContext)_localctx).CTBF = match(CTBF);
 				_localctx.type = 'bool'
 				_localctx.value = func_dir.ConstDeclaration(_localctx.type ,(((CtContext)_localctx).CTBF!=null?((CtContext)_localctx).CTBF.getText():null) )
@@ -1362,7 +1367,7 @@ public class VisionScriptParser extends Parser {
 			case CTBT:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(233);
+				setState(235);
 				((CtContext)_localctx).CTBT = match(CTBT);
 				_localctx.type = 'bool'
 				_localctx.value = func_dir.ConstDeclaration(_localctx.type , (((CtContext)_localctx).CTBT!=null?((CtContext)_localctx).CTBT.getText():null) )
@@ -1371,7 +1376,7 @@ public class VisionScriptParser extends Parser {
 			case CTT:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(236);
+				setState(238);
 				((CtContext)_localctx).CTT = match(CTT);
 				_localctx.type = 'text'
 				_localctx.value = func_dir.ConstDeclaration(_localctx.type , (((CtContext)_localctx).CTT!=null?((CtContext)_localctx).CTT.getText():null) )
@@ -1380,7 +1385,7 @@ public class VisionScriptParser extends Parser {
 			case ID:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(239);
+				setState(241);
 				((CtContext)_localctx).ID = match(ID);
 				_localctx.type = func_dir.returnIDType(func_dir.currentFunction, (((CtContext)_localctx).ID!=null?((CtContext)_localctx).ID.getText():null))
 				_localctx.value = func_dir.returnIDAddress(func_dir.currentFunction, (((CtContext)_localctx).ID!=null?((CtContext)_localctx).ID.getText():null))
@@ -1442,74 +1447,74 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(244);
-			((FunctionContext)_localctx).function_type = function_type();
-			setState(245);
-			match(FUNCTION);
 			setState(246);
+			((FunctionContext)_localctx).function_type = function_type();
+			setState(247);
+			match(FUNCTION);
+			setState(248);
 			((FunctionContext)_localctx).ID = match(ID);
 			func_dir.currentFunction = (((FunctionContext)_localctx).ID!=null?((FunctionContext)_localctx).ID.getText():null)
 			func_dir.FuncDeclaration(func_dir.currentFunction,((FunctionContext)_localctx).function_type.type)
 					
-			setState(249);
+			setState(251);
 			match(T__1);
-			setState(263);
+			setState(265);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << NUMBER) | (1L << TEXT) | (1L << BOOL) | (1L << CONTAINER))) != 0)) {
 				{
-				setState(250);
+				setState(252);
 				((FunctionContext)_localctx).tipo = tipo();
-				setState(251);
+				setState(253);
 				((FunctionContext)_localctx).ID = match(ID);
 				func_dir.VarDeclaration(func_dir.currentFunction,(((FunctionContext)_localctx).ID!=null?((FunctionContext)_localctx).ID.getText():null),((FunctionContext)_localctx).tipo.type,'@parameter')
 						
-				setState(260);
+				setState(262);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T__3) {
 					{
 					{
-					setState(253);
-					match(T__3);
-					setState(254);
-					((FunctionContext)_localctx).tipo = tipo();
 					setState(255);
+					match(T__3);
+					setState(256);
+					((FunctionContext)_localctx).tipo = tipo();
+					setState(257);
 					((FunctionContext)_localctx).ID = match(ID);
 					func_dir.VarDeclaration(func_dir.currentFunction,(((FunctionContext)_localctx).ID!=null?((FunctionContext)_localctx).ID.getText():null),((FunctionContext)_localctx).tipo.type,'@parameter')
 							
 					}
 					}
-					setState(262);
+					setState(264);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(265);
-			match(T__2);
-			setState(266);
-			match(BEGIN);
 			setState(267);
-			func_bloque();
+			match(T__2);
 			setState(268);
-			match(RETURN);
+			match(BEGIN);
 			setState(269);
-			match(T__1);
+			func_bloque();
+			setState(270);
+			match(RETURN);
 			setState(271);
+			match(T__1);
+			setState(273);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << CTBF) | (1L << CTBT) | (1L << ID) | (1L << CTN) | (1L << CTT) | (1L << MINUS))) != 0)) {
 				{
-				setState(270);
+				setState(272);
 				todo();
 				}
 			}
 
-			setState(273);
+			setState(275);
 			match(T__2);
-			setState(274);
+			setState(276);
 			match(END);
 			func_dir.currentFunction = '@global'
 			func_dir.memLocal = 9000
@@ -1545,7 +1550,7 @@ public class VisionScriptParser extends Parser {
 		Function_typeContext _localctx = new Function_typeContext(_ctx, getState());
 		enterRule(_localctx, 38, RULE_function_type);
 		try {
-			setState(283);
+			setState(285);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NUMBER:
@@ -1554,7 +1559,7 @@ public class VisionScriptParser extends Parser {
 			case CONTAINER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(278);
+				setState(280);
 				((Function_typeContext)_localctx).tipo = tipo();
 				_localctx.type = ((Function_typeContext)_localctx).tipo.type
 				}
@@ -1562,7 +1567,7 @@ public class VisionScriptParser extends Parser {
 			case VOID:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(281);
+				setState(283);
 				((Function_typeContext)_localctx).VOID = match(VOID);
 				_localctx.type = (((Function_typeContext)_localctx).VOID!=null?((Function_typeContext)_localctx).VOID.getText():null)
 				}
@@ -1644,65 +1649,65 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(295);
+			setState(297);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << READ) | (1L << PRINT) | (1L << HEAR) | (1L << BRAILLE) | (1L << IF) | (1L << NUMBER) | (1L << TEXT) | (1L << BOOL) | (1L << CONTAINER) | (1L << REPEAT) | (1L << ID))) != 0)) {
 				{
-				setState(293);
+				setState(295);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
 				case 1:
 					{
-					setState(285);
+					setState(287);
 					variable();
 					}
 					break;
 				case 2:
 					{
-					setState(286);
+					setState(288);
 					condicion();
 					}
 					break;
 				case 3:
 					{
-					setState(287);
+					setState(289);
 					ciclo();
 					}
 					break;
 				case 4:
 					{
-					setState(288);
+					setState(290);
 					read();
 					}
 					break;
 				case 5:
 					{
-					setState(289);
+					setState(291);
 					imprimir();
 					}
 					break;
 				case 6:
 					{
-					setState(290);
+					setState(292);
 					asignacion();
 					}
 					break;
 				case 7:
 					{
-					setState(291);
+					setState(293);
 					op_contenedor();
 					}
 					break;
 				case 8:
 					{
-					setState(292);
+					setState(294);
 					function_call();
 					}
 					break;
 				}
 				}
-				setState(297);
+				setState(299);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1742,39 +1747,39 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(298);
+			setState(300);
 			((Function_callContext)_localctx).ID = match(ID);
-			setState(299);
+			setState(301);
 			match(T__1);
-			setState(311);
+			setState(313);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << CTBF) | (1L << CTBT) | (1L << ID) | (1L << CTN) | (1L << CTT) | (1L << MINUS))) != 0)) {
 				{
-				setState(300);
+				setState(302);
 				((Function_callContext)_localctx).todo = todo();
 				func_dir.VarAssignment((((Function_callContext)_localctx).ID!=null?((Function_callContext)_localctx).ID.getText():null),(((Function_callContext)_localctx).ID!=null?((Function_callContext)_localctx).ID.getText():null),(((Function_callContext)_localctx).todo!=null?_input.getText(((Function_callContext)_localctx).todo.start,((Function_callContext)_localctx).todo.stop):null))
-				setState(308);
+				setState(310);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T__3) {
 					{
 					{
-					setState(302);
+					setState(304);
 					match(T__3);
-					setState(303);
+					setState(305);
 					((Function_callContext)_localctx).todo = todo();
 					func_dir.VarAssignment(func_dir.currentFunction,(((Function_callContext)_localctx).ID!=null?((Function_callContext)_localctx).ID.getText():null),(((Function_callContext)_localctx).todo!=null?_input.getText(((Function_callContext)_localctx).todo.start,((Function_callContext)_localctx).todo.stop):null))
 					}
 					}
-					setState(310);
+					setState(312);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(313);
+			setState(315);
 			match(T__2);
 			}
 		}
@@ -1809,35 +1814,35 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(315);
+			setState(317);
 			match(T__4);
-			setState(324);
+			setState(326);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << CTBF) | (1L << CTBT) | (1L << ID) | (1L << CTN) | (1L << CTT) | (1L << MINUS))) != 0)) {
 				{
-				setState(316);
+				setState(318);
 				mega_expresion();
-				setState(321);
+				setState(323);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==T__3) {
 					{
 					{
-					setState(317);
+					setState(319);
 					match(T__3);
-					setState(318);
+					setState(320);
 					mega_expresion();
 					}
 					}
-					setState(323);
+					setState(325);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(326);
+			setState(328);
 			match(T__5);
 			}
 		}
@@ -1880,18 +1885,18 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(328);
+			setState(330);
 			match(ID);
-			setState(329);
+			setState(331);
 			match(T__6);
-			setState(345);
+			setState(347);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case GET_BACK:
 			case GET_FRONT:
 			case LENGTH:
 				{
-				setState(330);
+				setState(332);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GET_BACK) | (1L << GET_FRONT) | (1L << LENGTH))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -1901,9 +1906,9 @@ public class VisionScriptParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(331);
+				setState(333);
 				match(T__1);
-				setState(332);
+				setState(334);
 				match(T__2);
 				}
 				break;
@@ -1911,7 +1916,7 @@ public class VisionScriptParser extends Parser {
 			case INSERT_BACK:
 			case INSERT_FRONT:
 				{
-				setState(333);
+				setState(335);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GET) | (1L << INSERT_BACK) | (1L << INSERT_FRONT))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -1921,27 +1926,27 @@ public class VisionScriptParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(334);
-				match(T__1);
-				setState(335);
-				mega_expresion();
 				setState(336);
+				match(T__1);
+				setState(337);
+				mega_expresion();
+				setState(338);
 				match(T__2);
 				}
 				break;
 			case INSERT:
 				{
-				setState(338);
-				match(INSERT);
-				setState(339);
-				match(T__1);
 				setState(340);
-				mega_expresion();
+				match(INSERT);
 				setState(341);
-				match(T__3);
+				match(T__1);
 				setState(342);
 				mega_expresion();
 				setState(343);
+				match(T__3);
+				setState(344);
+				mega_expresion();
+				setState(345);
 				match(T__2);
 				}
 				break;
@@ -1985,21 +1990,21 @@ public class VisionScriptParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(347);
+			setState(349);
 			contenedor();
-			setState(350); 
+			setState(352); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(348);
+				setState(350);
 				match(PLUS);
-				setState(349);
+				setState(351);
 				contenedor();
 				}
 				}
-				setState(352); 
+				setState(354); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==PLUS );
@@ -2017,7 +2022,7 @@ public class VisionScriptParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\65\u0165\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\65\u0167\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2026,124 +2031,125 @@ public class VisionScriptParser extends Parser {
 		"\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5\\\n\5\3\6\3\6\3\6\3\6\3\6\5\6c\n\6"+
 		"\3\7\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3"+
 		"\t\3\t\3\t\5\ty\n\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\7\n\u0086"+
-		"\n\n\f\n\16\n\u0089\13\n\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\3\f"+
-		"\3\f\5\f\u0096\n\f\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u00a3"+
-		"\n\r\3\r\3\r\3\r\7\r\u00a8\n\r\f\r\16\r\u00ab\13\r\3\16\3\16\3\16\3\16"+
-		"\3\16\3\16\5\16\u00b3\n\16\3\17\3\17\3\20\3\20\3\20\3\20\3\20\3\20\5\20"+
-		"\u00bd\n\20\3\20\3\20\3\20\7\20\u00c2\n\20\f\20\16\20\u00c5\13\20\3\21"+
-		"\3\21\3\21\3\21\3\21\3\21\5\21\u00cd\n\21\3\21\3\21\3\21\7\21\u00d2\n"+
-		"\21\f\21\16\21\u00d5\13\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22"+
-		"\5\22\u00e0\n\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23"+
-		"\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u00f5\n\23\3\24\3\24\3\24"+
-		"\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\7\24\u0105\n\24"+
-		"\f\24\16\24\u0108\13\24\5\24\u010a\n\24\3\24\3\24\3\24\3\24\3\24\3\24"+
-		"\5\24\u0112\n\24\3\24\3\24\3\24\3\24\3\24\3\25\3\25\3\25\3\25\3\25\5\25"+
-		"\u011e\n\25\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\7\26\u0128\n\26\f"+
-		"\26\16\26\u012b\13\26\3\27\3\27\3\27\3\27\3\27\3\27\3\27\3\27\7\27\u0135"+
-		"\n\27\f\27\16\27\u0138\13\27\5\27\u013a\n\27\3\27\3\27\3\30\3\30\3\30"+
-		"\3\30\7\30\u0142\n\30\f\30\16\30\u0145\13\30\5\30\u0147\n\30\3\30\3\30"+
-		"\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31"+
-		"\3\31\3\31\3\31\5\31\u015c\n\31\3\32\3\32\3\32\6\32\u0161\n\32\r\32\16"+
-		"\32\u0162\3\32\2\2\33\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,."+
-		"\60\62\2\5\4\2\27\30\60\63\4\2!\"((\3\2#%\2\u0185\2\64\3\2\2\2\4E\3\2"+
-		"\2\2\6H\3\2\2\2\b[\3\2\2\2\nb\3\2\2\2\fd\3\2\2\2\16j\3\2\2\2\20r\3\2\2"+
-		"\2\22\u0087\3\2\2\2\24\u008a\3\2\2\2\26\u0095\3\2\2\2\30\u009c\3\2\2\2"+
-		"\32\u00ac\3\2\2\2\34\u00b4\3\2\2\2\36\u00b6\3\2\2\2 \u00c6\3\2\2\2\"\u00df"+
-		"\3\2\2\2$\u00f4\3\2\2\2&\u00f6\3\2\2\2(\u011d\3\2\2\2*\u0129\3\2\2\2,"+
-		"\u012c\3\2\2\2.\u013d\3\2\2\2\60\u014a\3\2\2\2\62\u015d\3\2\2\2\64\65"+
-		"\b\2\1\2\65\66\5\4\3\2\66\67\7\2\2\3\678\b\2\1\289\b\2\1\29\3\3\2\2\2"+
-		":D\5\6\4\2;D\5\16\b\2<D\5\20\t\2=D\5\24\13\2>D\5\26\f\2?D\5&\24\2@D\5"+
-		",\27\2AD\5\f\7\2BD\5\60\31\2C:\3\2\2\2C;\3\2\2\2C<\3\2\2\2C=\3\2\2\2C"+
-		">\3\2\2\2C?\3\2\2\2C@\3\2\2\2CA\3\2\2\2CB\3\2\2\2DG\3\2\2\2EC\3\2\2\2"+
-		"EF\3\2\2\2F\5\3\2\2\2GE\3\2\2\2HI\5\b\5\2IJ\7)\2\2JK\7\3\2\2KL\5\n\6\2"+
-		"LM\b\4\1\2MN\b\4\1\2N\7\3\2\2\2OP\7\20\2\2P\\\b\5\1\2QR\7\21\2\2R\\\b"+
-		"\5\1\2ST\7\22\2\2T\\\b\5\1\2UV\7\31\2\2VW\7\4\2\2WX\5\30\r\2XY\7\5\2\2"+
-		"YZ\b\5\1\2Z\\\3\2\2\2[O\3\2\2\2[Q\3\2\2\2[S\3\2\2\2[U\3\2\2\2\\\t\3\2"+
-		"\2\2]c\5\30\r\2^c\5\62\32\2_c\5.\30\2`c\5,\27\2ac\5\60\31\2b]\3\2\2\2"+
-		"b^\3\2\2\2b_\3\2\2\2b`\3\2\2\2ba\3\2\2\2c\13\3\2\2\2de\7)\2\2ef\7\3\2"+
-		"\2fg\5\n\6\2gh\b\7\1\2hi\b\7\1\2i\r\3\2\2\2jk\7\16\2\2kl\5\30\r\2lm\7"+
-		"\32\2\2mn\5\22\n\2no\7\17\2\2op\5\22\n\2pq\7\33\2\2q\17\3\2\2\2rx\7\34"+
-		"\2\2st\5\30\r\2tu\7\35\2\2uy\3\2\2\2vw\7\36\2\2wy\5\30\r\2xs\3\2\2\2x"+
-		"v\3\2\2\2yz\3\2\2\2z{\7\32\2\2{|\5\22\n\2|}\7\33\2\2}\21\3\2\2\2~\u0086"+
-		"\5\16\b\2\177\u0086\5\20\t\2\u0080\u0086\5\24\13\2\u0081\u0086\5\26\f"+
-		"\2\u0082\u0086\5\f\7\2\u0083\u0086\5\60\31\2\u0084\u0086\5,\27\2\u0085"+
-		"~\3\2\2\2\u0085\177\3\2\2\2\u0085\u0080\3\2\2\2\u0085\u0081\3\2\2\2\u0085"+
-		"\u0082\3\2\2\2\u0085\u0083\3\2\2\2\u0085\u0084\3\2\2\2\u0086\u0089\3\2"+
-		"\2\2\u0087\u0085\3\2\2\2\u0087\u0088\3\2\2\2\u0088\23\3\2\2\2\u0089\u0087"+
-		"\3\2\2\2\u008a\u008b\7\n\2\2\u008b\u008c\7\4\2\2\u008c\u008d\7)\2\2\u008d"+
-		"\u008e\7\5\2\2\u008e\25\3\2\2\2\u008f\u0090\7\r\2\2\u0090\u0096\b\f\1"+
-		"\2\u0091\u0092\7\13\2\2\u0092\u0096\b\f\1\2\u0093\u0094\7\f\2\2\u0094"+
-		"\u0096\b\f\1\2\u0095\u008f\3\2\2\2\u0095\u0091\3\2\2\2\u0095\u0093\3\2"+
-		"\2\2\u0096\u0097\3\2\2\2\u0097\u0098\7\4\2\2\u0098\u0099\5\n\6\2\u0099"+
-		"\u009a\7\5\2\2\u009a\u009b\b\f\1\2\u009b\27\3\2\2\2\u009c\u009d\5\32\16"+
-		"\2\u009d\u00a9\b\r\1\2\u009e\u009f\7\25\2\2\u009f\u00a3\b\r\1\2\u00a0"+
-		"\u00a1\7\26\2\2\u00a1\u00a3\b\r\1\2\u00a2\u009e\3\2\2\2\u00a2\u00a0\3"+
-		"\2\2\2\u00a3\u00a4\3\2\2\2\u00a4\u00a5\5\32\16\2\u00a5\u00a6\b\r\1\2\u00a6"+
-		"\u00a8\3\2\2\2\u00a7\u00a2\3\2\2\2\u00a8\u00ab\3\2\2\2\u00a9\u00a7\3\2"+
-		"\2\2\u00a9\u00aa\3\2\2\2\u00aa\31\3\2\2\2\u00ab\u00a9\3\2\2\2\u00ac\u00b2"+
-		"\5\36\20\2\u00ad\u00ae\5\34\17\2\u00ae\u00af\b\16\1\2\u00af\u00b0\5\36"+
-		"\20\2\u00b0\u00b1\b\16\1\2\u00b1\u00b3\3\2\2\2\u00b2\u00ad\3\2\2\2\u00b2"+
-		"\u00b3\3\2\2\2\u00b3\33\3\2\2\2\u00b4\u00b5\t\2\2\2\u00b5\35\3\2\2\2\u00b6"+
-		"\u00b7\5 \21\2\u00b7\u00c3\b\20\1\2\u00b8\u00b9\7,\2\2\u00b9\u00bd\b\20"+
-		"\1\2\u00ba\u00bb\7-\2\2\u00bb\u00bd\b\20\1\2\u00bc\u00b8\3\2\2\2\u00bc"+
-		"\u00ba\3\2\2\2\u00bd\u00be\3\2\2\2\u00be\u00bf\5 \21\2\u00bf\u00c0\b\20"+
-		"\1\2\u00c0\u00c2\3\2\2\2\u00c1\u00bc\3\2\2\2\u00c2\u00c5\3\2\2\2\u00c3"+
-		"\u00c1\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4\37\3\2\2\2\u00c5\u00c3\3\2\2"+
-		"\2\u00c6\u00c7\5\"\22\2\u00c7\u00d3\b\21\1\2\u00c8\u00c9\7/\2\2\u00c9"+
-		"\u00cd\b\21\1\2\u00ca\u00cb\7.\2\2\u00cb\u00cd\b\21\1\2\u00cc\u00c8\3"+
-		"\2\2\2\u00cc\u00ca\3\2\2\2\u00cd\u00ce\3\2\2\2\u00ce\u00cf\5\"\22\2\u00cf"+
-		"\u00d0\b\21\1\2\u00d0\u00d2\3\2\2\2\u00d1\u00cc\3\2\2\2\u00d2\u00d5\3"+
-		"\2\2\2\u00d3\u00d1\3\2\2\2\u00d3\u00d4\3\2\2\2\u00d4!\3\2\2\2\u00d5\u00d3"+
-		"\3\2\2\2\u00d6\u00d7\7\4\2\2\u00d7\u00d8\b\22\1\2\u00d8\u00d9\5\30\r\2"+
-		"\u00d9\u00da\7\5\2\2\u00da\u00db\b\22\1\2\u00db\u00e0\3\2\2\2\u00dc\u00dd"+
-		"\5$\23\2\u00dd\u00de\b\22\1\2\u00de\u00e0\3\2\2\2\u00df\u00d6\3\2\2\2"+
-		"\u00df\u00dc\3\2\2\2\u00e0#\3\2\2\2\u00e1\u00e2\7-\2\2\u00e2\u00e3\7*"+
-		"\2\2\u00e3\u00e4\b\23\1\2\u00e4\u00f5\b\23\1\2\u00e5\u00e6\7*\2\2\u00e6"+
-		"\u00e7\b\23\1\2\u00e7\u00f5\b\23\1\2\u00e8\u00e9\7\23\2\2\u00e9\u00ea"+
-		"\b\23\1\2\u00ea\u00f5\b\23\1\2\u00eb\u00ec\7\24\2\2\u00ec\u00ed\b\23\1"+
-		"\2\u00ed\u00f5\b\23\1\2\u00ee\u00ef\7+\2\2\u00ef\u00f0\b\23\1\2\u00f0"+
-		"\u00f5\b\23\1\2\u00f1\u00f2\7)\2\2\u00f2\u00f3\b\23\1\2\u00f3\u00f5\b"+
-		"\23\1\2\u00f4\u00e1\3\2\2\2\u00f4\u00e5\3\2\2\2\u00f4\u00e8\3\2\2\2\u00f4"+
-		"\u00eb\3\2\2\2\u00f4\u00ee\3\2\2\2\u00f4\u00f1\3\2\2\2\u00f5%\3\2\2\2"+
-		"\u00f6\u00f7\5(\25\2\u00f7\u00f8\7\37\2\2\u00f8\u00f9\7)\2\2\u00f9\u00fa"+
-		"\b\24\1\2\u00fa\u00fb\b\24\1\2\u00fb\u0109\7\4\2\2\u00fc\u00fd\5\b\5\2"+
-		"\u00fd\u00fe\7)\2\2\u00fe\u0106\b\24\1\2\u00ff\u0100\7\6\2\2\u0100\u0101"+
-		"\5\b\5\2\u0101\u0102\7)\2\2\u0102\u0103\b\24\1\2\u0103\u0105\3\2\2\2\u0104"+
-		"\u00ff\3\2\2\2\u0105\u0108\3\2\2\2\u0106\u0104\3\2\2\2\u0106\u0107\3\2"+
-		"\2\2\u0107\u010a\3\2\2\2\u0108\u0106\3\2\2\2\u0109\u00fc\3\2\2\2\u0109"+
-		"\u010a\3\2\2\2\u010a\u010b\3\2\2\2\u010b\u010c\7\5\2\2\u010c\u010d\7\32"+
-		"\2\2\u010d\u010e\5*\26\2\u010e\u010f\7 \2\2\u010f\u0111\7\4\2\2\u0110"+
-		"\u0112\5\n\6\2\u0111\u0110\3\2\2\2\u0111\u0112\3\2\2\2\u0112\u0113\3\2"+
-		"\2\2\u0113\u0114\7\5\2\2\u0114\u0115\7\33\2\2\u0115\u0116\b\24\1\2\u0116"+
-		"\u0117\b\24\1\2\u0117\'\3\2\2\2\u0118\u0119\5\b\5\2\u0119\u011a\b\25\1"+
-		"\2\u011a\u011e\3\2\2\2\u011b\u011c\7\'\2\2\u011c\u011e\b\25\1\2\u011d"+
-		"\u0118\3\2\2\2\u011d\u011b\3\2\2\2\u011e)\3\2\2\2\u011f\u0128\5\6\4\2"+
-		"\u0120\u0128\5\16\b\2\u0121\u0128\5\20\t\2\u0122\u0128\5\24\13\2\u0123"+
-		"\u0128\5\26\f\2\u0124\u0128\5\f\7\2\u0125\u0128\5\60\31\2\u0126\u0128"+
-		"\5,\27\2\u0127\u011f\3\2\2\2\u0127\u0120\3\2\2\2\u0127\u0121\3\2\2\2\u0127"+
-		"\u0122\3\2\2\2\u0127\u0123\3\2\2\2\u0127\u0124\3\2\2\2\u0127\u0125\3\2"+
-		"\2\2\u0127\u0126\3\2\2\2\u0128\u012b\3\2\2\2\u0129\u0127\3\2\2\2\u0129"+
-		"\u012a\3\2\2\2\u012a+\3\2\2\2\u012b\u0129\3\2\2\2\u012c\u012d\7)\2\2\u012d"+
-		"\u0139\7\4\2\2\u012e\u012f\5\n\6\2\u012f\u0136\b\27\1\2\u0130\u0131\7"+
-		"\6\2\2\u0131\u0132\5\n\6\2\u0132\u0133\b\27\1\2\u0133\u0135\3\2\2\2\u0134"+
-		"\u0130\3\2\2\2\u0135\u0138\3\2\2\2\u0136\u0134\3\2\2\2\u0136\u0137\3\2"+
-		"\2\2\u0137\u013a\3\2\2\2\u0138\u0136\3\2\2\2\u0139\u012e\3\2\2\2\u0139"+
-		"\u013a\3\2\2\2\u013a\u013b\3\2\2\2\u013b\u013c\7\5\2\2\u013c-\3\2\2\2"+
-		"\u013d\u0146\7\7\2\2\u013e\u0143\5\30\r\2\u013f\u0140\7\6\2\2\u0140\u0142"+
-		"\5\30\r\2\u0141\u013f\3\2\2\2\u0142\u0145\3\2\2\2\u0143\u0141\3\2\2\2"+
-		"\u0143\u0144\3\2\2\2\u0144\u0147\3\2\2\2\u0145\u0143\3\2\2\2\u0146\u013e"+
-		"\3\2\2\2\u0146\u0147\3\2\2\2\u0147\u0148\3\2\2\2\u0148\u0149\7\b\2\2\u0149"+
-		"/\3\2\2\2\u014a\u014b\7)\2\2\u014b\u015b\7\t\2\2\u014c\u014d\t\3\2\2\u014d"+
-		"\u014e\7\4\2\2\u014e\u015c\7\5\2\2\u014f\u0150\t\4\2\2\u0150\u0151\7\4"+
-		"\2\2\u0151\u0152\5\30\r\2\u0152\u0153\7\5\2\2\u0153\u015c\3\2\2\2\u0154"+
-		"\u0155\7&\2\2\u0155\u0156\7\4\2\2\u0156\u0157\5\30\r\2\u0157\u0158\7\6"+
-		"\2\2\u0158\u0159\5\30\r\2\u0159\u015a\7\5\2\2\u015a\u015c\3\2\2\2\u015b"+
-		"\u014c\3\2\2\2\u015b\u014f\3\2\2\2\u015b\u0154\3\2\2\2\u015c\61\3\2\2"+
-		"\2\u015d\u0160\5.\30\2\u015e\u015f\7,\2\2\u015f\u0161\5.\30\2\u0160\u015e"+
-		"\3\2\2\2\u0161\u0162\3\2\2\2\u0162\u0160\3\2\2\2\u0162\u0163\3\2\2\2\u0163"+
-		"\63\3\2\2\2\37CE[bx\u0085\u0087\u0095\u00a2\u00a9\u00b2\u00bc\u00c3\u00cc"+
-		"\u00d3\u00df\u00f4\u0106\u0109\u0111\u011d\u0127\u0129\u0136\u0139\u0143"+
-		"\u0146\u015b\u0162";
+		"\n\n\f\n\16\n\u0089\13\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\3"+
+		"\f\3\f\3\f\3\f\5\f\u0098\n\f\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3"+
+		"\r\5\r\u00a5\n\r\3\r\3\r\3\r\7\r\u00aa\n\r\f\r\16\r\u00ad\13\r\3\16\3"+
+		"\16\3\16\3\16\3\16\3\16\5\16\u00b5\n\16\3\17\3\17\3\20\3\20\3\20\3\20"+
+		"\3\20\3\20\5\20\u00bf\n\20\3\20\3\20\3\20\7\20\u00c4\n\20\f\20\16\20\u00c7"+
+		"\13\20\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u00cf\n\21\3\21\3\21\3\21\7"+
+		"\21\u00d4\n\21\f\21\16\21\u00d7\13\21\3\22\3\22\3\22\3\22\3\22\3\22\3"+
+		"\22\3\22\3\22\5\22\u00e2\n\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23"+
+		"\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u00f7\n\23"+
+		"\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24\3\24"+
+		"\7\24\u0107\n\24\f\24\16\24\u010a\13\24\5\24\u010c\n\24\3\24\3\24\3\24"+
+		"\3\24\3\24\3\24\5\24\u0114\n\24\3\24\3\24\3\24\3\24\3\24\3\25\3\25\3\25"+
+		"\3\25\3\25\5\25\u0120\n\25\3\26\3\26\3\26\3\26\3\26\3\26\3\26\3\26\7\26"+
+		"\u012a\n\26\f\26\16\26\u012d\13\26\3\27\3\27\3\27\3\27\3\27\3\27\3\27"+
+		"\3\27\7\27\u0137\n\27\f\27\16\27\u013a\13\27\5\27\u013c\n\27\3\27\3\27"+
+		"\3\30\3\30\3\30\3\30\7\30\u0144\n\30\f\30\16\30\u0147\13\30\5\30\u0149"+
+		"\n\30\3\30\3\30\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31"+
+		"\3\31\3\31\3\31\3\31\3\31\3\31\5\31\u015e\n\31\3\32\3\32\3\32\6\32\u0163"+
+		"\n\32\r\32\16\32\u0164\3\32\2\2\33\2\4\6\b\n\f\16\20\22\24\26\30\32\34"+
+		"\36 \"$&(*,.\60\62\2\5\4\2\27\30\60\63\4\2!\"((\3\2#%\2\u0187\2\64\3\2"+
+		"\2\2\4E\3\2\2\2\6H\3\2\2\2\b[\3\2\2\2\nb\3\2\2\2\fd\3\2\2\2\16j\3\2\2"+
+		"\2\20r\3\2\2\2\22\u0087\3\2\2\2\24\u008a\3\2\2\2\26\u0097\3\2\2\2\30\u009e"+
+		"\3\2\2\2\32\u00ae\3\2\2\2\34\u00b6\3\2\2\2\36\u00b8\3\2\2\2 \u00c8\3\2"+
+		"\2\2\"\u00e1\3\2\2\2$\u00f6\3\2\2\2&\u00f8\3\2\2\2(\u011f\3\2\2\2*\u012b"+
+		"\3\2\2\2,\u012e\3\2\2\2.\u013f\3\2\2\2\60\u014c\3\2\2\2\62\u015f\3\2\2"+
+		"\2\64\65\b\2\1\2\65\66\5\4\3\2\66\67\7\2\2\3\678\b\2\1\289\b\2\1\29\3"+
+		"\3\2\2\2:D\5\6\4\2;D\5\16\b\2<D\5\20\t\2=D\5\24\13\2>D\5\26\f\2?D\5&\24"+
+		"\2@D\5,\27\2AD\5\f\7\2BD\5\60\31\2C:\3\2\2\2C;\3\2\2\2C<\3\2\2\2C=\3\2"+
+		"\2\2C>\3\2\2\2C?\3\2\2\2C@\3\2\2\2CA\3\2\2\2CB\3\2\2\2DG\3\2\2\2EC\3\2"+
+		"\2\2EF\3\2\2\2F\5\3\2\2\2GE\3\2\2\2HI\5\b\5\2IJ\7)\2\2JK\7\3\2\2KL\5\n"+
+		"\6\2LM\b\4\1\2MN\b\4\1\2N\7\3\2\2\2OP\7\20\2\2P\\\b\5\1\2QR\7\21\2\2R"+
+		"\\\b\5\1\2ST\7\22\2\2T\\\b\5\1\2UV\7\31\2\2VW\7\4\2\2WX\5\30\r\2XY\7\5"+
+		"\2\2YZ\b\5\1\2Z\\\3\2\2\2[O\3\2\2\2[Q\3\2\2\2[S\3\2\2\2[U\3\2\2\2\\\t"+
+		"\3\2\2\2]c\5\30\r\2^c\5\62\32\2_c\5.\30\2`c\5,\27\2ac\5\60\31\2b]\3\2"+
+		"\2\2b^\3\2\2\2b_\3\2\2\2b`\3\2\2\2ba\3\2\2\2c\13\3\2\2\2de\7)\2\2ef\7"+
+		"\3\2\2fg\5\n\6\2gh\b\7\1\2hi\b\7\1\2i\r\3\2\2\2jk\7\16\2\2kl\5\30\r\2"+
+		"lm\7\32\2\2mn\5\22\n\2no\7\17\2\2op\5\22\n\2pq\7\33\2\2q\17\3\2\2\2rx"+
+		"\7\34\2\2st\5\30\r\2tu\7\35\2\2uy\3\2\2\2vw\7\36\2\2wy\5\30\r\2xs\3\2"+
+		"\2\2xv\3\2\2\2yz\3\2\2\2z{\7\32\2\2{|\5\22\n\2|}\7\33\2\2}\21\3\2\2\2"+
+		"~\u0086\5\16\b\2\177\u0086\5\20\t\2\u0080\u0086\5\24\13\2\u0081\u0086"+
+		"\5\26\f\2\u0082\u0086\5\f\7\2\u0083\u0086\5\60\31\2\u0084\u0086\5,\27"+
+		"\2\u0085~\3\2\2\2\u0085\177\3\2\2\2\u0085\u0080\3\2\2\2\u0085\u0081\3"+
+		"\2\2\2\u0085\u0082\3\2\2\2\u0085\u0083\3\2\2\2\u0085\u0084\3\2\2\2\u0086"+
+		"\u0089\3\2\2\2\u0087\u0085\3\2\2\2\u0087\u0088\3\2\2\2\u0088\23\3\2\2"+
+		"\2\u0089\u0087\3\2\2\2\u008a\u008b\7\n\2\2\u008b\u008c\7\4\2\2\u008c\u008d"+
+		"\7)\2\2\u008d\u008e\b\13\1\2\u008e\u008f\7\5\2\2\u008f\u0090\b\13\1\2"+
+		"\u0090\25\3\2\2\2\u0091\u0092\7\r\2\2\u0092\u0098\b\f\1\2\u0093\u0094"+
+		"\7\13\2\2\u0094\u0098\b\f\1\2\u0095\u0096\7\f\2\2\u0096\u0098\b\f\1\2"+
+		"\u0097\u0091\3\2\2\2\u0097\u0093\3\2\2\2\u0097\u0095\3\2\2\2\u0098\u0099"+
+		"\3\2\2\2\u0099\u009a\7\4\2\2\u009a\u009b\5\n\6\2\u009b\u009c\7\5\2\2\u009c"+
+		"\u009d\b\f\1\2\u009d\27\3\2\2\2\u009e\u009f\5\32\16\2\u009f\u00ab\b\r"+
+		"\1\2\u00a0\u00a1\7\25\2\2\u00a1\u00a5\b\r\1\2\u00a2\u00a3\7\26\2\2\u00a3"+
+		"\u00a5\b\r\1\2\u00a4\u00a0\3\2\2\2\u00a4\u00a2\3\2\2\2\u00a5\u00a6\3\2"+
+		"\2\2\u00a6\u00a7\5\32\16\2\u00a7\u00a8\b\r\1\2\u00a8\u00aa\3\2\2\2\u00a9"+
+		"\u00a4\3\2\2\2\u00aa\u00ad\3\2\2\2\u00ab\u00a9\3\2\2\2\u00ab\u00ac\3\2"+
+		"\2\2\u00ac\31\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ae\u00b4\5\36\20\2\u00af"+
+		"\u00b0\5\34\17\2\u00b0\u00b1\b\16\1\2\u00b1\u00b2\5\36\20\2\u00b2\u00b3"+
+		"\b\16\1\2\u00b3\u00b5\3\2\2\2\u00b4\u00af\3\2\2\2\u00b4\u00b5\3\2\2\2"+
+		"\u00b5\33\3\2\2\2\u00b6\u00b7\t\2\2\2\u00b7\35\3\2\2\2\u00b8\u00b9\5 "+
+		"\21\2\u00b9\u00c5\b\20\1\2\u00ba\u00bb\7,\2\2\u00bb\u00bf\b\20\1\2\u00bc"+
+		"\u00bd\7-\2\2\u00bd\u00bf\b\20\1\2\u00be\u00ba\3\2\2\2\u00be\u00bc\3\2"+
+		"\2\2\u00bf\u00c0\3\2\2\2\u00c0\u00c1\5 \21\2\u00c1\u00c2\b\20\1\2\u00c2"+
+		"\u00c4\3\2\2\2\u00c3\u00be\3\2\2\2\u00c4\u00c7\3\2\2\2\u00c5\u00c3\3\2"+
+		"\2\2\u00c5\u00c6\3\2\2\2\u00c6\37\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c8\u00c9"+
+		"\5\"\22\2\u00c9\u00d5\b\21\1\2\u00ca\u00cb\7/\2\2\u00cb\u00cf\b\21\1\2"+
+		"\u00cc\u00cd\7.\2\2\u00cd\u00cf\b\21\1\2\u00ce\u00ca\3\2\2\2\u00ce\u00cc"+
+		"\3\2\2\2\u00cf\u00d0\3\2\2\2\u00d0\u00d1\5\"\22\2\u00d1\u00d2\b\21\1\2"+
+		"\u00d2\u00d4\3\2\2\2\u00d3\u00ce\3\2\2\2\u00d4\u00d7\3\2\2\2\u00d5\u00d3"+
+		"\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6!\3\2\2\2\u00d7\u00d5\3\2\2\2\u00d8"+
+		"\u00d9\7\4\2\2\u00d9\u00da\b\22\1\2\u00da\u00db\5\30\r\2\u00db\u00dc\7"+
+		"\5\2\2\u00dc\u00dd\b\22\1\2\u00dd\u00e2\3\2\2\2\u00de\u00df\5$\23\2\u00df"+
+		"\u00e0\b\22\1\2\u00e0\u00e2\3\2\2\2\u00e1\u00d8\3\2\2\2\u00e1\u00de\3"+
+		"\2\2\2\u00e2#\3\2\2\2\u00e3\u00e4\7-\2\2\u00e4\u00e5\7*\2\2\u00e5\u00e6"+
+		"\b\23\1\2\u00e6\u00f7\b\23\1\2\u00e7\u00e8\7*\2\2\u00e8\u00e9\b\23\1\2"+
+		"\u00e9\u00f7\b\23\1\2\u00ea\u00eb\7\23\2\2\u00eb\u00ec\b\23\1\2\u00ec"+
+		"\u00f7\b\23\1\2\u00ed\u00ee\7\24\2\2\u00ee\u00ef\b\23\1\2\u00ef\u00f7"+
+		"\b\23\1\2\u00f0\u00f1\7+\2\2\u00f1\u00f2\b\23\1\2\u00f2\u00f7\b\23\1\2"+
+		"\u00f3\u00f4\7)\2\2\u00f4\u00f5\b\23\1\2\u00f5\u00f7\b\23\1\2\u00f6\u00e3"+
+		"\3\2\2\2\u00f6\u00e7\3\2\2\2\u00f6\u00ea\3\2\2\2\u00f6\u00ed\3\2\2\2\u00f6"+
+		"\u00f0\3\2\2\2\u00f6\u00f3\3\2\2\2\u00f7%\3\2\2\2\u00f8\u00f9\5(\25\2"+
+		"\u00f9\u00fa\7\37\2\2\u00fa\u00fb\7)\2\2\u00fb\u00fc\b\24\1\2\u00fc\u00fd"+
+		"\b\24\1\2\u00fd\u010b\7\4\2\2\u00fe\u00ff\5\b\5\2\u00ff\u0100\7)\2\2\u0100"+
+		"\u0108\b\24\1\2\u0101\u0102\7\6\2\2\u0102\u0103\5\b\5\2\u0103\u0104\7"+
+		")\2\2\u0104\u0105\b\24\1\2\u0105\u0107\3\2\2\2\u0106\u0101\3\2\2\2\u0107"+
+		"\u010a\3\2\2\2\u0108\u0106\3\2\2\2\u0108\u0109\3\2\2\2\u0109\u010c\3\2"+
+		"\2\2\u010a\u0108\3\2\2\2\u010b\u00fe\3\2\2\2\u010b\u010c\3\2\2\2\u010c"+
+		"\u010d\3\2\2\2\u010d\u010e\7\5\2\2\u010e\u010f\7\32\2\2\u010f\u0110\5"+
+		"*\26\2\u0110\u0111\7 \2\2\u0111\u0113\7\4\2\2\u0112\u0114\5\n\6\2\u0113"+
+		"\u0112\3\2\2\2\u0113\u0114\3\2\2\2\u0114\u0115\3\2\2\2\u0115\u0116\7\5"+
+		"\2\2\u0116\u0117\7\33\2\2\u0117\u0118\b\24\1\2\u0118\u0119\b\24\1\2\u0119"+
+		"\'\3\2\2\2\u011a\u011b\5\b\5\2\u011b\u011c\b\25\1\2\u011c\u0120\3\2\2"+
+		"\2\u011d\u011e\7\'\2\2\u011e\u0120\b\25\1\2\u011f\u011a\3\2\2\2\u011f"+
+		"\u011d\3\2\2\2\u0120)\3\2\2\2\u0121\u012a\5\6\4\2\u0122\u012a\5\16\b\2"+
+		"\u0123\u012a\5\20\t\2\u0124\u012a\5\24\13\2\u0125\u012a\5\26\f\2\u0126"+
+		"\u012a\5\f\7\2\u0127\u012a\5\60\31\2\u0128\u012a\5,\27\2\u0129\u0121\3"+
+		"\2\2\2\u0129\u0122\3\2\2\2\u0129\u0123\3\2\2\2\u0129\u0124\3\2\2\2\u0129"+
+		"\u0125\3\2\2\2\u0129\u0126\3\2\2\2\u0129\u0127\3\2\2\2\u0129\u0128\3\2"+
+		"\2\2\u012a\u012d\3\2\2\2\u012b\u0129\3\2\2\2\u012b\u012c\3\2\2\2\u012c"+
+		"+\3\2\2\2\u012d\u012b\3\2\2\2\u012e\u012f\7)\2\2\u012f\u013b\7\4\2\2\u0130"+
+		"\u0131\5\n\6\2\u0131\u0138\b\27\1\2\u0132\u0133\7\6\2\2\u0133\u0134\5"+
+		"\n\6\2\u0134\u0135\b\27\1\2\u0135\u0137\3\2\2\2\u0136\u0132\3\2\2\2\u0137"+
+		"\u013a\3\2\2\2\u0138\u0136\3\2\2\2\u0138\u0139\3\2\2\2\u0139\u013c\3\2"+
+		"\2\2\u013a\u0138\3\2\2\2\u013b\u0130\3\2\2\2\u013b\u013c\3\2\2\2\u013c"+
+		"\u013d\3\2\2\2\u013d\u013e\7\5\2\2\u013e-\3\2\2\2\u013f\u0148\7\7\2\2"+
+		"\u0140\u0145\5\30\r\2\u0141\u0142\7\6\2\2\u0142\u0144\5\30\r\2\u0143\u0141"+
+		"\3\2\2\2\u0144\u0147\3\2\2\2\u0145\u0143\3\2\2\2\u0145\u0146\3\2\2\2\u0146"+
+		"\u0149\3\2\2\2\u0147\u0145\3\2\2\2\u0148\u0140\3\2\2\2\u0148\u0149\3\2"+
+		"\2\2\u0149\u014a\3\2\2\2\u014a\u014b\7\b\2\2\u014b/\3\2\2\2\u014c\u014d"+
+		"\7)\2\2\u014d\u015d\7\t\2\2\u014e\u014f\t\3\2\2\u014f\u0150\7\4\2\2\u0150"+
+		"\u015e\7\5\2\2\u0151\u0152\t\4\2\2\u0152\u0153\7\4\2\2\u0153\u0154\5\30"+
+		"\r\2\u0154\u0155\7\5\2\2\u0155\u015e\3\2\2\2\u0156\u0157\7&\2\2\u0157"+
+		"\u0158\7\4\2\2\u0158\u0159\5\30\r\2\u0159\u015a\7\6\2\2\u015a\u015b\5"+
+		"\30\r\2\u015b\u015c\7\5\2\2\u015c\u015e\3\2\2\2\u015d\u014e\3\2\2\2\u015d"+
+		"\u0151\3\2\2\2\u015d\u0156\3\2\2\2\u015e\61\3\2\2\2\u015f\u0162\5.\30"+
+		"\2\u0160\u0161\7,\2\2\u0161\u0163\5.\30\2\u0162\u0160\3\2\2\2\u0163\u0164"+
+		"\3\2\2\2\u0164\u0162\3\2\2\2\u0164\u0165\3\2\2\2\u0165\63\3\2\2\2\37C"+
+		"E[bx\u0085\u0087\u0097\u00a4\u00ab\u00b4\u00be\u00c5\u00ce\u00d5\u00e1"+
+		"\u00f6\u0108\u010b\u0113\u011f\u0129\u012b\u0138\u013b\u0145\u0148\u015d"+
+		"\u0164";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

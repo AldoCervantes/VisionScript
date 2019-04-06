@@ -64,7 +64,9 @@ bloque: (
 		| function_call
 	)*;
 
-read: READ '(' ID ')';
+read:
+	READ '(' ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))
+		} ')' {cuadruplos.GenerateReadCuad($READ.text)};
 
 imprimir
 	returns[Object flag]: (

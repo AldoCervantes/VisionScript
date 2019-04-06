@@ -466,5 +466,6 @@ class SemanticCube:
         'Goto':15,
         'print':16,
         'hear':17,
-        'braille':18
+        'braille':18,
+        'read':19
     }

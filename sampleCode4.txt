@@ -4,11 +4,12 @@ number a = 1 + n
 
 a = 1
 
-hear (1+2/3)
-
 number function add(number a, text y)
 begin
     a = 40
-    print (n)
+    n = 199990
     return()
 end
+
+print(false)
+read(w)
