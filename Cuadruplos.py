@@ -47,6 +47,20 @@ class Cuadruplos:
                 cuadruplo = [SemanticCube.opToKey['='],self.PilaO.pop(),-1,varId]
                 self.Quad.append(cuadruplo) 
     
+    def GenerateGotoF(self):
+        if len(self.PilaO) > 0:
+            cuadruplo = [SemanticCube.opToKey['GotoF'],self.PilaO.pop(),-1,-1]
+            self.Quad.append(cuadruplo)
+
+    def GenerateGoto(self):
+        if len(self.PilaO) > 0:
+            cuadruplo = [SemanticCube.opToKey['Goto'],-1]
+            self.Quad.append(cuadruplo)
+
+    def FillCuad(self, cuadruplo,pos):
+        self.Quad[cuadruplo][3].append(pos)
+
+
     def InsertParentesis(self): #Funcion 6
         self.POper.append('(')
     
