@@ -12,10 +12,11 @@ class FunctionDirectory:
         self.memGlobal =  5000
         self.memLocal  =  9000
         self.memConst  =  20000
+
     #Funcion que sirve para crear una nueva funcion en el directorio de funciones
     def FuncDeclaration(self, functionId , FunctionType):
         if functionId in self.funDirectory:
-            print("Error: la funcion ",functionId," ya existe")
+            print("#FuncDeclaration Error: la funcion ",functionId," ya existe")
         else:
             self.funDirectory[functionId] = [FunctionType, {}]
 
@@ -29,10 +30,10 @@ class FunctionDirectory:
         return self.tablaConstantes[value][1]
 
     #Funcion que sirve para crear una nueva variable 
-    def VarDeclaration(self , functionId , varId , VarType , value):
+    def VarDeclaration(self , functionId , varId , VarType , value):   
         if functionId  in self.funDirectory:
             if varId in self.funDirectory[functionId][1]:
-                print("Error: La variable ",varId," ya existe")
+                print("#VarDeclaration Error: La variable ",varId," ya existe")
             else:
                 if functionId == '@global':
                     self.funDirectory[functionId][1][varId] = [VarType, value, self.memGlobal]
@@ -41,7 +42,7 @@ class FunctionDirectory:
                     self.funDirectory[functionId][1][varId] = [VarType, value, self.memLocal]
                     self.memLocal+=1
         else:
-            print("Error: La funcion ",functionId," no existe")
+            print("#VarDeclaration Error: La funcion ",functionId," no existe")
 
     #Funcion que sirve para modificar el valor de una variable
     def VarAssignment(self , functionId , varId , value):
@@ -50,11 +51,11 @@ class FunctionDirectory:
                 self.funDirectory[functionId][1][varId][1] = value
             else:
                 if functionId != '@global':
-                    print("Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                    print("#VarAssignment Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
                 else:
-                    print("Error: La variable",varId,"no esta declarada")
+                    print("#VarAssignment Error: La variable",varId,"no esta declarada")
         else:
-            print("Error: La funcion",varId,"no existe")
+            print("#VarAssignment Error: La funcion",varId,"no existe")
     
     #Funcion que retorna el tipo de dato de una variable
     def returnIDType(self, functionId, varId):
@@ -63,11 +64,11 @@ class FunctionDirectory:
                 return self.funDirectory[functionId][1][varId][0]
             else:
                 if functionId != '@global':
-                    print("Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                    print("#returnIDType Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
                 else:
-                    print("Error: La variable",varId,"no esta declarada")
+                    print("#returnIDType Error: La variable",varId,"no esta declarada")
         else:
-            print("Error: La funcion",varId,"no existe")
+            print("#returnIDType Error: La funcion",varId,"no existe")
         return 'error'
 
     #Funcion para debug, sirve para imprimir nuestro directorio 
@@ -90,11 +91,11 @@ class FunctionDirectory:
                 return self.funDirectory[functionId][1][varId][2]
             else:
                 if functionId != '@global':
-                    print("Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                    print("#returnIDAddress Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
                 else:
-                    print("Error: La variable",varId,"no esta declarada")
+                    print("#returnIDAddress Error: La variable",varId,"no esta declarada")
         else:
-            print("Error: La funcion",varId,"no existe")
+            print("#returnIDAddress Error: La funcion",varId,"no existe")
         return -999
 
     #Funcion que regresa la direccion de memoria de una constante
@@ -102,5 +103,5 @@ class FunctionDirectory:
         if value  in self.tablaConstantes:
             return self.tablaConstantes[value][2]
         else:
-            print("Error: La funcion",varId,"no existe")
+            print("#returnConstAddress Error: La funcion",varId,"no existe")
             return -999

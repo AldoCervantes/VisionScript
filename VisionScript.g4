@@ -28,7 +28,7 @@ programa: (
 
 variable:
 	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)
-		} {cuadruplos.GenerateAssignmentCuad('Assignment',func_dir.returnIDAddress(func_dir.currentFunction,$ID.text))
+		} {cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))
 		};
 
 tipo
@@ -46,7 +46,8 @@ todo:
 	| op_contenedor;
 
 asignacion:
-	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)};
+	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)} {cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))
+		};
 
 condicion: IF mega_expresion BEGIN bloque ELSE bloque END;
 
@@ -65,7 +66,12 @@ bloque: (
 
 read: READ '(' ID ')';
 
-imprimir: (BRAILLE | PRINT | HEAR) '(' todo ')';
+imprimir
+	returns[Object flag]: (
+		BRAILLE {$flag = $BRAILLE.text}
+		| PRINT {$flag = $PRINT.text}
+		| HEAR {$flag = $HEAR.text}
+	) '(' todo ')' {cuadruplos.GeneratePrintCuad($flag)};
 
 mega_expresion:
 	expresion {cuadruplos.GenerateCuad('Mega_Expresion')} (

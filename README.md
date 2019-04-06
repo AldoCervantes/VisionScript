@@ -15,15 +15,6 @@ ProjectoFinal
 2 --> python VisionScriptRunner.py sampleCode.txt
 
 
-
-Nos faltaría:
-- Cambiar el arreglo provisional por localidades de memoria
-- Agregar una nueva columna que represente su localidad de memoria
-- Mandar el tipo de las id en lugar de su id
-- Implementar la clase cuadruplos al momento de crear el directorio de funciones.
-- Agregar al directorio de Funciones los parametros de las funciones como variables
-
-
 #print (self.funDirectory['@global'])
 - ['void', {'n': ['number', '1']}] => all info of the function
 
@@ -40,19 +31,8 @@ Nos faltaría:
 - 1 => variable value
 
 
-number n = 1
 
-n = ((1*2-3*4) > n + 2 * 5 / 6 ) and ( 7 * 8 - 9 > 10 - 1 ) and 2 + 3 > 4 * 6
-
-
-
-
-
-number function add(number a, number x)
-begin
-    a = 10
-    return()
-end
-
-
-number x = add(10,2)
+- Hacer cuadruplos Prints(3 tipos), Read
+- Hacer cuadruplos para if
+- Hacer cuadruplos para los repeat
+- Hacer cuadruplos para funciones
