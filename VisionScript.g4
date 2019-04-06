@@ -28,7 +28,7 @@ programa: (
 
 variable:
 	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)
-		} {cuadruplos.GenerateAssignmentCuad('Assignment',func_dir.returnIDAddress(func_dir.currentFunction,$ID.text))
+		} {cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))
 		};
 
 tipo
@@ -46,9 +46,12 @@ todo:
 	| op_contenedor;
 
 asignacion:
-	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)};
+	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)} {cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))
+		};
 
-condicion: IF mega_expresion BEGIN bloque ELSE bloque END;
+condicion:
+	IF mega_expresion {cuadruplos.FuncionIF1()} BEGIN bloque ELSE {cuadruplos.FuncionIF2()} bloque
+		END {cuadruplos.FuncionIF3()};
 
 ciclo:
 	REPEAT (mega_expresion TIMES | UNTIL mega_expresion) BEGIN bloque END;
@@ -63,9 +66,16 @@ bloque: (
 		| function_call
 	)*;
 
-read: READ '(' ID ')';
+read:
+	READ '(' ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))
+		} ')' {cuadruplos.GenerateReadCuad($READ.text)};
 
-imprimir: (BRAILLE | PRINT | HEAR) '(' todo ')';
+imprimir
+	returns[Object flag]: (
+		BRAILLE {$flag = $BRAILLE.text}
+		| PRINT {$flag = $PRINT.text}
+		| HEAR {$flag = $HEAR.text}
+	) '(' todo ')' {cuadruplos.GeneratePrintCuad($flag)};
 
 mega_expresion:
 	expresion {cuadruplos.GenerateCuad('Mega_Expresion')} (
@@ -107,16 +117,17 @@ termino:
 
 factor:
 	'(' {cuadruplos.InsertParentesis()} mega_expresion ')' {cuadruplos.RemoveParentesis()}
-	| ct {cuadruplos.InsertIdType($ct.text,$ct.type)};
+	| ct {cuadruplos.InsertIdType($ct.value,$ct.type)};
 
 ct
-	returns[Object type]:
-	MINUS CTN {$type = 'number'}
-	| CTN {$type = 'number'}
-	| CTBF {$type = 'bool'}
-	| CTBT {$type = 'bool'}
-	| CTT {$type = 'text'}
-	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)};
+	returns[Object type, value]:
+	MINUS CTN {$type = 'number'} {$value = func_dir.ConstDeclaration($type , '-'+$CTN.text )}
+	| CTN {$type = 'number'} {$value = func_dir.ConstDeclaration($type , $CTN.text )}
+	| CTBF {$type = 'bool'} {$value = func_dir.ConstDeclaration($type ,$CTBF.text )}
+	| CTBT {$type = 'bool'} {$value = func_dir.ConstDeclaration($type , $CTBT.text )}
+	| CTT {$type = 'text'} {$value = func_dir.ConstDeclaration($type , $CTT.text )}
+	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(func_dir.currentFunction, $ID.text)
+		};
 
 function:
 	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)

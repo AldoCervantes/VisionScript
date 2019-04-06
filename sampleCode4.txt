@@ -1,0 +1,12 @@
+number n = 1
+
+number a = 2
+
+if n > a 
+begin
+ a = 0
+else
+ n = 1
+end
+
+number w = 100
