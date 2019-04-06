@@ -1,0 +1,5 @@
+number n = "A"
+
+n = 1 + 2
+
+number a = n + "3" + 3 + 3

@@ -1712,35 +1712,35 @@ class VisionScriptParser ( Parser ):
                 self.state = 215
                 localctx._CTN = self.match(VisionScriptParser.CTN)
                 localctx.type = 'number'
-                localctx.value = '-'+(None if localctx._CTN is None else localctx._CTN.text)
+                localctx.value = func_dir.ConstDeclaration(localctx.type , '-'+(None if localctx._CTN is None else localctx._CTN.text) )
                 pass
             elif token in [VisionScriptParser.CTN]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 218
                 localctx._CTN = self.match(VisionScriptParser.CTN)
                 localctx.type = 'number'
-                localctx.value = (None if localctx._CTN is None else localctx._CTN.text)
+                localctx.value = func_dir.ConstDeclaration(localctx.type , (None if localctx._CTN is None else localctx._CTN.text) )
                 pass
             elif token in [VisionScriptParser.CTBF]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 221
                 localctx._CTBF = self.match(VisionScriptParser.CTBF)
                 localctx.type = 'bool'
-                localctx.value = (None if localctx._CTBF is None else localctx._CTBF.text)
+                localctx.value = func_dir.ConstDeclaration(localctx.type ,(None if localctx._CTBF is None else localctx._CTBF.text) )
                 pass
             elif token in [VisionScriptParser.CTBT]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 224
                 localctx._CTBT = self.match(VisionScriptParser.CTBT)
                 localctx.type = 'bool'
-                localctx.value = (None if localctx._CTBT is None else localctx._CTBT.text)
+                localctx.value = func_dir.ConstDeclaration(localctx.type , (None if localctx._CTBT is None else localctx._CTBT.text) )
                 pass
             elif token in [VisionScriptParser.CTT]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 227
                 localctx._CTT = self.match(VisionScriptParser.CTT)
                 localctx.type = 'text'
-                localctx.value = (None if localctx._CTT is None else localctx._CTT.text)
+                localctx.value = func_dir.ConstDeclaration(localctx.type , (None if localctx._CTT is None else localctx._CTT.text) )
                 pass
             elif token in [VisionScriptParser.ID]:
                 self.enterOuterAlt(localctx, 6)

@@ -8,7 +8,7 @@ number G = 1
 number H = 1
 number J = 1
 number L = 1
-number n = (( A * B - C * D ) > C + D * E / F ) and ( G * H - J > L - A ) and B + C > D * F
+number n = (( A * 1 - C * D ) > C + D * E / F ) and ( G * H - J > L - A ) and B + C > D * F
 
 
 number function uno(number i, number j)

@@ -111,23 +111,13 @@ factor:
 
 ct
 	returns[Object type, value]:
-	MINUS CTN {$type = 'number'} {$value = '-'+$CTN.text}
-	| CTN {$type = 'number'} {$value = $CTN.text}
-	| CTBF {$type = 'bool'} {$value = $CTBF.text}
-	| CTBT {$type = 'bool'} {$value = $CTBT.text}
-	| CTT {$type = 'text'} {$value = $CTT.text}
+	MINUS CTN {$type = 'number'} {$value = func_dir.ConstDeclaration($type , '-'+$CTN.text )}
+	| CTN {$type = 'number'} {$value = func_dir.ConstDeclaration($type , $CTN.text )}
+	| CTBF {$type = 'bool'} {$value = func_dir.ConstDeclaration($type ,$CTBF.text )}
+	| CTBT {$type = 'bool'} {$value = func_dir.ConstDeclaration($type , $CTBT.text )}
+	| CTT {$type = 'text'} {$value = func_dir.ConstDeclaration($type , $CTT.text )}
 	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(func_dir.currentFunction, $ID.text)
 		};
-/* ct
-*	returns[Object type, value]:
-*	MINUS CTN {$type = 'number'} {$value = '-'+$CTN.text} {func_dir.ConstDeclaration($type , $value )}
-*	| CTN {$type = 'number'} {$value = $CTN.text}  		  {func_dir.ConstDeclaration($type , $value )}
-*	| CTBF {$type = 'bool'} {$value = $CTBF.text}  		  {func_dir.ConstDeclaration($type , $value )}
-*	| CTBT {$type = 'bool'} {$value = $CTBT.text}  		  {func_dir.ConstDeclaration($type , $value )}
-*	| CTT {$type = 'text'} {$value = $CTT.text}    		  {func_dir.ConstDeclaration($type , $value )}
-*	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(				*    func_dir.currentFunction, $ID.text)
-*		};
-*/
 
 function:
 	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)

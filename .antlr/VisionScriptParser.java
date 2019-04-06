@@ -1315,7 +1315,7 @@ public class VisionScriptParser extends Parser {
 				setState(215);
 				((CtContext)_localctx).CTN = match(CTN);
 				_localctx.type = 'number'
-				_localctx.value = '-'+(((CtContext)_localctx).CTN!=null?((CtContext)_localctx).CTN.getText():null)
+				_localctx.value = func_dir.ConstDeclaration(_localctx.type , '-'+(((CtContext)_localctx).CTN!=null?((CtContext)_localctx).CTN.getText():null) )
 				}
 				break;
 			case CTN:
@@ -1324,7 +1324,7 @@ public class VisionScriptParser extends Parser {
 				setState(218);
 				((CtContext)_localctx).CTN = match(CTN);
 				_localctx.type = 'number'
-				_localctx.value = (((CtContext)_localctx).CTN!=null?((CtContext)_localctx).CTN.getText():null)
+				_localctx.value = func_dir.ConstDeclaration(_localctx.type , (((CtContext)_localctx).CTN!=null?((CtContext)_localctx).CTN.getText():null) )
 				}
 				break;
 			case CTBF:
@@ -1333,7 +1333,7 @@ public class VisionScriptParser extends Parser {
 				setState(221);
 				((CtContext)_localctx).CTBF = match(CTBF);
 				_localctx.type = 'bool'
-				_localctx.value = (((CtContext)_localctx).CTBF!=null?((CtContext)_localctx).CTBF.getText():null)
+				_localctx.value = func_dir.ConstDeclaration(_localctx.type ,(((CtContext)_localctx).CTBF!=null?((CtContext)_localctx).CTBF.getText():null) )
 				}
 				break;
 			case CTBT:
@@ -1342,7 +1342,7 @@ public class VisionScriptParser extends Parser {
 				setState(224);
 				((CtContext)_localctx).CTBT = match(CTBT);
 				_localctx.type = 'bool'
-				_localctx.value = (((CtContext)_localctx).CTBT!=null?((CtContext)_localctx).CTBT.getText():null)
+				_localctx.value = func_dir.ConstDeclaration(_localctx.type , (((CtContext)_localctx).CTBT!=null?((CtContext)_localctx).CTBT.getText():null) )
 				}
 				break;
 			case CTT:
@@ -1351,7 +1351,7 @@ public class VisionScriptParser extends Parser {
 				setState(227);
 				((CtContext)_localctx).CTT = match(CTT);
 				_localctx.type = 'text'
-				_localctx.value = (((CtContext)_localctx).CTT!=null?((CtContext)_localctx).CTT.getText():null)
+				_localctx.value = func_dir.ConstDeclaration(_localctx.type , (((CtContext)_localctx).CTT!=null?((CtContext)_localctx).CTT.getText():null) )
 				}
 				break;
 			case ID:

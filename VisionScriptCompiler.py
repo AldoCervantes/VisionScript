@@ -2,14 +2,13 @@ from Cuadruplos import Cuadruplos
 
 #Clase para crear el directorio de funciones
 class FunctionDirectory:
-    
     Cuad = Cuadruplos()
     #Variable que sirve como flag para distinguir en que función estamos
     currentFunction = '@global'
     #Inicialización del directorio de funciones
     def __init__(self):
         self.funDirectory = {}
-        # self.tablaConstantes = {}
+        self.tablaConstantes = {}
         self.memGlobal =  5000
         self.memLocal  =  9000
         self.memConst  =  20000
@@ -19,17 +18,16 @@ class FunctionDirectory:
             print("Error: la funcion ",functionId," ya existe")
         else:
             self.funDirectory[functionId] = [FunctionType, {}]
-'''
+
     #Funcion que sirve para crear constantes 
     def ConstDeclaration(self , VarType , value):
         if VarType == 'number':
-            float(value)
-            self.funDirectory[self.memConst] = [VarType, value]
-            self.memConst+=1
-        else:
-            self.funDirectory[self.memConst] = [VarType, value]
-            self.memConst+=1
-'''
+            float(value) 
+        if value not in self.tablaConstantes:
+                self.tablaConstantes[value] = [VarType,self.memConst]
+                self.memConst+=1
+        return self.tablaConstantes[value][1]
+
     #Funcion que sirve para crear una nueva variable 
     def VarDeclaration(self , functionId , varId , VarType , value):
         if functionId  in self.funDirectory:
@@ -74,10 +72,16 @@ class FunctionDirectory:
 
     #Funcion para debug, sirve para imprimir nuestro directorio 
     def showFunctionDirectory(self):
-        print("______________")
+        print("~~~~~~~~~~~~~~~~~")
         for key , value in self.funDirectory.items():
             print(key,"=>",value)
             print("______________")
+        print("~~~~~~~~~~~~~~~~~")
+        print("################")
+        for key , value in self.tablaConstantes.items():
+            print(key,"=>",value)
+            print("______________")
+        print("################")
 
     #Funcion que regresa la direccion de memoria de una variable
     def returnIDAddress(self, functionId, varId):
@@ -92,3 +96,11 @@ class FunctionDirectory:
         else:
             print("Error: La funcion",varId,"no existe")
         return -999
+
+    #Funcion que regresa la direccion de memoria de una constante
+    def returnConstAddress(self, value):
+        if value  in self.tablaConstantes:
+            return self.tablaConstantes[value][2]
+        else:
+            print("Error: La funcion",varId,"no existe")
+            return -999
