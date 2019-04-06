@@ -460,5 +460,11 @@ class SemanticCube:
         'equal':9,
         'not_equal':10,
         'and':11,
-        'or':12
+        'or':12,
+        'GotoF':13,
+        'GotoV':14,
+        'Goto':15,
+        'print':16,
+        'hear':17,
+        'braille':18
     }
