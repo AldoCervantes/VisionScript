@@ -1,12 +1,6 @@
-number n = 1
-
 number a = 2
 
-if n > a 
+repeat 1+2+3 times
 begin
- a = 0
-else
- n = 1
+    a = 1
 end
-
-number w = 100

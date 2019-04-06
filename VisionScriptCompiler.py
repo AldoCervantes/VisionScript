@@ -9,9 +9,11 @@ class FunctionDirectory:
     def __init__(self):
         self.funDirectory = {}
         self.tablaConstantes = {}
-        self.memGlobal =  5000
-        self.memLocal  =  9000
-        self.memConst  =  20000
+        self.tablaConstantes['-1'] = ['number',30000]
+        self.tablaConstantes['1'] = ['number',30001]
+        self.memGlobal =  10000
+        self.memLocal  =  20000
+        self.memConst  =  30002
 
     #Funcion que sirve para crear una nueva funcion en el directorio de funciones
     def FuncDeclaration(self, functionId , FunctionType):

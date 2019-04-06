@@ -54,7 +54,10 @@ condicion:
 		END {cuadruplos.FuncionIF3()};
 
 ciclo:
-	REPEAT (mega_expresion TIMES | UNTIL mega_expresion) BEGIN bloque END;
+	REPEAT (
+		mega_expresion {cuadruplos.FuncionRepTimes1()} TIMES
+		| UNTIL {cuadruplos.FuncionRepUntil1()} mega_expresion {cuadruplos.FuncionRepUntil2()}
+	) BEGIN bloque END {cuadruplos.FuncionRepUntil3()};
 
 bloque: (
 		condicion
