@@ -32,7 +32,6 @@ ProjectoFinal
 
 
 
-- Hacer cuadruplos Prints(3 tipos), Read
-- Hacer cuadruplos para if
+
 - Hacer cuadruplos para los repeat
 - Hacer cuadruplos para funciones

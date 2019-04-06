@@ -49,7 +49,9 @@ asignacion:
 	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)} {cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))
 		};
 
-condicion: IF mega_expresion BEGIN bloque ELSE bloque END;
+condicion:
+	IF mega_expresion {cuadruplos.FuncionIF1()} BEGIN bloque ELSE {cuadruplos.FuncionIF2()} bloque
+		END {cuadruplos.FuncionIF3()};
 
 ciclo:
 	REPEAT (mega_expresion TIMES | UNTIL mega_expresion) BEGIN bloque END;

@@ -9,6 +9,7 @@ class Cuadruplos:
         self.PTypes = [] #Pila de tipos (number,text,bool,container)
         self.POper = [] #Pila de Operadores (+,-,*,/,...)
         self.Quad = deque([]) #Fila de Cuadruplos
+        self.PJumps = [] #Pila de saltos
         self.memTemporal = 30000
 
     def InsertIdType(self,varId,VarType): #Funcion 1
@@ -52,18 +53,31 @@ class Cuadruplos:
             else:
                 print("#GenerateAssignmentCuad Error: Se esta intentando asignar un valor de tipo",valueType,"a una variable de tipo",targetType)
     
-    def GenerateGotoF(self):
-        if len(self.PilaO) > 0:
-            cuadruplo = [SemanticCube.opToKey['GotoF'],self.PilaO.pop(),-1,-1]
-            self.Quad.append(cuadruplo)
+    #Funcion 1 de IF
+    def FuncionIF1(self):
+        if len(self.PilaO) > 0 and len(self.PTypes) > 0:
+            result = self.PilaO.pop()
+            exp_type = self.PTypes.pop()
+            if exp_type == 'bool':
+                cuadruplo = [SemanticCube.opToKey['GotoF'],result,-1,-1]
+                self.Quad.append(cuadruplo)
+                self.PJumps.append(len(self.Quad) - 1 )
+            else:
+                print("#GenerateGotoF Error: Se esta intentando hacer un if con una expresion de tipo",exp_type)
 
-    def GenerateGoto(self):
-        if len(self.PilaO) > 0:
-            cuadruplo = [SemanticCube.opToKey['Goto'],-1]
-            self.Quad.append(cuadruplo)
+    #Funcion 3 de IF
+    def FuncionIF2(self):
+        cuadruplo = [SemanticCube.opToKey['Goto'],-1,-1,-1]
+        self.Quad.append(cuadruplo)
+        false = self.PJumps.pop()
+        self.PJumps.append(len(self.Quad) - 1)
+        self.Quad[false][3] = len(self.Quad)
+        
 
-    def FillCuad(self, cuadruplo,pos):
-        self.Quad[cuadruplo][3].append(pos)
+    #Funcion 2 de IF
+    def  FuncionIF3(self):
+        end = self.PJumps.pop()
+        self.Quad[end][3] = len(self.Quad)
 
     #Funcion para Generar los cuadruplos de los 3 tipos de print
     def GeneratePrintCuad(self,flag):
@@ -86,8 +100,10 @@ class Cuadruplos:
         self.POper.pop()
 
     def printCuad(self):
+        cont = 0
         for cuad in range(len(self.Quad)):
-            print(self.Quad[cuad])
+            print(cont,self.Quad[cuad])
+            cont = cont + 1
     
     #Funcion para debug se puede llamar con self.printAll()
     def printAll(self):

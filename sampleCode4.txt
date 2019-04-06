@@ -1,15 +1,12 @@
 number n = 1
 
-number a = 1 + n
+number a = 2
 
-a = 1
-
-number function add(number a, text y)
+if n > a 
 begin
-    a = 40
-    n = 199990
-    return()
+ a = 0
+else
+ n = 1
 end
 
-print(false)
-read(w)
+number w = 100
