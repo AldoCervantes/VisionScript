@@ -469,3 +469,11 @@ class SemanticCube:
         'braille':18,
         'read':19
     }
+
+    TypeToKey = {
+        'number':101,
+        'text':102,
+        'bool':103,
+        'container':104,
+        'error':105
+    }

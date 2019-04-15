@@ -45,6 +45,8 @@ class Cuadruplos:
     
     #Funcion que genera un cuaduplo de asignacion [=,valor,-1,id]
     def GenerateAssignmentCuad(self,varId,targetType):
+        print(self.PTypes)
+        print(self.PilaO)
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             valueType = self.PTypes.pop()
             value = self.PilaO.pop()
@@ -73,8 +75,7 @@ class Cuadruplos:
         false = self.PJumps.pop()
         self.PJumps.append(len(self.Quad) - 1)
         self.Quad[false][3] = len(self.Quad)
-        
-
+     
     #Funcion 2 de IF
     def  FuncionIF3(self):
         end = self.PJumps.pop()
@@ -94,7 +95,7 @@ class Cuadruplos:
                 self.Quad.append(cuadruplo)
                 self.PJumps.append(len(self.Quad) - 1 )
             else:
-                print("#FuncionRepUntil2 Error: Se esta intentando hacer un if con una expresion de tipo",exp_type)
+                print("#FuncionRepUntil2 Error: Se esta intentando hacer un repeat con una expresion de tipo",exp_type)
 
     #Funcion 3 de repat until
     def FuncionRepUntil3(self):
@@ -104,37 +105,6 @@ class Cuadruplos:
         self.Quad.append(cuadruplo)
         self.Quad[end][3] = len(self.Quad)
 
-    #Funcion 1 de repat times
-    def FuncionRepTimes1(self):
-        if len(self.PilaO) > 0 and len(self.PTypes) > 0:
-            valueType = self.PTypes.pop()
-            value = self.PilaO.pop()
-            if valueType == 'number':
-                vartimes = self.memTimes
-                self.memTimes = self.memTimes + 1
-                cuadruplo = [SemanticCube.opToKey['='],30000,-1,vartimes]
-                self.Quad.append(cuadruplo)
-                self.PJumps.append(len(self.Quad))
-
-                cuadruplo = [SemanticCube.opToKey['+'],vartimes,30001,self.memTemporal]
-                self.Quad.append(cuadruplo)
-
-                cuadruplo = [SemanticCube.opToKey['='],self.memTemporal,-1,vartimes]
-                self.Quad.append(cuadruplo)
-                self.memTemporal = self.memTemporal + 1
-
-                cuadruplo = [SemanticCube.opToKey['<'],vartimes,value,self.memTemporal]
-                self.Quad.append(cuadruplo)
-
-                cuadruplo = [SemanticCube.opToKey['GotoF'],self.memTemporal,-1,-1]
-                self.Quad.append(cuadruplo)
-
-                self.memTemporal = self.memTemporal + 1
-
-                self.PJumps.append(len(self.Quad) -1)
-            else:
-                print("#FuncionRepTimes1 Error: Se esta intentando hacer un times con una expresion de tipo",valueType)
-
     #Funcion para Generar los cuadruplos de los 3 tipos de print
     def GeneratePrintCuad(self,flag):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
@@ -143,10 +113,10 @@ class Cuadruplos:
             self.Quad.append(cuadruplo)
 
     #Funcion para generar los cuadruplos de la funcion read
-    def GenerateReadCuad(self,flag):
+    def GenerateReadCuad(self,flag,VarType):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             self.PTypes.pop()
-            cuadruplo = [SemanticCube.opToKey[flag],-1,-1,self.PilaO.pop()]
+            cuadruplo = [SemanticCube.opToKey[flag],SemanticCube.TypeToKey[VarType],-1,self.PilaO.pop()]
             self.Quad.append(cuadruplo)
     
     def InsertParentesis(self): #Funcion 6

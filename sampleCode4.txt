@@ -1,6 +1,1 @@
-number a = 2
-
-repeat 1+2+3 times
-begin
-    a = 1
-end
+container b = [1,2,4,345,123,123]

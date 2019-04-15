@@ -11,8 +11,7 @@ cuadruplos = Cuadruplos()
  */
 
 visionscript:
-	{func_dir.FuncDeclaration('@global','void')} programa EOF {cuadruplos.printCuad()} {func_dir.showFunctionDirectory()
-		};
+	{func_dir.FuncDeclaration('@global','void')} programa EOF {cuadruplos.printCuad()} {func_dir.showFunctionDirectory()};
 
 programa: (
 		variable
@@ -27,16 +26,15 @@ programa: (
 	)*;
 
 variable:
-	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)
-		} {cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))
-		};
+	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)} 
+	{cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))};
 
 tipo
 	returns[Object type]:
 	NUMBER {$type = $NUMBER.text}
 	| TEXT {$type = $TEXT.text}
 	| BOOL {$type = $BOOL.text}
-	| CONTAINER '(' mega_expresion ')' {$type = $CONTAINER.text};
+	| CONTAINER {$type = $CONTAINER.text};
 
 todo:
 	mega_expresion
@@ -46,18 +44,16 @@ todo:
 	| op_contenedor;
 
 asignacion:
-	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)} {cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))
-		};
+	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)} 
+	{cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))};
 
 condicion:
 	IF mega_expresion {cuadruplos.FuncionIF1()} BEGIN bloque ELSE {cuadruplos.FuncionIF2()} bloque
 		END {cuadruplos.FuncionIF3()};
 
 ciclo:
-	REPEAT (
-		mega_expresion {cuadruplos.FuncionRepTimes1()} TIMES
-		| UNTIL {cuadruplos.FuncionRepUntil1()} mega_expresion {cuadruplos.FuncionRepUntil2()}
-	) BEGIN bloque END {cuadruplos.FuncionRepUntil3()};
+	REPEAT UNTIL {cuadruplos.FuncionRepUntil1()} mega_expresion {cuadruplos.FuncionRepUntil2()} 
+	BEGIN bloque END {cuadruplos.FuncionRepUntil3()};
 
 bloque: (
 		condicion
@@ -70,9 +66,9 @@ bloque: (
 	)*;
 
 read:
-	READ '(' ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))
-		} ')' {cuadruplos.GenerateReadCuad($READ.text)};
-
+	READ '(' ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))} 
+	')' {cuadruplos.GenerateReadCuad($READ.text,func_dir.returnIDType(func_dir.currentFunction,$ID.text))};
+				
 imprimir
 	returns[Object flag]: (
 		BRAILLE {$flag = $BRAILLE.text}
@@ -129,19 +125,14 @@ ct
 	| CTBF {$type = 'bool'} {$value = func_dir.ConstDeclaration($type ,$CTBF.text )}
 	| CTBT {$type = 'bool'} {$value = func_dir.ConstDeclaration($type , $CTBT.text )}
 	| CTT {$type = 'text'} {$value = func_dir.ConstDeclaration($type , $CTT.text )}
-	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(func_dir.currentFunction, $ID.text)
-		};
+	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(func_dir.currentFunction, $ID.text)};
 
 function:
-	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)
-		} '(' (
-		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')
-		} (
-			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')
-		}
+	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)} '(' (
+		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')} (
+			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}
 		)*
-	)? ')' BEGIN func_bloque RETURN '(' (todo)? ')' END {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000
-		};
+	)? ')' BEGIN func_bloque RETURN '(' (todo)? ')' END {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
 
 function_type
 	returns[Object type]:
