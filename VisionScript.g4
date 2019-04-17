@@ -37,10 +37,13 @@ tipo
 	| CONTAINER {$type = $CONTAINER.text};
 
 todo:
+	casi_todo
+	| function_call;
+
+casi_todo: 
 	mega_expresion
 	| concat_contenedor
 	| contenedor
-	| function_call
 	| op_contenedor;
 
 asignacion:
@@ -128,11 +131,11 @@ ct
 	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(func_dir.currentFunction, $ID.text)};
 
 function:
-	function_type FUNCTION ID {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)} '(' (
-		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')} (
-			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}
+	function_type FUNCTION ID {cuadruplos.GenerateFunGoto()} {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)} '(' (
+		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)} (
+			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)}
 		)*
-	)? ')' BEGIN func_bloque RETURN '(' (todo)? ')' END {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
+	)? ')' BEGIN func_bloque RETURN '(' (casi_todo)? ')' END {cuadruplos.FillFunGoto()} {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
 
 function_type
 	returns[Object type]:
@@ -151,11 +154,7 @@ func_bloque: (
 	)*;
 
 function_call:
-	ID '(' (
-		todo {func_dir.VarAssignment($ID.text,$ID.text,$todo.text)} (
-			',' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)}
-		)*
-	)? ')';
+	ID {cuadruplos.GenerateEra($ID.text)} '(' (casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)} (',' casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)})*)? ')' {cuadruplos.VerifyParameters(func_dir.ReturnParams($ID.text),$ID.text)};
 
 contenedor: '[' ( mega_expresion (',' mega_expresion)*)? ']';
 

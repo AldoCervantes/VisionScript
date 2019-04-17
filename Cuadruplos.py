@@ -11,7 +11,7 @@ class Cuadruplos:
         self.Quad = deque([]) #Fila de Cuadruplos
         self.PJumps = [] #Pila de saltos
         self.memTemporal = 40000
-        self.memTimes = 50000
+        self.paramCounter = 0
 
     def InsertIdType(self,varId,VarType): #Funcion 1
         self.PilaO.append(varId)
@@ -45,8 +45,6 @@ class Cuadruplos:
     
     #Funcion que genera un cuaduplo de asignacion [=,valor,-1,id]
     def GenerateAssignmentCuad(self,varId,targetType):
-        print(self.PTypes)
-        print(self.PilaO)
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             valueType = self.PTypes.pop()
             value = self.PilaO.pop()
@@ -119,17 +117,65 @@ class Cuadruplos:
             cuadruplo = [SemanticCube.opToKey[flag],SemanticCube.TypeToKey[VarType],-1,self.PilaO.pop()]
             self.Quad.append(cuadruplo)
     
-    def InsertParentesis(self): #Funcion 6
+    #Funcion 6
+    def InsertParentesis(self):
         self.POper.append('(')
     
-    def RemoveParentesis(self): # Funcion 7
+    # Funcion 7
+    def RemoveParentesis(self):
         self.POper.pop()
 
+    #Funcion que genera el Goto de una Funcion
+    def GenerateFunGoto(self):
+        cuadruplo = ['Goto',-1,-1,-1]
+        self.Quad.append(cuadruplo)
+        self.PJumps.append(len(self.Quad) - 1)
+
+    #Funcion que llena el Goto de una Funcion
+    def FillFunGoto(self):
+        returns = self.PJumps.pop()
+        self.Quad[returns][3] = len(self.Quad)
+
+    #Funcion que genera el cuadruplo ERA
+    def GenerateEra(self,functionId):
+        cuadruplo = ['ERA',-1,-1,functionId]
+        self.Quad.append(cuadruplo)
+
+    #Funcion para generar un cuadruplo de parametro
+    def GenerateParameter(self,parametros,funcionId):
+        if len(parametros) > 0:
+            valueType = self.PTypes.pop()
+            value = self.PilaO.pop()
+            if self.paramCounter < len(parametros):
+                if parametros[self.paramCounter] == valueType:
+                    cuadruplo = ['param',value,valueType,'param' + str(self.paramCounter)]
+                    self.Quad.append(cuadruplo)
+                else:
+                    print('#GenerateParameter Error: El tipo del parametro',self.paramCounter,'es',parametros[self.paramCounter],'y el tipo que se esta pasando es',valueType)
+                self.paramCounter = self.paramCounter + 1
+            else:
+                print('#GenerateParameter Error: La funcion',funcionId,"()",'tiene unicamente',len(parametros),'parametros')
+        else:
+            print('#GenerateParameter Error: La funcion',funcionId,"()",'no recibe parametros')
+
+    #Funcion que revisa si se mandaron todos los parametros y ademas resetea el contador de parametros y hace el GOSUB
+    def VerifyParameters(self, parametros, funcionId):
+        if len(parametros) == self.paramCounter:
+            cuadruplo = ['gosub',-1,-1,funcionId]
+            self.Quad.append(cuadruplo)
+        else:
+            print('#VerifyParameters Error: faltan',len(parametros) - self.paramCounter,'parametro(s) an la llamada a la funcion',funcionId)
+        self.paramCounter = 0
+
+    #Funcion unicamente para debuggear
     def printCuad(self):
         cont = 0
+        print(" ")
+        print('=========== CUADRUPLOS ==========')
         for cuad in range(len(self.Quad)):
             print(cont,self.Quad[cuad])
             cont = cont + 1
+        print('=================================')
     
     #Funcion para debug se puede llamar con self.printAll()
     def printAll(self):
