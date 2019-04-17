@@ -59,6 +59,15 @@ class VisionScriptListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by VisionScriptParser#casi_todo.
+    def enterCasi_todo(self, ctx:VisionScriptParser.Casi_todoContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#casi_todo.
+    def exitCasi_todo(self, ctx:VisionScriptParser.Casi_todoContext):
+        pass
+
+
     # Enter a parse tree produced by VisionScriptParser#asignacion.
     def enterAsignacion(self, ctx:VisionScriptParser.AsignacionContext):
         pass

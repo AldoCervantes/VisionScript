@@ -1,6 +1,20 @@
-number a = 2
-
-repeat 1+2+3 times
+number b = 2
+number a = 1
+number function add(number x, bool y, number z)
 begin
-    a = 1
+    x = 1 +2 /3 * 5
+    return()
 end
+
+
+b = add(1, 1+1*2/2+2*1-2/2*3 > a,1)
+
+b = add(1, 1+1*2/2+2*1-2/2*3 > a,1)
+
+number function less(number x, bool y, number z)
+begin
+    x = 1 +2 /3 * 5
+    return()
+end
+
+a = 20

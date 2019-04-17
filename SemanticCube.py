@@ -462,10 +462,17 @@ class SemanticCube:
         'and':11,
         'or':12,
         'GotoF':13,
-        'GotoV':14,
-        'Goto':15,
-        'print':16,
-        'hear':17,
-        'braille':18,
-        'read':19
+        'Goto':14,
+        'print':15,
+        'hear':16,
+        'braille':17,
+        'read':18
+    }
+
+    TypeToKey = {
+        'number':101,
+        'text':102,
+        'bool':103,
+        'container':104,
+        'error':105
     }

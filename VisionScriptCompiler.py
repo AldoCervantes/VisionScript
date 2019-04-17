@@ -9,18 +9,30 @@ class FunctionDirectory:
     def __init__(self):
         self.funDirectory = {}
         self.tablaConstantes = {}
-        self.tablaConstantes['-1'] = ['number',30000]
-        self.tablaConstantes['1'] = ['number',30001]
         self.memGlobal =  10000
         self.memLocal  =  20000
-        self.memConst  =  30002
+        self.memConst  =  30000
 
     #Funcion que sirve para crear una nueva funcion en el directorio de funciones
     def FuncDeclaration(self, functionId , FunctionType):
         if functionId in self.funDirectory:
             print("#FuncDeclaration Error: la funcion ",functionId," ya existe")
         else:
-            self.funDirectory[functionId] = [FunctionType, {}]
+            self.funDirectory[functionId] = [FunctionType, {}, []]
+
+    #Funcion que sirve para registrar los parametros
+    def ParamDeclaration(self,functionId, ParamType):
+        if functionId  in self.funDirectory:
+            self.funDirectory[functionId][2].append(ParamType)
+        else:
+            print("#ParamDeclaration Error: La funcion ",functionId," no existe")
+
+    #Funcion que regresa un arreglo con los paremtros de la funcion
+    def ReturnParams(self,functionId):
+        if functionId  in self.funDirectory:
+            return self.funDirectory[functionId][2]
+        else:
+            print("#ReturnParams Error: La funcion ",functionId," no existe")
 
     #Funcion que sirve para crear constantes 
     def ConstDeclaration(self , VarType , value):
@@ -81,16 +93,18 @@ class FunctionDirectory:
 
     #Funcion para debug, sirve para imprimir nuestro directorio 
     def showFunctionDirectory(self):
-        print("~~~~~~~~~~~~~~~~~")
+        print(" ")
+        print("~~~~~~~~ DIRECTORIO DE FUNCIONES ~~~~~~~~~")
         for key , value in self.funDirectory.items():
             print(key,"=>",value)
             print("______________")
-        print("~~~~~~~~~~~~~~~~~")
-        print("################")
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print(" ")
+        print("####### TABLA DE CONSTANTES #########")
         for key , value in self.tablaConstantes.items():
             print(key,"=>",value)
             print("______________")
-        print("################")
+        print("#####################################")
 
     #Funcion que regresa la direccion de memoria de una variable
     def returnIDAddress(self, functionId, varId):
