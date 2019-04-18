@@ -158,14 +158,15 @@ function_call:
 
 contenedor: '[' ( mega_expresion (',' mega_expresion)*)? ']';
 
-op_contenedor:
-	ID '.' (
-		(GET_BACK | GET_FRONT | LENGTH) '(' ')'
-		| (GET | INSERT_BACK | INSERT_FRONT) '(' mega_expresion ')'
-		| INSERT '(' mega_expresion ',' mega_expresion ')'
-	);
+op_contenedor
+	returns[Object flag]:
+		ID '.' (
+			(GET_BACK {$flag = $GET_BACK.text} | GET_FRONT {$flag = $GET_FRONT.text}| LENGTH {$flag = $LENGTH.text}) '(' ')' {FuncionOP3($ID.text,$flag)}
+			| (GET {$flag = $GET.text}| INSERT_BACK {$flag = $INSERT_BACK.text} | INSERT_FRONT {$flag = $INSERT_FRONT.text}) '(' mega_expresion ')' {FuncionOP4($ID.text,$flag,$mega_expresion.value)}
+			| INSERT'(' mega_expresion ',' mega_expresion ')' {FuncionOP5($ID.text,$mega_expresion.value, $mega_expresion.value)}
+		);
 
-concat_contenedor: contenedor (PLUS contenedor)+;
+concat_contenedor: contenedor (PLUS contenedor)+; 
 
 /*
  * Lexer Rules

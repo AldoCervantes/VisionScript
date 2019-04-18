@@ -21,7 +21,7 @@ class Cuadruplos:
         self.POper.append(operator)
     
     #Para operaciones aritmeticas
-    def GenerateCuad(self,flag): # Funcion 4 , 5 , 9 y 11
+    def GenerateCuad(self,flag ==): # Funcion 4 , 5 , 9 y 11
         if len(self.POper) > 0:
             top = self.POper[len(self.POper)-1]
             if (flag == 'Termino' and (top == '+' or top == '-')) or (flag == 'Factor' and (top == '*' or top == '/')) or (flag == 'Expresion' and (top == '>' or top == '<'or top == '<=' or top == '>=' or top == 'not_equal' or top == 'equal')) or (flag == 'Mega_Expresion'  and (top == 'and' or top == 'or')):
@@ -140,6 +140,58 @@ class Cuadruplos:
     def GenerateEra(self,functionId):
         cuadruplo = ['ERA',-1,-1,functionId]
         self.Quad.append(cuadruplo)
+    
+    #Funcion que genera el cuadruplo append
+    def FuncionOP1(self,varId,value):
+        cuadruplo = ['append',value,-1,varId]
+        self.Quad.append(cuadruplo)
+
+    #Funcion que genera el cuadruplo concat
+    def FuncionOP2(self,varIdLeft,varIdRight):
+        result = self.memTemporal
+        self.memTemporal = self.memTemporal + 1
+        cuadruplo = ['concat',varIdLeft,varIdRight,result]
+        self.Quad.append(cuadruplo)
+
+    def FuncionOP3(self,varId,flag):
+        if (flag == "get_back"):
+            result = self.memTemporal
+            self.memTemporal = self.memTemporal + 1
+            cuadruplo = ['get_back',varId,-1,result]
+            self.Quad.append(cuadruplo)
+        elif (flag == "get_front"):
+            result = self.memTemporal
+            self.memTemporal = self.memTemporal + 1
+            cuadruplo = ['get_front',varId,-1,result]
+            self.Quad.append(cuadruplo)
+        else:
+            result = self.memTemporal
+            self.memTemporal = self.memTemporal + 1
+            cuadruplo = ['length',varId,-1,result]
+            self.Quad.append(cuadruplo)
+
+    def FuncionOP4(self,varId,flag,pos):
+        if (flag == "get"):
+            result = self.memTemporal
+            self.memTemporal = self.memTemporal + 1
+            cuadruplo = ['get',varId,pos,result]
+            self.Quad.append(cuadruplo)
+        elif (flag == "insert_front"):
+            result = self.memTemporal
+            self.memTemporal = self.memTemporal + 1
+            cuadruplo = ['insert_front',varId,pos,result]
+            self.Quad.append(cuadruplo)
+        else:
+            result = self.memTemporal
+            self.memTemporal = self.memTemporal + 1
+            cuadruplo = ['insert_back',varId,pos,result]
+            self.Quad.append(cuadruplo)
+
+    #Funcion que genera el cuadruplo insert
+    def FuncionOP5(self,varId,value,pos):
+        cuadruplo = ['insert',value,pos,varId]
+        self.Quad.append(cuadruplo)
+
 
     #Funcion para generar un cuadruplo de parametro
     def GenerateParameter(self,parametros,funcionId):

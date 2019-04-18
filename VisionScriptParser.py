@@ -1,4 +1,4 @@
-# Generated from VisionScript.g4 by ANTLR 4.7.2
+# Generated from VisionScript.g4 by ANTLR 4.7.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -10,7 +10,6 @@ from VisionScriptCompiler import FunctionDirectory
 from Cuadruplos import Cuadruplos
 func_dir = FunctionDirectory()
 cuadruplos = Cuadruplos() 
-
 
 def serializedATN():
     with StringIO() as buf:
@@ -308,10 +307,9 @@ class VisionScriptParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.2")
+        self.checkVersion("4.7.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
-
 
 
 
@@ -362,7 +360,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ProgramaContext(ParserRuleContext):
 
@@ -519,7 +516,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class VariableContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -577,7 +573,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class TipoContext(ParserRuleContext):
 
@@ -659,7 +654,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class TodoContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -716,7 +710,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Casi_todoContext(ParserRuleContext):
 
@@ -795,7 +788,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class AsignacionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -846,7 +838,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class CondicionContext(ParserRuleContext):
 
@@ -922,7 +913,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class CicloContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -991,7 +981,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class BloqueContext(ParserRuleContext):
 
@@ -1124,7 +1113,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ReadContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1176,7 +1164,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ImprimirContext(ParserRuleContext):
 
@@ -1256,7 +1243,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Mega_expresionContext(ParserRuleContext):
 
@@ -1344,7 +1330,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ExpresionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1407,7 +1392,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Exp_todoContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1467,7 +1451,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ExpContext(ParserRuleContext):
 
@@ -1555,7 +1538,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class TerminoContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1642,7 +1624,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class FactorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1707,7 +1688,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class CtContext(ParserRuleContext):
 
@@ -1816,7 +1796,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class FunctionContext(ParserRuleContext):
 
@@ -1957,7 +1936,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Function_typeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2018,7 +1996,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Func_bloqueContext(ParserRuleContext):
 
@@ -2163,7 +2140,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class Function_callContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2240,7 +2216,6 @@ class VisionScriptParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class ContenedorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2306,7 +2281,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Op_contenedorContext(ParserRuleContext):
 
@@ -2425,7 +2399,6 @@ class VisionScriptParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Concat_contenedorContext(ParserRuleContext):
 
