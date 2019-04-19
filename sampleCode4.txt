@@ -1,20 +1,7 @@
-number b = 2
-number a = 1
-number function add(number x, bool y, number z)
-begin
-    x = 1 +2 /3 * 5
-    return()
-end
+number a = 10
 
+number b = 20
 
-b = add(1, 1+1*2/2+2*1-2/2*3 > a,1)
+number c = 10+20/30*40-80
 
-b = add(1, 1+1*2/2+2*1-2/2*3 > a,1)
-
-number function less(number x, bool y, number z)
-begin
-    x = 1 +2 /3 * 5
-    return()
-end
-
-a = 20
+number y = a + b

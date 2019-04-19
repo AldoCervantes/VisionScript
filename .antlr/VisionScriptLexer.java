@@ -2,8 +2,10 @@
 
 from VisionScriptCompiler import FunctionDirectory
 from Cuadruplos import Cuadruplos
+from VirtualMachine import VirtualMachine
 func_dir = FunctionDirectory()
 cuadruplos = Cuadruplos() 
+vm = VirtualMachine()
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

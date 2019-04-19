@@ -3,15 +3,17 @@ grammar VisionScript;
 @header {
 from VisionScriptCompiler import FunctionDirectory
 from Cuadruplos import Cuadruplos
+from VirtualMachine import VirtualMachine
 func_dir = FunctionDirectory()
 cuadruplos = Cuadruplos() 
+vm = VirtualMachine()
 }
 /*
  * Parser Ruless
  */
 
 visionscript:
-	{func_dir.FuncDeclaration('@global','void')} programa EOF {cuadruplos.printCuad()} {func_dir.showFunctionDirectory()};
+	{func_dir.FuncDeclaration('@global','void')} programa EOF {cuadruplos.printCuad()} {func_dir.showFunctionDirectory()} {vm.Cuadruplos = cuadruplos.ReturnCuads()} {vm.PrintCuadruplos()};
 
 programa: (
 		variable
@@ -44,7 +46,7 @@ casi_todo:
 	mega_expresion
 	| concat_contenedor
 	| contenedor
-	| op_contenedor;
+	| op_contenedor_returns;
 
 asignacion:
 	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)} 
@@ -135,7 +137,7 @@ function:
 		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)} (
 			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)}
 		)*
-	)? ')' BEGIN func_bloque RETURN '(' (casi_todo)? ')' END {cuadruplos.FillFunGoto()} {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
+	)? ')' BEGIN func_bloque RETURN '(' (casi_todo {cuadruplos.GenerateFunReturns()})? ')' END {cuadruplos.FillFunGoto()} {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
 
 function_type
 	returns[Object type]:
@@ -156,17 +158,22 @@ func_bloque: (
 function_call:
 	ID {cuadruplos.GenerateEra($ID.text)} '(' (casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)} (',' casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)})*)? ')' {cuadruplos.VerifyParameters(func_dir.ReturnParams($ID.text),$ID.text)};
 
-contenedor: '[' ( mega_expresion (',' mega_expresion)*)? ']';
+contenedor: '[' {cuadruplos.GenerateEmptyContainer()} ( mega_expresion {cuadruplos.GenerateFillContainer()} (',' mega_expresion {cuadruplos.GenerateFillContainer()})*)? ']' {cuadruplos.RegisterContainer()};
 
-op_contenedor
+op_contenedor 
 	returns[Object flag]:
-		ID '.' (
-			(GET_BACK {$flag = $GET_BACK.text} | GET_FRONT {$flag = $GET_FRONT.text}| LENGTH {$flag = $LENGTH.text}) '(' ')' {FuncionOP3($ID.text,$flag)}
-			| (GET {$flag = $GET.text}| INSERT_BACK {$flag = $INSERT_BACK.text} | INSERT_FRONT {$flag = $INSERT_FRONT.text}) '(' mega_expresion ')' {FuncionOP4($ID.text,$flag,$mega_expresion.value)}
-			| INSERT'(' mega_expresion ',' mega_expresion ')' {FuncionOP5($ID.text,$mega_expresion.value, $mega_expresion.value)}
+		ID '.' ( (INSERT_BACK {$flag = $INSERT_BACK.text} | INSERT_FRONT {$flag = $INSERT_FRONT.text}) '(' mega_expresion ')' {cuadruplos.FuncionOPContainer3($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
+			| INSERT {$flag = $INSERT.text}'(' mega_expresion ',' mega_expresion ')' {cuadruplos.FuncionOPContainer4($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
 		);
 
-concat_contenedor: contenedor (PLUS contenedor)+; 
+op_contenedor_returns 
+	returns[Object flag]:
+		ID '.' ( (GET_BACK {$flag = $GET_BACK.text} | GET_FRONT {$flag = $GET_FRONT.text}| LENGTH {$flag = $LENGTH.text}) '(' ')' {cuadruplos.FuncionOPContainer1($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
+			|GET {$flag = $GET.text} '(' mega_expresion ')' {cuadruplos.FuncionOPContainer2($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))} );
+
+		
+
+concat_contenedor: (ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))} | contenedor) (PLUS (ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))} | contenedor) {cuadruplos.GenerateConcatContainer()})+; 
 
 /*
  * Lexer Rules

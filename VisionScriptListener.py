@@ -1,4 +1,4 @@
-# Generated from VisionScript.g4 by ANTLR 4.7.1
+# Generated from VisionScript.g4 by ANTLR 4.7.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .VisionScriptParser import VisionScriptParser
@@ -7,8 +7,10 @@ else:
 
 from VisionScriptCompiler import FunctionDirectory
 from Cuadruplos import Cuadruplos
+from VirtualMachine import VirtualMachine
 func_dir = FunctionDirectory()
 cuadruplos = Cuadruplos() 
+vm = VirtualMachine()
 
 
 # This class defines a complete listener for a parse tree produced by VisionScriptParser.
@@ -236,6 +238,15 @@ class VisionScriptListener(ParseTreeListener):
 
     # Exit a parse tree produced by VisionScriptParser#op_contenedor.
     def exitOp_contenedor(self, ctx:VisionScriptParser.Op_contenedorContext):
+        pass
+
+
+    # Enter a parse tree produced by VisionScriptParser#op_contenedor_returns.
+    def enterOp_contenedor_returns(self, ctx:VisionScriptParser.Op_contenedor_returnsContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#op_contenedor_returns.
+    def exitOp_contenedor_returns(self, ctx:VisionScriptParser.Op_contenedor_returnsContext):
         pass
 
 
