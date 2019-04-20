@@ -232,21 +232,21 @@ class VisionScriptListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by VisionScriptParser#op_contenedor.
-    def enterOp_contenedor(self, ctx:VisionScriptParser.Op_contenedorContext):
-        pass
-
-    # Exit a parse tree produced by VisionScriptParser#op_contenedor.
-    def exitOp_contenedor(self, ctx:VisionScriptParser.Op_contenedorContext):
-        pass
-
-
     # Enter a parse tree produced by VisionScriptParser#op_contenedor_returns.
     def enterOp_contenedor_returns(self, ctx:VisionScriptParser.Op_contenedor_returnsContext):
         pass
 
     # Exit a parse tree produced by VisionScriptParser#op_contenedor_returns.
     def exitOp_contenedor_returns(self, ctx:VisionScriptParser.Op_contenedor_returnsContext):
+        pass
+
+
+    # Enter a parse tree produced by VisionScriptParser#op_contenedor.
+    def enterOp_contenedor(self, ctx:VisionScriptParser.Op_contenedorContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#op_contenedor.
+    def exitOp_contenedor(self, ctx:VisionScriptParser.Op_contenedorContext):
         pass
 
 

@@ -137,7 +137,7 @@ function:
 		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)} (
 			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)}
 		)*
-	)? ')' BEGIN func_bloque RETURN '(' (casi_todo {cuadruplos.GenerateFunReturns()})? ')' END {cuadruplos.FillFunGoto()} {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
+	)? ')' BEGIN func_bloque RETURN '(' (casi_todo {cuadruplos.GenerateFunReturns($function_type.type)})? ')' END {cuadruplos.FillFunGoto()} {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
 
 function_type
 	returns[Object type]:
@@ -160,18 +160,16 @@ function_call:
 
 contenedor: '[' {cuadruplos.GenerateEmptyContainer()} ( mega_expresion {cuadruplos.GenerateFillContainer()} (',' mega_expresion {cuadruplos.GenerateFillContainer()})*)? ']' {cuadruplos.RegisterContainer()};
 
-op_contenedor 
-	returns[Object flag]:
-		ID '.' ( (INSERT_BACK {$flag = $INSERT_BACK.text} | INSERT_FRONT {$flag = $INSERT_FRONT.text}) '(' mega_expresion ')' {cuadruplos.FuncionOPContainer3($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
-			| INSERT {$flag = $INSERT.text}'(' mega_expresion ',' mega_expresion ')' {cuadruplos.FuncionOPContainer4($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
-		);
-
 op_contenedor_returns 
 	returns[Object flag]:
 		ID '.' ( (GET_BACK {$flag = $GET_BACK.text} | GET_FRONT {$flag = $GET_FRONT.text}| LENGTH {$flag = $LENGTH.text}) '(' ')' {cuadruplos.FuncionOPContainer1($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
 			|GET {$flag = $GET.text} '(' mega_expresion ')' {cuadruplos.FuncionOPContainer2($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))} );
 
-		
+op_contenedor 
+	returns[Object flag]:
+		ID '.' ( (INSERT_BACK {$flag = $INSERT_BACK.text} | INSERT_FRONT {$flag = $INSERT_FRONT.text}) '(' mega_expresion ')' {cuadruplos.FuncionOPContainer3($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
+			| INSERT {$flag = $INSERT.text}'(' mega_expresion ',' mega_expresion ')' {cuadruplos.FuncionOPContainer4($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
+		);
 
 concat_contenedor: (ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))} | contenedor) (PLUS (ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))} | contenedor) {cuadruplos.GenerateConcatContainer()})+; 
 

@@ -38,13 +38,13 @@ public class VisionScriptParser extends Parser {
 		RULE_expresion = 13, RULE_exp_todo = 14, RULE_exp = 15, RULE_termino = 16, 
 		RULE_factor = 17, RULE_ct = 18, RULE_function = 19, RULE_function_type = 20, 
 		RULE_func_bloque = 21, RULE_function_call = 22, RULE_contenedor = 23, 
-		RULE_op_contenedor = 24, RULE_op_contenedor_returns = 25, RULE_concat_contenedor = 26;
+		RULE_op_contenedor_returns = 24, RULE_op_contenedor = 25, RULE_concat_contenedor = 26;
 	public static final String[] ruleNames = {
 		"visionscript", "programa", "variable", "tipo", "todo", "casi_todo", "asignacion", 
 		"condicion", "ciclo", "bloque", "read", "imprimir", "mega_expresion", 
 		"expresion", "exp_todo", "exp", "termino", "factor", "ct", "function", 
-		"function_type", "func_bloque", "function_call", "contenedor", "op_contenedor", 
-		"op_contenedor_returns", "concat_contenedor"
+		"function_type", "func_bloque", "function_call", "contenedor", "op_contenedor_returns", 
+		"op_contenedor", "concat_contenedor"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -1516,7 +1516,7 @@ public class VisionScriptParser extends Parser {
 				{
 				setState(281);
 				casi_todo();
-				cuadruplos.GenerateFunReturns()
+				cuadruplos.GenerateFunReturns(((FunctionContext)_localctx).function_type.type)
 				}
 			}
 
@@ -1870,6 +1870,108 @@ public class VisionScriptParser extends Parser {
 		return _localctx;
 	}
 
+	public static class Op_contenedor_returnsContext extends ParserRuleContext {
+		public Object flag;
+		public Token ID;
+		public Token GET_BACK;
+		public Token GET_FRONT;
+		public Token LENGTH;
+		public Token GET;
+		public TerminalNode ID() { return getToken(VisionScriptParser.ID, 0); }
+		public TerminalNode GET() { return getToken(VisionScriptParser.GET, 0); }
+		public Mega_expresionContext mega_expresion() {
+			return getRuleContext(Mega_expresionContext.class,0);
+		}
+		public TerminalNode GET_BACK() { return getToken(VisionScriptParser.GET_BACK, 0); }
+		public TerminalNode GET_FRONT() { return getToken(VisionScriptParser.GET_FRONT, 0); }
+		public TerminalNode LENGTH() { return getToken(VisionScriptParser.LENGTH, 0); }
+		public Op_contenedor_returnsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_op_contenedor_returns; }
+	}
+
+	public final Op_contenedor_returnsContext op_contenedor_returns() throws RecognitionException {
+		Op_contenedor_returnsContext _localctx = new Op_contenedor_returnsContext(_ctx, getState());
+		enterRule(_localctx, 48, RULE_op_contenedor_returns);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(349);
+			((Op_contenedor_returnsContext)_localctx).ID = match(ID);
+			setState(350);
+			match(T__6);
+			setState(369);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case GET_BACK:
+			case GET_FRONT:
+			case LENGTH:
+				{
+				setState(357);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case GET_BACK:
+					{
+					setState(351);
+					((Op_contenedor_returnsContext)_localctx).GET_BACK = match(GET_BACK);
+					_localctx.flag = (((Op_contenedor_returnsContext)_localctx).GET_BACK!=null?((Op_contenedor_returnsContext)_localctx).GET_BACK.getText():null)
+					}
+					break;
+				case GET_FRONT:
+					{
+					setState(353);
+					((Op_contenedor_returnsContext)_localctx).GET_FRONT = match(GET_FRONT);
+					_localctx.flag = (((Op_contenedor_returnsContext)_localctx).GET_FRONT!=null?((Op_contenedor_returnsContext)_localctx).GET_FRONT.getText():null)
+					}
+					break;
+				case LENGTH:
+					{
+					setState(355);
+					((Op_contenedor_returnsContext)_localctx).LENGTH = match(LENGTH);
+					_localctx.flag = (((Op_contenedor_returnsContext)_localctx).LENGTH!=null?((Op_contenedor_returnsContext)_localctx).LENGTH.getText():null)
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				setState(359);
+				match(T__1);
+				setState(360);
+				match(T__2);
+				cuadruplos.FuncionOPContainer1(_localctx.flag,func_dir.returnIDAddress(func_dir.currentFunction, (((Op_contenedor_returnsContext)_localctx).ID!=null?((Op_contenedor_returnsContext)_localctx).ID.getText():null)))
+				}
+				break;
+			case GET:
+				{
+				setState(362);
+				((Op_contenedor_returnsContext)_localctx).GET = match(GET);
+				_localctx.flag = (((Op_contenedor_returnsContext)_localctx).GET!=null?((Op_contenedor_returnsContext)_localctx).GET.getText():null)
+				setState(364);
+				match(T__1);
+				setState(365);
+				mega_expresion();
+				setState(366);
+				match(T__2);
+				cuadruplos.FuncionOPContainer2(_localctx.flag,func_dir.returnIDAddress(func_dir.currentFunction, (((Op_contenedor_returnsContext)_localctx).ID!=null?((Op_contenedor_returnsContext)_localctx).ID.getText():null)))
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static class Op_contenedorContext extends ParserRuleContext {
 		public Object flag;
 		public Token ID;
@@ -1894,33 +1996,33 @@ public class VisionScriptParser extends Parser {
 
 	public final Op_contenedorContext op_contenedor() throws RecognitionException {
 		Op_contenedorContext _localctx = new Op_contenedorContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_op_contenedor);
+		enterRule(_localctx, 50, RULE_op_contenedor);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(349);
-			((Op_contenedorContext)_localctx).ID = match(ID);
-			setState(350);
-			match(T__6);
 			setState(371);
+			((Op_contenedorContext)_localctx).ID = match(ID);
+			setState(372);
+			match(T__6);
+			setState(393);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INSERT_BACK:
 			case INSERT_FRONT:
 				{
-				setState(355);
+				setState(377);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case INSERT_BACK:
 					{
-					setState(351);
+					setState(373);
 					((Op_contenedorContext)_localctx).INSERT_BACK = match(INSERT_BACK);
 					_localctx.flag = (((Op_contenedorContext)_localctx).INSERT_BACK!=null?((Op_contenedorContext)_localctx).INSERT_BACK.getText():null)
 					}
 					break;
 				case INSERT_FRONT:
 					{
-					setState(353);
+					setState(375);
 					((Op_contenedorContext)_localctx).INSERT_FRONT = match(INSERT_FRONT);
 					_localctx.flag = (((Op_contenedorContext)_localctx).INSERT_FRONT!=null?((Op_contenedorContext)_localctx).INSERT_FRONT.getText():null)
 					}
@@ -1928,133 +2030,31 @@ public class VisionScriptParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(357);
+				setState(379);
 				match(T__1);
-				setState(358);
+				setState(380);
 				mega_expresion();
-				setState(359);
+				setState(381);
 				match(T__2);
 				cuadruplos.FuncionOPContainer3(_localctx.flag,func_dir.returnIDAddress(func_dir.currentFunction, (((Op_contenedorContext)_localctx).ID!=null?((Op_contenedorContext)_localctx).ID.getText():null)))
 				}
 				break;
 			case INSERT:
 				{
-				setState(362);
+				setState(384);
 				((Op_contenedorContext)_localctx).INSERT = match(INSERT);
 				_localctx.flag = (((Op_contenedorContext)_localctx).INSERT!=null?((Op_contenedorContext)_localctx).INSERT.getText():null)
-				setState(364);
-				match(T__1);
-				setState(365);
-				mega_expresion();
-				setState(366);
-				match(T__3);
-				setState(367);
-				mega_expresion();
-				setState(368);
-				match(T__2);
-				cuadruplos.FuncionOPContainer4(_localctx.flag,func_dir.returnIDAddress(func_dir.currentFunction, (((Op_contenedorContext)_localctx).ID!=null?((Op_contenedorContext)_localctx).ID.getText():null)))
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Op_contenedor_returnsContext extends ParserRuleContext {
-		public Object flag;
-		public Token ID;
-		public Token GET_BACK;
-		public Token GET_FRONT;
-		public Token LENGTH;
-		public Token GET;
-		public TerminalNode ID() { return getToken(VisionScriptParser.ID, 0); }
-		public TerminalNode GET() { return getToken(VisionScriptParser.GET, 0); }
-		public Mega_expresionContext mega_expresion() {
-			return getRuleContext(Mega_expresionContext.class,0);
-		}
-		public TerminalNode GET_BACK() { return getToken(VisionScriptParser.GET_BACK, 0); }
-		public TerminalNode GET_FRONT() { return getToken(VisionScriptParser.GET_FRONT, 0); }
-		public TerminalNode LENGTH() { return getToken(VisionScriptParser.LENGTH, 0); }
-		public Op_contenedor_returnsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_op_contenedor_returns; }
-	}
-
-	public final Op_contenedor_returnsContext op_contenedor_returns() throws RecognitionException {
-		Op_contenedor_returnsContext _localctx = new Op_contenedor_returnsContext(_ctx, getState());
-		enterRule(_localctx, 50, RULE_op_contenedor_returns);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(373);
-			((Op_contenedor_returnsContext)_localctx).ID = match(ID);
-			setState(374);
-			match(T__6);
-			setState(393);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case GET_BACK:
-			case GET_FRONT:
-			case LENGTH:
-				{
-				setState(381);
-				_errHandler.sync(this);
-				switch (_input.LA(1)) {
-				case GET_BACK:
-					{
-					setState(375);
-					((Op_contenedor_returnsContext)_localctx).GET_BACK = match(GET_BACK);
-					_localctx.flag = (((Op_contenedor_returnsContext)_localctx).GET_BACK!=null?((Op_contenedor_returnsContext)_localctx).GET_BACK.getText():null)
-					}
-					break;
-				case GET_FRONT:
-					{
-					setState(377);
-					((Op_contenedor_returnsContext)_localctx).GET_FRONT = match(GET_FRONT);
-					_localctx.flag = (((Op_contenedor_returnsContext)_localctx).GET_FRONT!=null?((Op_contenedor_returnsContext)_localctx).GET_FRONT.getText():null)
-					}
-					break;
-				case LENGTH:
-					{
-					setState(379);
-					((Op_contenedor_returnsContext)_localctx).LENGTH = match(LENGTH);
-					_localctx.flag = (((Op_contenedor_returnsContext)_localctx).LENGTH!=null?((Op_contenedor_returnsContext)_localctx).LENGTH.getText():null)
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				setState(383);
-				match(T__1);
-				setState(384);
-				match(T__2);
-				cuadruplos.FuncionOPContainer1(_localctx.flag,func_dir.returnIDAddress(func_dir.currentFunction, (((Op_contenedor_returnsContext)_localctx).ID!=null?((Op_contenedor_returnsContext)_localctx).ID.getText():null)))
-				}
-				break;
-			case GET:
-				{
 				setState(386);
-				((Op_contenedor_returnsContext)_localctx).GET = match(GET);
-				_localctx.flag = (((Op_contenedor_returnsContext)_localctx).GET!=null?((Op_contenedor_returnsContext)_localctx).GET.getText():null)
-				setState(388);
 				match(T__1);
+				setState(387);
+				mega_expresion();
+				setState(388);
+				match(T__3);
 				setState(389);
 				mega_expresion();
 				setState(390);
 				match(T__2);
-				cuadruplos.FuncionOPContainer2(_localctx.flag,func_dir.returnIDAddress(func_dir.currentFunction, (((Op_contenedor_returnsContext)_localctx).ID!=null?((Op_contenedor_returnsContext)_localctx).ID.getText():null)))
+				cuadruplos.FuncionOPContainer4(_localctx.flag,func_dir.returnIDAddress(func_dir.currentFunction, (((Op_contenedorContext)_localctx).ID!=null?((Op_contenedorContext)_localctx).ID.getText():null)))
 				}
 				break;
 			default:
@@ -2196,9 +2196,9 @@ public class VisionScriptParser extends Parser {
 		"\3\30\3\30\3\30\3\30\7\30\u0144\n\30\f\30\16\30\u0147\13\30\5\30\u0149"+
 		"\n\30\3\30\3\30\3\30\3\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\7\31\u0156"+
 		"\n\31\f\31\16\31\u0159\13\31\5\31\u015b\n\31\3\31\3\31\3\31\3\32\3\32"+
-		"\3\32\3\32\3\32\3\32\5\32\u0166\n\32\3\32\3\32\3\32\3\32\3\32\3\32\3\32"+
-		"\3\32\3\32\3\32\3\32\3\32\3\32\3\32\5\32\u0176\n\32\3\33\3\33\3\33\3\33"+
-		"\3\33\3\33\3\33\3\33\5\33\u0180\n\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
+		"\3\32\3\32\3\32\3\32\3\32\3\32\5\32\u0168\n\32\3\32\3\32\3\32\3\32\3\32"+
+		"\3\32\3\32\3\32\3\32\3\32\5\32\u0174\n\32\3\33\3\33\3\33\3\33\3\33\3\33"+
+		"\5\33\u017c\n\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
 		"\3\33\3\33\3\33\5\33\u018c\n\33\3\34\3\34\3\34\5\34\u0191\n\34\3\34\3"+
 		"\34\3\34\3\34\5\34\u0197\n\34\3\34\6\34\u019a\n\34\r\34\16\34\u019b\3"+
 		"\34\2\2\35\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\66"+
@@ -2207,24 +2207,24 @@ public class VisionScriptParser extends Parser {
 		"\3\2\2\2\26\u0090\3\2\2\2\30\u009d\3\2\2\2\32\u00a4\3\2\2\2\34\u00b4\3"+
 		"\2\2\2\36\u00bc\3\2\2\2 \u00be\3\2\2\2\"\u00ce\3\2\2\2$\u00e7\3\2\2\2"+
 		"&\u00fc\3\2\2\2(\u00fe\3\2\2\2*\u012b\3\2\2\2,\u0137\3\2\2\2.\u013a\3"+
-		"\2\2\2\60\u014d\3\2\2\2\62\u015f\3\2\2\2\64\u0177\3\2\2\2\66\u0190\3\2"+
+		"\2\2\2\60\u014d\3\2\2\2\62\u015f\3\2\2\2\64\u0175\3\2\2\2\66\u0190\3\2"+
 		"\2\289\b\2\1\29:\5\4\3\2:;\7\2\2\3;<\b\2\1\2<=\b\2\1\2=>\b\2\1\2>?\b\2"+
 		"\1\2?\3\3\2\2\2@J\5\6\4\2AJ\5\20\t\2BJ\5\22\n\2CJ\5\26\f\2DJ\5\30\r\2"+
-		"EJ\5(\25\2FJ\5.\30\2GJ\5\16\b\2HJ\5\62\32\2I@\3\2\2\2IA\3\2\2\2IB\3\2"+
+		"EJ\5(\25\2FJ\5.\30\2GJ\5\16\b\2HJ\5\64\33\2I@\3\2\2\2IA\3\2\2\2IB\3\2"+
 		"\2\2IC\3\2\2\2ID\3\2\2\2IE\3\2\2\2IF\3\2\2\2IG\3\2\2\2IH\3\2\2\2JM\3\2"+
 		"\2\2KI\3\2\2\2KL\3\2\2\2L\5\3\2\2\2MK\3\2\2\2NO\5\b\5\2OP\7)\2\2PQ\7\3"+
 		"\2\2QR\5\n\6\2RS\b\4\1\2ST\b\4\1\2T\7\3\2\2\2UV\7\20\2\2V^\b\5\1\2WX\7"+
 		"\21\2\2X^\b\5\1\2YZ\7\22\2\2Z^\b\5\1\2[\\\7\31\2\2\\^\b\5\1\2]U\3\2\2"+
 		"\2]W\3\2\2\2]Y\3\2\2\2][\3\2\2\2^\t\3\2\2\2_b\5\f\7\2`b\5.\30\2a_\3\2"+
-		"\2\2a`\3\2\2\2b\13\3\2\2\2ch\5\32\16\2dh\5\66\34\2eh\5\60\31\2fh\5\64"+
-		"\33\2gc\3\2\2\2gd\3\2\2\2ge\3\2\2\2gf\3\2\2\2h\r\3\2\2\2ij\7)\2\2jk\7"+
+		"\2\2a`\3\2\2\2b\13\3\2\2\2ch\5\32\16\2dh\5\66\34\2eh\5\60\31\2fh\5\62"+
+		"\32\2gc\3\2\2\2gd\3\2\2\2ge\3\2\2\2gf\3\2\2\2h\r\3\2\2\2ij\7)\2\2jk\7"+
 		"\3\2\2kl\5\n\6\2lm\b\b\1\2mn\b\b\1\2n\17\3\2\2\2op\7\16\2\2pq\5\32\16"+
 		"\2qr\b\t\1\2rs\7\32\2\2st\5\24\13\2tu\7\17\2\2uv\b\t\1\2vw\5\24\13\2w"+
 		"x\7\33\2\2xy\b\t\1\2y\21\3\2\2\2z{\7\34\2\2{|\7\36\2\2|}\b\n\1\2}~\5\32"+
 		"\16\2~\177\b\n\1\2\177\u0080\7\32\2\2\u0080\u0081\5\24\13\2\u0081\u0082"+
 		"\7\33\2\2\u0082\u0083\b\n\1\2\u0083\23\3\2\2\2\u0084\u008c\5\20\t\2\u0085"+
 		"\u008c\5\22\n\2\u0086\u008c\5\26\f\2\u0087\u008c\5\30\r\2\u0088\u008c"+
-		"\5\16\b\2\u0089\u008c\5\62\32\2\u008a\u008c\5.\30\2\u008b\u0084\3\2\2"+
+		"\5\16\b\2\u0089\u008c\5\64\33\2\u008a\u008c\5.\30\2\u008b\u0084\3\2\2"+
 		"\2\u008b\u0085\3\2\2\2\u008b\u0086\3\2\2\2\u008b\u0087\3\2\2\2\u008b\u0088"+
 		"\3\2\2\2\u008b\u0089\3\2\2\2\u008b\u008a\3\2\2\2\u008c\u008f\3\2\2\2\u008d"+
 		"\u008b\3\2\2\2\u008d\u008e\3\2\2\2\u008e\25\3\2\2\2\u008f\u008d\3\2\2"+
@@ -2279,7 +2279,7 @@ public class VisionScriptParser extends Parser {
 		"\2\u0127\u0128\b\26\1\2\u0128\u012c\3\2\2\2\u0129\u012a\7\'\2\2\u012a"+
 		"\u012c\b\26\1\2\u012b\u0126\3\2\2\2\u012b\u0129\3\2\2\2\u012c+\3\2\2\2"+
 		"\u012d\u0136\5\6\4\2\u012e\u0136\5\20\t\2\u012f\u0136\5\22\n\2\u0130\u0136"+
-		"\5\26\f\2\u0131\u0136\5\30\r\2\u0132\u0136\5\16\b\2\u0133\u0136\5\62\32"+
+		"\5\26\f\2\u0131\u0136\5\30\r\2\u0132\u0136\5\16\b\2\u0133\u0136\5\64\33"+
 		"\2\u0134\u0136\5.\30\2\u0135\u012d\3\2\2\2\u0135\u012e\3\2\2\2\u0135\u012f"+
 		"\3\2\2\2\u0135\u0130\3\2\2\2\u0135\u0131\3\2\2\2\u0135\u0132\3\2\2\2\u0135"+
 		"\u0133\3\2\2\2\u0135\u0134\3\2\2\2\u0136\u0139\3\2\2\2\u0137\u0135\3\2"+
@@ -2295,21 +2295,21 @@ public class VisionScriptParser extends Parser {
 		"\3\2\2\2\u0155\u0151\3\2\2\2\u0156\u0159\3\2\2\2\u0157\u0155\3\2\2\2\u0157"+
 		"\u0158\3\2\2\2\u0158\u015b\3\2\2\2\u0159\u0157\3\2\2\2\u015a\u014f\3\2"+
 		"\2\2\u015a\u015b\3\2\2\2\u015b\u015c\3\2\2\2\u015c\u015d\7\b\2\2\u015d"+
-		"\u015e\b\31\1\2\u015e\61\3\2\2\2\u015f\u0160\7)\2\2\u0160\u0175\7\t\2"+
-		"\2\u0161\u0162\7$\2\2\u0162\u0166\b\32\1\2\u0163\u0164\7%\2\2\u0164\u0166"+
-		"\b\32\1\2\u0165\u0161\3\2\2\2\u0165\u0163\3\2\2\2\u0166\u0167\3\2\2\2"+
-		"\u0167\u0168\7\4\2\2\u0168\u0169\5\32\16\2\u0169\u016a\7\5\2\2\u016a\u016b"+
-		"\b\32\1\2\u016b\u0176\3\2\2\2\u016c\u016d\7&\2\2\u016d\u016e\b\32\1\2"+
-		"\u016e\u016f\7\4\2\2\u016f\u0170\5\32\16\2\u0170\u0171\7\6\2\2\u0171\u0172"+
-		"\5\32\16\2\u0172\u0173\7\5\2\2\u0173\u0174\b\32\1\2\u0174\u0176\3\2\2"+
-		"\2\u0175\u0165\3\2\2\2\u0175\u016c\3\2\2\2\u0176\63\3\2\2\2\u0177\u0178"+
-		"\7)\2\2\u0178\u018b\7\t\2\2\u0179\u017a\7!\2\2\u017a\u0180\b\33\1\2\u017b"+
-		"\u017c\7\"\2\2\u017c\u0180\b\33\1\2\u017d\u017e\7(\2\2\u017e\u0180\b\33"+
-		"\1\2\u017f\u0179\3\2\2\2\u017f\u017b\3\2\2\2\u017f\u017d\3\2\2\2\u0180"+
-		"\u0181\3\2\2\2\u0181\u0182\7\4\2\2\u0182\u0183\7\5\2\2\u0183\u018c\b\33"+
-		"\1\2\u0184\u0185\7#\2\2\u0185\u0186\b\33\1\2\u0186\u0187\7\4\2\2\u0187"+
+		"\u015e\b\31\1\2\u015e\61\3\2\2\2\u015f\u0160\7)\2\2\u0160\u0173\7\t\2"+
+		"\2\u0161\u0162\7!\2\2\u0162\u0168\b\32\1\2\u0163\u0164\7\"\2\2\u0164\u0168"+
+		"\b\32\1\2\u0165\u0166\7(\2\2\u0166\u0168\b\32\1\2\u0167\u0161\3\2\2\2"+
+		"\u0167\u0163\3\2\2\2\u0167\u0165\3\2\2\2\u0168\u0169\3\2\2\2\u0169\u016a"+
+		"\7\4\2\2\u016a\u016b\7\5\2\2\u016b\u0174\b\32\1\2\u016c\u016d\7#\2\2\u016d"+
+		"\u016e\b\32\1\2\u016e\u016f\7\4\2\2\u016f\u0170\5\32\16\2\u0170\u0171"+
+		"\7\5\2\2\u0171\u0172\b\32\1\2\u0172\u0174\3\2\2\2\u0173\u0167\3\2\2\2"+
+		"\u0173\u016c\3\2\2\2\u0174\63\3\2\2\2\u0175\u0176\7)\2\2\u0176\u018b\7"+
+		"\t\2\2\u0177\u0178\7$\2\2\u0178\u017c\b\33\1\2\u0179\u017a\7%\2\2\u017a"+
+		"\u017c\b\33\1\2\u017b\u0177\3\2\2\2\u017b\u0179\3\2\2\2\u017c\u017d\3"+
+		"\2\2\2\u017d\u017e\7\4\2\2\u017e\u017f\5\32\16\2\u017f\u0180\7\5\2\2\u0180"+
+		"\u0181\b\33\1\2\u0181\u018c\3\2\2\2\u0182\u0183\7&\2\2\u0183\u0184\b\33"+
+		"\1\2\u0184\u0185\7\4\2\2\u0185\u0186\5\32\16\2\u0186\u0187\7\6\2\2\u0187"+
 		"\u0188\5\32\16\2\u0188\u0189\7\5\2\2\u0189\u018a\b\33\1\2\u018a\u018c"+
-		"\3\2\2\2\u018b\u017f\3\2\2\2\u018b\u0184\3\2\2\2\u018c\65\3\2\2\2\u018d"+
+		"\3\2\2\2\u018b\u017b\3\2\2\2\u018b\u0182\3\2\2\2\u018c\65\3\2\2\2\u018d"+
 		"\u018e\7)\2\2\u018e\u0191\b\34\1\2\u018f\u0191\5\60\31\2\u0190\u018d\3"+
 		"\2\2\2\u0190\u018f\3\2\2\2\u0191\u0199\3\2\2\2\u0192\u0196\7,\2\2\u0193"+
 		"\u0194\7)\2\2\u0194\u0197\b\34\1\2\u0195\u0197\5\60\31\2\u0196\u0193\3"+
@@ -2317,7 +2317,7 @@ public class VisionScriptParser extends Parser {
 		"\u0192\3\2\2\2\u019a\u019b\3\2\2\2\u019b\u0199\3\2\2\2\u019b\u019c\3\2"+
 		"\2\2\u019c\67\3\2\2\2$IK]ag\u008b\u008d\u009d\u00aa\u00b1\u00ba\u00c4"+
 		"\u00cb\u00d4\u00db\u00e7\u00fc\u0111\u0114\u011e\u012b\u0135\u0137\u0145"+
-		"\u0148\u0157\u015a\u0165\u0175\u017f\u018b\u0190\u0196\u019b";
+		"\u0148\u0157\u015a\u0167\u0173\u017b\u018b\u0190\u0196\u019b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
