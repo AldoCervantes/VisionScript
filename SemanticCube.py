@@ -323,7 +323,7 @@ class SemanticCube:
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
-                            'container': 'error',
+                            'container': 'bool',
                             'error' : 'error'
                 },
                 'error':{ 
@@ -360,7 +360,7 @@ class SemanticCube:
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
-                            'container': 'error',
+                            'container': 'bool',
                             'error' : 'error'
                 },
                 'error':{ 
@@ -466,7 +466,20 @@ class SemanticCube:
         'print':15,
         'hear':16,
         'braille':17,
-        'read':18
+        'read':18,
+        'return':19,
+        'ERA':20,
+        'param':21,
+        'gosub':22,
+        'append':23,
+        'concat':24,
+        'insert':25,
+        'insert_back':26,
+        'insert_front':27,
+        'get':28,
+        'get_back':29,
+        'get_front':30,
+        'length':31
     }
 
     TypeToKey = {

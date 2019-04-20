@@ -1,11 +1,9 @@
-// Generated from c:\Users\Aldo Cervantes\Desktop\8 Semestre\Compiladores\VisionScript.g4 by ANTLR 4.7.1
+// Generated from VisionScript.g4 by ANTLR 4.7.2
 
 from VisionScriptCompiler import FunctionDirectory
 from Cuadruplos import Cuadruplos
-from VirtualMachine import VirtualMachine
 func_dir = FunctionDirectory()
 cuadruplos = Cuadruplos() 
-vm = VirtualMachine()
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -18,7 +16,7 @@ import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class VisionScriptLexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -39,34 +37,44 @@ public class VisionScriptLexer extends Lexer {
 		"DEFAULT_MODE"
 	};
 
-	public static final String[] ruleNames = {
-		"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "LOWERCASE", "UPPERCASE", 
-		"DIGIT", "READ", "PRINT", "HEAR", "BRAILLE", "IF", "ELSE", "NUMBER", "TEXT", 
-		"BOOL", "CTBF", "CTBT", "AND", "OR", "EQUAL", "NOT_EQUAL", "CONTAINER", 
-		"BEGIN", "END", "REPEAT", "TIMES", "UNTIL", "FUNCTION", "RETURN", "GET_BACK", 
-		"GET_FRONT", "GET", "INSERT_BACK", "INSERT_FRONT", "INSERT", "VOID", "LENGTH", 
-		"ID", "CTN", "CTT", "PLUS", "MINUS", "DIVISION", "MULTIPLICATION", "GREATER", 
-		"GREATER_EQUAL", "LESS", "LESS_EQUAL", "WHITESPACE", "NEWLINE"
-	};
+	private static String[] makeRuleNames() {
+		return new String[] {
+			"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "LOWERCASE", 
+			"UPPERCASE", "DIGIT", "READ", "PRINT", "HEAR", "BRAILLE", "IF", "ELSE", 
+			"NUMBER", "TEXT", "BOOL", "CTBF", "CTBT", "AND", "OR", "EQUAL", "NOT_EQUAL", 
+			"CONTAINER", "BEGIN", "END", "REPEAT", "TIMES", "UNTIL", "FUNCTION", 
+			"RETURN", "GET_BACK", "GET_FRONT", "GET", "INSERT_BACK", "INSERT_FRONT", 
+			"INSERT", "VOID", "LENGTH", "ID", "CTN", "CTT", "PLUS", "MINUS", "DIVISION", 
+			"MULTIPLICATION", "GREATER", "GREATER_EQUAL", "LESS", "LESS_EQUAL", "WHITESPACE", 
+			"NEWLINE"
+		};
+	}
+	public static final String[] ruleNames = makeRuleNames();
 
-	private static final String[] _LITERAL_NAMES = {
-		null, "'='", "'('", "')'", "','", "'['", "']'", "'.'", "'read'", "'print'", 
-		"'hear'", "'braille'", "'if'", "'else'", "'number'", "'text'", "'bool'", 
-		"'false'", "'true'", "'and'", "'or'", "'equal'", "'not_equal'", "'container'", 
-		"'begin'", "'end'", "'repeat'", "'times'", "'until'", "'function'", "'return'", 
-		"'get_back'", "'get_front'", "'get'", "'insert_back'", "'insert_front'", 
-		"'insert'", "'void'", "'length'", null, null, null, "'+'", "'-'", "'/'", 
-		"'*'", "'>'", "'>='", "'<'", "'<='"
-	};
-	private static final String[] _SYMBOLIC_NAMES = {
-		null, null, null, null, null, null, null, null, "READ", "PRINT", "HEAR", 
-		"BRAILLE", "IF", "ELSE", "NUMBER", "TEXT", "BOOL", "CTBF", "CTBT", "AND", 
-		"OR", "EQUAL", "NOT_EQUAL", "CONTAINER", "BEGIN", "END", "REPEAT", "TIMES", 
-		"UNTIL", "FUNCTION", "RETURN", "GET_BACK", "GET_FRONT", "GET", "INSERT_BACK", 
-		"INSERT_FRONT", "INSERT", "VOID", "LENGTH", "ID", "CTN", "CTT", "PLUS", 
-		"MINUS", "DIVISION", "MULTIPLICATION", "GREATER", "GREATER_EQUAL", "LESS", 
-		"LESS_EQUAL", "WHITESPACE", "NEWLINE"
-	};
+	private static String[] makeLiteralNames() {
+		return new String[] {
+			null, "'='", "'('", "')'", "','", "'['", "']'", "'.'", "'read'", "'print'", 
+			"'hear'", "'braille'", "'if'", "'else'", "'number'", "'text'", "'bool'", 
+			"'false'", "'true'", "'and'", "'or'", "'equal'", "'not_equal'", "'container'", 
+			"'begin'", "'end'", "'repeat'", "'times'", "'until'", "'function'", "'return'", 
+			"'get_back'", "'get_front'", "'get'", "'insert_back'", "'insert_front'", 
+			"'insert'", "'void'", "'length'", null, null, null, "'+'", "'-'", "'/'", 
+			"'*'", "'>'", "'>='", "'<'", "'<='"
+		};
+	}
+	private static final String[] _LITERAL_NAMES = makeLiteralNames();
+	private static String[] makeSymbolicNames() {
+		return new String[] {
+			null, null, null, null, null, null, null, null, "READ", "PRINT", "HEAR", 
+			"BRAILLE", "IF", "ELSE", "NUMBER", "TEXT", "BOOL", "CTBF", "CTBT", "AND", 
+			"OR", "EQUAL", "NOT_EQUAL", "CONTAINER", "BEGIN", "END", "REPEAT", "TIMES", 
+			"UNTIL", "FUNCTION", "RETURN", "GET_BACK", "GET_FRONT", "GET", "INSERT_BACK", 
+			"INSERT_FRONT", "INSERT", "VOID", "LENGTH", "ID", "CTN", "CTT", "PLUS", 
+			"MINUS", "DIVISION", "MULTIPLICATION", "GREATER", "GREATER_EQUAL", "LESS", 
+			"LESS_EQUAL", "WHITESPACE", "NEWLINE"
+		};
+	}
+	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**

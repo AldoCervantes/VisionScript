@@ -1,20 +1,39 @@
-number b = 2
-number a = 1
-number function add(number x, bool y, number z)
+number a = 0
+number b = 0
+number f = 0
+
+void function uno(number a)
 begin
-    x = 1 +2 /3 * 5
+    a = a + b * a
+    print(a)
+    print(b)
+    print(a+b)
+    
     return()
 end
 
-
-b = add(1, 1+1*2/2+2*1-2/2*3 > a,1)
-
-b = add(1, 1+1*2/2+2*1-2/2*3 > a,1)
-
-number function less(number x, bool y, number z)
+void function dos(number a, number b, number g)
 begin
-    x = 1 +2 /3 * 5
+    number i = 0
+    i = b 
+
+    repeat until i > 0
+    begin
+        a = a + b * i + b 
+        uno(i*2)
+        print(a)
+        i = i - 1
+    end
+
     return()
 end
 
-a = 20
+a = 3
+b = a + 1
+print(a)
+print(b)
+f = 3.14
+dos(a+b*2,b,f*3)
+print(a)
+print(b)
+print(f*2+1)

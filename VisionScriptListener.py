@@ -7,8 +7,10 @@ else:
 
 from VisionScriptCompiler import FunctionDirectory
 from Cuadruplos import Cuadruplos
+from VirtualMachine import VirtualMachine
 func_dir = FunctionDirectory()
 cuadruplos = Cuadruplos() 
+vm = VirtualMachine()
 
 
 # This class defines a complete listener for a parse tree produced by VisionScriptParser.
@@ -227,6 +229,15 @@ class VisionScriptListener(ParseTreeListener):
 
     # Exit a parse tree produced by VisionScriptParser#contenedor.
     def exitContenedor(self, ctx:VisionScriptParser.ContenedorContext):
+        pass
+
+
+    # Enter a parse tree produced by VisionScriptParser#op_contenedor_returns.
+    def enterOp_contenedor_returns(self, ctx:VisionScriptParser.Op_contenedor_returnsContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#op_contenedor_returns.
+    def exitOp_contenedor_returns(self, ctx:VisionScriptParser.Op_contenedor_returnsContext):
         pass
 
 
