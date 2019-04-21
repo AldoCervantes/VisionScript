@@ -91,6 +91,7 @@ class VirtualMachine:
             #funcion hear
         elif op == 'braille'
             #funcion braille
+            
     def Read(self, cuadruplo):
         temporal = input()
         tipo = cuadruplo[1]
