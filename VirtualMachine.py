@@ -91,6 +91,19 @@ class VirtualMachine:
             #funcion hear
         elif op == 'braille'
             #funcion braille
+    def Read(self, cuadruplo):
+        temporal = input()
+        tipo = cuadruplo[1]
+        if tipo == 'number':
+            temp = float(temp)
+        elif tipo == 'text':
+            temp = str(temp)
+        elif tipo == 'bool':
+            if temp == 'TRUE' or temp == 'true' or temp == 'True':
+                temp = 1
+            else:
+                temp = 0
+        #setValue(cuadruplo[3], temp)
 
 
     def run(self):
