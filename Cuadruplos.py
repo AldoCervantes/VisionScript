@@ -191,13 +191,13 @@ class Cuadruplos:
             self.Quad.append(cuadruplo)
             self.PilaO.append(result)
             self.PTypes.append('container')
-
+    #length get_front get_back
     def FuncionOPContainer1(self,flag,varId):
         result = self.memTemporal
         self.memTemporal = self.memTemporal + 1
         cuadruplo = [SemanticCube.opToKey[flag],-1,varId,result]
         self.Quad.append(cuadruplo)
-
+    #get
     def FuncionOPContainer2(self,flag,varId):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             result = self.memTemporal
@@ -209,14 +209,14 @@ class Cuadruplos:
                 self.Quad.append(cuadruplo)
             else:
                 print('#FuncionOPContainer2 Error: El indice proporcionado no es de tipo numerico')
-
+    #insert back insert front
     def FuncionOPContainer3(self,flag,varId):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             valueType = self.PTypes.pop()
             value = self.PilaO.pop()
             cuadruplo = [SemanticCube.opToKey[flag],value,-1,varId]
             self.Quad.append(cuadruplo)
-   
+   #insert
     def FuncionOPContainer4(self,flag,varId):
         if len(self.PilaO) > 1 and len(self.PTypes) > 1:
             element = self.PilaO.pop()
