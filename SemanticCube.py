@@ -487,5 +487,6 @@ class SemanticCube:
         'text':102,
         'bool':103,
         'container':104,
-        'error':105
+        'error':105,
+        'op_container':106
     }

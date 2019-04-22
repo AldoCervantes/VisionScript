@@ -85,11 +85,13 @@ class VirtualMachine:
         op = cuadruplo[0]
         
         if op == 'print':
-            #??
+            a = 0
             #print()
         elif op == 'hear':
+            a = 1
             #funcion hear
-        elif op == 'braille'
+        elif op == 'braille':
+            a = 2
             #funcion braille
             
     def Read(self, cuadruplo):

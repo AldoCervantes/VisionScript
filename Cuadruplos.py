@@ -49,9 +49,9 @@ class Cuadruplos:
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             valueType = self.PTypes.pop()
             value = self.PilaO.pop()
-            if valueType == targetType:
-                cuadruplo = [SemanticCube.opToKey['='],value,-1,varId]
-                self.Quad.append(cuadruplo) 
+            if valueType == targetType or valueType == 'op_container':
+                cuadruplo = [SemanticCube.opToKey['='],value,SemanticCube.TypeToKey[valueType],varId]
+                self.Quad.append(cuadruplo)
             else:
                 print("#GenerateAssignmentCuad Error: Se esta intentando asignar un valor de tipo",valueType,"a una variable de tipo",targetType)
     
@@ -126,7 +126,6 @@ class Cuadruplos:
     def RemoveParentesis(self):
         self.POper.pop()
 
-
     #Funcion para generar los cuadruplos de los RETURNS de las funciones
     def GenerateFunReturns(self,funcType):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
@@ -191,13 +190,20 @@ class Cuadruplos:
             self.Quad.append(cuadruplo)
             self.PilaO.append(result)
             self.PTypes.append('container')
-    #length get_front get_back
+    
+    #Funcion para generar un cuadruplo de length, get_front y get_back
     def FuncionOPContainer1(self,flag,varId):
         result = self.memTemporal
         self.memTemporal = self.memTemporal + 1
         cuadruplo = [SemanticCube.opToKey[flag],-1,varId,result]
         self.Quad.append(cuadruplo)
-    #get
+        # Aqui hay que resaltar que el tipo que se introduce es:
+        # "El que se espera, no necesariamente es el tipo del valor que regresa"
+        # *** SE TIENE QUE VALIDAR EL TIPO EN LA MAQUINA VIRTUAL ***
+        self.PilaO.append(result)
+        self.PTypes.append('op_container')
+    
+    #Funcion para generar un cuadruplo de get
     def FuncionOPContainer2(self,flag,varId):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             result = self.memTemporal
@@ -207,16 +213,23 @@ class Cuadruplos:
             if valueType == 'number':
                 cuadruplo = [SemanticCube.opToKey[flag],value,varId,result]
                 self.Quad.append(cuadruplo)
+                # Aqui hay que resaltar que el tipo que se introduce es:
+                # "El que se espera, no necesariamente es el tipo del valor que regresa"
+                # *** SE TIENE QUE VALIDAR EL TIPO EN LA MAQUINA VIRTUAL ***
+                self.PilaO.append(result)
+                self.PTypes.append('op_container')
             else:
                 print('#FuncionOPContainer2 Error: El indice proporcionado no es de tipo numerico')
-    #insert back insert front
+    
+    #Funcion para generar un cuadruplo de insert_back y insert_front
     def FuncionOPContainer3(self,flag,varId):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             valueType = self.PTypes.pop()
             value = self.PilaO.pop()
             cuadruplo = [SemanticCube.opToKey[flag],value,-1,varId]
             self.Quad.append(cuadruplo)
-   #insert
+   
+   #Funcion para generar un cuadruplo de insert
     def FuncionOPContainer4(self,flag,varId):
         if len(self.PilaO) > 1 and len(self.PTypes) > 1:
             element = self.PilaO.pop()
@@ -260,23 +273,23 @@ class Cuadruplos:
     def printCuad(self):
         cont = 0
         print(" ")
-        print("++++++++++++ PilaO ++++++++++++++++")
+        print("++++++++++++ PilaO +++++++++++++++")
         print(self.PilaO)
         print("++++++++++++++++++++++++++++++++++")
         print(" ")
-        print("--------------- PTypes -------------")
+        print("--------------- PTypes -----------")
         print(self.PTypes)
-        print("-------------------------------------")
+        print("----------------------------------")
         print(" ")
-        print("================== POper =============")
+        print("::::::::::::::::: POper ::::::::::")
         print(self.POper)
-        print("====================================")
+        print("::::::::::::::::::::::::::::::::::")
         print(" ")
-        print('=========== CUADRUPLOS ==========')
+        print('=========== CUADRUPLOS ===========')
         for cuad in range(len(self.Quad)):
             print(cont,self.Quad[cuad])
             cont = cont + 1
-        print('=================================')
+        print('==================================')
     
     #Funcion para debug se puede llamar con self.printAll()
     def printAll(self):

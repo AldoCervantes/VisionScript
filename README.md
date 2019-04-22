@@ -69,7 +69,7 @@ print(arr)
 X TRADUCIR TODO A CODIGOS ** SOLO FALTAN NOMBRES DE FUNCIONES Y EL FLAG DE [] contenedor vacio **
 X Validar que sea un number en las op_contenedor
 X Validar que el Return sea del mismo tipo que la funcion
-- COMO SE HACE UNA ASIGNACION DE UNA OP_CONTENEDOR
+X COMO SE HACE UNA ASIGNACION DE UNA OP_CONTENEDOR
 - PREGUNTAR: COMO SE HACE UNA ASIGNACION DE UNA FUNCTION CALL
 
 - Generar los 4 arreglos (Global, Local, Constantes, Temporales)
