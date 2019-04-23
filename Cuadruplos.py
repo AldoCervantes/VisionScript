@@ -127,15 +127,15 @@ class Cuadruplos:
         self.POper.pop()
 
     #Funcion para generar los cuadruplos de los RETURNS de las funciones
-    def GenerateFunReturns(self,funcType):
+    def GenerateFunReturns(self,funcType,returnDir):
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             VarType = self.PTypes.pop()
             value = self.PilaO.pop()
             if VarType == funcType:
-                cuadruplo = [SemanticCube.opToKey['return'],SemanticCube.TypeToKey[VarType],-1,value]
+                cuadruplo = [SemanticCube.opToKey['return'],SemanticCube.TypeToKey[VarType],value,returnDir]
                 self.Quad.append(cuadruplo)
             else:
-                print('# Error: Se esta intentando retornar un valor de tipo',VarType,'de una funcion tipo',funcType)
+                print('#GenerateFunReturns Error: Se esta intentando retornar un valor de tipo',VarType,'de una funcion tipo',funcType)
 
     #Funcion que genera el Goto de una Funcion
     def GenerateFunGoto(self):
@@ -313,3 +313,14 @@ class Cuadruplos:
     #Funcion que regresa los cuadruplos
     def ReturnCuads(self):
         return self.Quad
+
+    #Agregar valores de la function call
+    def addValueToStack(self,value,valueType):
+        if value == -999:
+            print('#addValueToStack Error: La funcion a la que se esta llamando es de tipo void')
+        else:
+            if valueType == 'error':
+                print('#addValueToStack Error: La funcion a la que se esta llamando no existe')
+            else:
+                self.PTypes.append(valueType)
+                self.PilaO.append(value)

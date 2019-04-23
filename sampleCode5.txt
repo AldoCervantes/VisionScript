@@ -1,3 +1,31 @@
 container a = [1,2,3]
 
 number b = a.get(10)
+
+void function add()
+begin
+return()
+end
+
+
+number function add1()
+begin
+return(10+2)
+end
+
+container function add2()
+begin
+return()
+end
+
+text function add3()
+begin
+return()
+end
+
+bool function add4()
+begin
+return()
+end
+
+number x = adds()

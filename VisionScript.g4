@@ -137,7 +137,7 @@ function:
 		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)} (
 			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)}
 		)*
-	)? ')' BEGIN func_bloque RETURN '(' (casi_todo {cuadruplos.GenerateFunReturns($function_type.type)})? ')' END {cuadruplos.FillFunGoto()} {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
+	)? ')' BEGIN func_bloque RETURN '(' (casi_todo {cuadruplos.GenerateFunReturns($function_type.type,func_dir.returnFuncReturnAddress(func_dir.currentFunction))})? ')' END {cuadruplos.FillFunGoto()} {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
 
 function_type
 	returns[Object type]:
@@ -156,7 +156,7 @@ func_bloque: (
 	)*;
 
 function_call:
-	ID {cuadruplos.GenerateEra($ID.text)} '(' (casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)} (',' casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)})*)? ')' {cuadruplos.VerifyParameters(func_dir.ReturnParams($ID.text),$ID.text)};
+	ID {cuadruplos.GenerateEra($ID.text)} '(' (casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)} (',' casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)})*)? ')' {cuadruplos.VerifyParameters(func_dir.ReturnParams($ID.text),$ID.text)}{cuadruplos.addValueToStack(func_dir.returnFuncReturnAddress($ID.text),func_dir.returnFuncReturnType($ID.text))};
 
 contenedor: '[' {cuadruplos.GenerateEmptyContainer()} ( mega_expresion {cuadruplos.GenerateFillContainer()} (',' mega_expresion {cuadruplos.GenerateFillContainer()})*)? ']' {cuadruplos.RegisterContainer()};
 

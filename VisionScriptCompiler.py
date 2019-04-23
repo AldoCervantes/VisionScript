@@ -18,7 +18,11 @@ class FunctionDirectory:
         if functionId in self.funDirectory:
             print("#FuncDeclaration Error: la funcion ",functionId," ya existe")
         else:
-            self.funDirectory[functionId] = [FunctionType, {}, []]
+            if FunctionType != 'void':
+                self.funDirectory[functionId] = [FunctionType, {}, [],self.memGlobal]
+                self.memGlobal = self.memGlobal + 1
+            else:
+                self.funDirectory[functionId] = [FunctionType, {}, [],-1]
 
     #Funcion que sirve para registrar los parametros
     def ParamDeclaration(self,functionId, ParamType):
@@ -130,3 +134,17 @@ class FunctionDirectory:
         else:
             print("#returnConstAddress Error: La funcion",varId,"no existe")
             return -999
+    
+    #Funcion que regresa la direccion de memoria para el retorno de una funcion
+    def returnFuncReturnAddress(self,functionId):
+        if functionId in self.funDirectory:
+            return self.funDirectory[functionId][3]
+        else:
+            return -999
+    
+    #Funcion que regresa el tipo de una funcion
+    def returnFuncReturnType(self,functionId):
+        if functionId in self.funDirectory:
+            return self.funDirectory[functionId][0]
+        else:
+            return 'error'
