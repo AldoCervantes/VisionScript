@@ -43,7 +43,8 @@ class Cuadruplos:
                         self.PTypes.append(result_type)
                         # If any operands were a temporal space, return into AVAIL
                     else:
-                        print("#GenerateCuad Error:",left_operand,"=>",left_type,operator,right_operand,"=>",right_type,"genera",result_type)
+                        print("#GenerateCuad Error:",left_type,operator,right_type,"genera",result_type)
+                        sys.exit()
     
     #Funcion que genera un cuaduplo de asignacion [=,valor,-1,id]
     def GenerateAssignmentCuad(self,varId,targetType):
@@ -68,6 +69,7 @@ class Cuadruplos:
                 self.PJumps.append(len(self.Quad) - 1 )
             else:
                 print("#GenerateGotoF Error: Se esta intentando hacer un if con una expresion de tipo",exp_type)
+                sys.exit()
 
     #Funcion 3 de IF
     def FuncionIF2(self):
@@ -97,6 +99,7 @@ class Cuadruplos:
                 self.PJumps.append(len(self.Quad) - 1 )
             else:
                 print("#FuncionRepUntil2 Error: Se esta intentando hacer un repeat con una expresion de tipo",exp_type)
+                sys.exit()
 
     #Funcion 3 de repat until
     def FuncionRepUntil3(self):
@@ -138,6 +141,7 @@ class Cuadruplos:
                 self.Quad.append(cuadruplo)
             else:
                 print('#GenerateFunReturns Error: Se esta intentando retornar un valor de tipo',VarType,'de una funcion tipo',funcType)
+                sys.exit()
 
     #Funcion que genera el Goto de una Funcion
     def GenerateFunGoto(self):
@@ -173,6 +177,7 @@ class Cuadruplos:
                 self.Quad.append(cuadruplo)
             else:
                 print('#GenerateFillContainer Error: Se esta intentando insertar un valor de tipo',valueType)
+                sys.exit()
 
     #Funcion que inserta el contenedor a la pila de Operadores
     def RegisterContainer(self):
@@ -222,6 +227,7 @@ class Cuadruplos:
                 self.PTypes.append('op_container')
             else:
                 print('#FuncionOPContainer2 Error: El indice proporcionado no es de tipo numerico')
+                sys.exit()
     
     #Funcion para generar un cuadruplo de insert_back y insert_front
     def FuncionOPContainer3(self,flag,varId):
@@ -243,6 +249,7 @@ class Cuadruplos:
                 self.Quad.append(cuadruplo)
             else:
                 print('#FuncionOPContainer4 Error: El indice proporcionado no es de tipo numerico')
+                sys.exit()
 
     #Funcion para generar un cuadruplo de parametro
     def GenerateParameter(self,parametros,funcionId):
@@ -256,11 +263,14 @@ class Cuadruplos:
                         self.Quad.append(cuadruplo)
                     else:
                         print('#GenerateParameter Error: El tipo del parametro',self.paramCounter+1,'es',parametros[self.paramCounter],'y el tipo que se esta pasando es',valueType)
+                        sys.exit()
                     self.paramCounter = self.paramCounter + 1
                 else:
                     print('#GenerateParameter Error: La funcion',funcionId,"()",'tiene unicamente',len(parametros),'parametros')
+                    sys.exit()
         else:
             print('#GenerateParameter Error: La funcion',funcionId,"()",'no recibe parametros')
+            sys.exit()
 
     #Funcion que revisa si se mandaron todos los parametros y ademas resetea el contador de parametros y hace el GOSUB
     def VerifyParameters(self, parametros, funcionId):
@@ -269,6 +279,7 @@ class Cuadruplos:
             self.Quad.append(cuadruplo)
         else:
             print('#VerifyParameters Error: faltan',len(parametros) - self.paramCounter,'parametro(s) an la llamada a la funcion',funcionId)
+            sys.exit()
         self.paramCounter = 0
 
     #Funcion unicamente para debuggear
@@ -320,9 +331,11 @@ class Cuadruplos:
     def addValueToStack(self,value,valueType):
         if value == -999:
             print('#addValueToStack Error: La funcion a la que se esta llamando es de tipo void')
+            sys.exit()
         else:
             if valueType == 'error':
                 print('#addValueToStack Error: La funcion a la que se esta llamando no existe')
+                sys.exit()
             else:
                 self.PTypes.append(valueType)
                 self.PilaO.append(value)

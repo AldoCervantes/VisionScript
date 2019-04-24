@@ -18,6 +18,7 @@ class FunctionDirectory:
     def FuncDeclaration(self, functionId , FunctionType):
         if functionId in self.funDirectory:
             print("#FuncDeclaration Error: la funcion ",functionId," ya existe")
+            sys.exit()
         else:
             if FunctionType != 'void':
                 self.funDirectory[functionId] = [FunctionType, {}, [],self.memGlobal]
@@ -31,6 +32,7 @@ class FunctionDirectory:
             self.funDirectory[functionId][2].append(ParamType)
         else:
             print("#ParamDeclaration Error: La funcion ",functionId," no existe")
+            sys.exit()
 
     #Funcion que regresa un arreglo con los paremtros de la funcion
     def ReturnParams(self,functionId):
@@ -38,6 +40,7 @@ class FunctionDirectory:
             return self.funDirectory[functionId][2]
         else:
             print("#ReturnParams Error: La funcion ",functionId," no existe")
+            sys.exit()
 
     #Funcion que sirve para crear constantes 
     def ConstDeclaration(self , VarType , value):
@@ -53,6 +56,7 @@ class FunctionDirectory:
         if functionId  in self.funDirectory:
             if varId in self.funDirectory[functionId][1]:
                 print("#VarDeclaration Error: La variable ",varId," ya existe")
+                sys.exit()
             else:
                 if functionId == '@global':
                     self.funDirectory[functionId][1][varId] = [VarType, value, self.memGlobal]
@@ -62,6 +66,7 @@ class FunctionDirectory:
                     self.memLocal+=1
         else:
             print("#VarDeclaration Error: La funcion ",functionId," no existe")
+            sys.exit()
 
     #Funcion que sirve para modificar el valor de una variable
     def VarAssignment(self , functionId , varId , value):
@@ -74,10 +79,13 @@ class FunctionDirectory:
                         self.funDirectory['@global'][1][varId][1] = value
                     else:
                         print("#VarAssignment Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                        sys.exit()
                 else:
                     print("#VarAssignment Error: La variable",varId,"no esta declarada")
+                    sys.exit()
         else:
             print("#VarAssignment Error: La funcion",varId,"no existe")
+            sys.exit()
     
     #Funcion que retorna el tipo de dato de una variable
     def returnIDType(self, functionId, varId):
@@ -90,10 +98,13 @@ class FunctionDirectory:
                         return self.funDirectory['@global'][1][varId][0]
                     else:
                         print("#returnIDType Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                        sys.exit()
                 else:
                     print("#returnIDType Error: La variable",varId,"no esta declarada")
+                    sys.exit()
         else:
             print("#returnIDType Error: La funcion",varId,"no existe")
+            sys.exit()
         return 'error'
 
     #Funcion para debug, sirve para imprimir nuestro directorio 
@@ -122,10 +133,13 @@ class FunctionDirectory:
                         return self.funDirectory['@global'][1][varId][2]
                     else:
                         print("#returnIDAddress Error: La variable",varId,"no esta declarada dentro de la funcion",functionId)
+                        sys.exit()
                 else:
                     print("#returnIDAddress Error: La variable",varId,"no esta declarada")
+                    sys.exit()
         else:
             print("#returnIDAddress Error: La funcion",varId,"no existe")
+            sys.exit()
         return -999
 
     #Funcion que regresa la direccion de memoria de una constante
@@ -134,6 +148,7 @@ class FunctionDirectory:
             return self.tablaConstantes[value][2]
         else:
             print("#returnConstAddress Error: La funcion",varId,"no existe")
+            sys.exit()
             return -999
     
     #Funcion que regresa la direccion de memoria para el retorno de una funcion

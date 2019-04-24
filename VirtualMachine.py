@@ -25,11 +25,12 @@ class VirtualMachine:
 
         for key, value in constTable.items():
             if value[0] == 'number':
-                    if key.find("."):
-                        a = float(key)
-                    else:
+                    if key.find(".") == -1:
                         a = int(float(key))
-                    self.Constante.append(a)
+                        self.Constante.append(a)
+                    else:
+                        a = float(key)
+                        self.Constante.append(a)
             elif value[0] == 'bool':
                     if key == 'true':
                             a = True
@@ -58,7 +59,7 @@ class VirtualMachine:
         print('.............')
         print(' ')
 
-    #a esta funcion se le manda el cuadruplo Cuadruplos[i], ej. [0, 30000, -1, 10000]
+    #a esta funcion se le manda el cuadruplo Cuadruplos[i], ej. [+,a,b,result]
     def OperacionesAritmeticas(self, cuadruplo):
         op = cuadruplo[0]
         arg1 = self.cuadruplo[1]
@@ -101,7 +102,7 @@ class VirtualMachine:
         elif op == 'equal':
             arg3 = arg1 == arg2 
         #funcion de set value??
-        #setValue(cuadruplo[3], arg3)
+        #seVtalue(cuadruplo[3], arg3)
 
     def OperacionesContenedores(self,cuadruplo):
         op = cuadruplo[0]

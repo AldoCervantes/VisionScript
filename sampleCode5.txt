@@ -29,7 +29,7 @@ begin
 return()
 end
 
-number asd = 10.2
+number asd = 10.2 * 2 
 
 text asd1 = "ALDO"
 
