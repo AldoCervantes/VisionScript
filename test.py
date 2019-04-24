@@ -25,5 +25,21 @@ for key , value in myMap.items():
     print(key,"=>",value)
     print("______________")
 
+myarr = []
+for key, value in myMap.items():
+        if value[0] == 'number':
+                print('HOLA')
+                a = float(key)
+                myarr.append(a)
+        elif value[0] == 'bool':
+                if key == 'true':
+                        a = True
+                        myarr.append(a)
+                elif key == 'false':
+                        a = False
+                        myarr.append(a)
+        else:
+                myarr.append(key)
 
 
+print(myarr)

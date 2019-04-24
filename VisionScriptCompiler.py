@@ -151,12 +151,8 @@ class FunctionDirectory:
     
     #Funcion que regresa cuantas variables globales existen
     def returnGlobalCont(self):
-        return self.memGlobal
-    
-    #Funcion que regresa cuantas variables locales existen
-    def returnLocalCont(self):
-        return self.memLocal
-    
-    #Funcion que regresa cuantas variables globales existen
-    def returnConst(self):
-        return self.memConst
+        return self.memGlobal - 10000
+        
+    #Funcion que regresa la tabla de constantes
+    def returnConstTable(self):
+        return self.tablaConstantes

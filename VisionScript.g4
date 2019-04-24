@@ -13,7 +13,7 @@ vm = VirtualMachine()
  */
 
 visionscript:
-	{func_dir.FuncDeclaration('@global','void')} programa EOF {cuadruplos.printCuad()} {func_dir.showFunctionDirectory()} {vm.Cuadruplos = cuadruplos.ReturnCuads()} {vm.PrintCuadruplos()};
+	{func_dir.FuncDeclaration('@global','void')} programa EOF {cuadruplos.printCuad()} {func_dir.showFunctionDirectory()} {vm.Cuadruplos = cuadruplos.ReturnCuads()} {vm.PrintCuadruplos()} {vm.FillMemoryArrays(func_dir.returnGlobalCont(),func_dir.returnConstTable(),cuadruplos.returnTemporalCont())};
 
 programa: (
 		variable

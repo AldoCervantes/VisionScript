@@ -13,6 +13,46 @@ class VirtualMachine:
             print(cont,self.Cuadruplos[cuad])
             cont = cont + 1
 
+    #Funcion que rellena los arreglos de memoria
+    def FillMemoryArrays(self,GlobalCont,constTable,TemporalCont):
+        for x in range(0, GlobalCont):
+            self.Global.append(0)
+        
+        for x in range(0, TemporalCont):
+            self.Temporal.append(0)
+
+        for key, value in constTable.items():
+            if value[0] == 'number':
+                    a = float(key)
+                    self.Constante.append(a)
+            elif value[0] == 'bool':
+                    if key == 'true':
+                            a = True
+                            self.Constante.append(a)
+                    elif key == 'false':
+                            a = False
+                            self.Constante.append(a)
+            else:
+                a = key[1:len(key-1)]
+                self.Constante.append(key)
+        
+        print(' ')
+        print('#############')
+        print('GLOBAL')
+        print(self.Global)
+        print('#############')
+        print(' ')
+        print('=============')
+        print('CONSTANTES')
+        print(self.Constante)
+        print('=============')
+        print(' ')
+        print('.............')
+        print('TEMPORAL')
+        print(self.Temporal)
+        print('.............')
+        print(' ')
+
     #a esta funcion se le manda el cuadruplo Cuadruplos[i], ej. [0, 30000, -1, 10000]
     def OperacionesAritmeticas(self, cuadruplo):
         op = cuadruplo[0]

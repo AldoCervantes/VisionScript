@@ -324,3 +324,7 @@ class Cuadruplos:
             else:
                 self.PTypes.append(valueType)
                 self.PilaO.append(value)
+
+    #Funcion que regresa cuantas variables temporales existen
+    def returnTemporalCont(self):
+        return self.memTemporal - 40000 
