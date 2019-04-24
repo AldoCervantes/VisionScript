@@ -1,3 +1,4 @@
+import sys
 from Cuadruplos import Cuadruplos
 
 #Clase para crear el directorio de funciones

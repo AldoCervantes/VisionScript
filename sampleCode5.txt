@@ -29,8 +29,6 @@ begin
 return()
 end
 
-number x = add(1)
-
 number asd = 10.2
 
 text asd1 = "ALDO"

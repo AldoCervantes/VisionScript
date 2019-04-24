@@ -1,3 +1,5 @@
+import sys
+
 class VirtualMachine:
     def __init__(self):
         self.Global = []

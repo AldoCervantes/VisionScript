@@ -1,5 +1,6 @@
 from collections import deque
 from SemanticCube import SemanticCube
+import sys
 
 class Cuadruplos:
     SemanticCube = SemanticCube()
@@ -54,6 +55,7 @@ class Cuadruplos:
                 self.Quad.append(cuadruplo)
             else:
                 print("#GenerateAssignmentCuad Error: Se esta intentando asignar un valor de tipo",valueType,"a una variable de tipo",targetType)
+                sys.exit()
     
     #Funcion 1 de IF
     def FuncionIF1(self):
