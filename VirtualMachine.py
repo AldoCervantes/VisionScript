@@ -25,7 +25,10 @@ class VirtualMachine:
 
         for key, value in constTable.items():
             if value[0] == 'number':
-                    a = float(key)
+                    if key.find("."):
+                        a = float(key)
+                    else:
+                        a = int(float(key))
                     self.Constante.append(a)
             elif value[0] == 'bool':
                     if key == 'true':
