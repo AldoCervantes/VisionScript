@@ -33,8 +33,8 @@ class VirtualMachine:
                             a = False
                             self.Constante.append(a)
             else:
-                a = key[1:len(key-1)]
-                self.Constante.append(key)
+                a = key[1:len(key)-1]
+                self.Constante.append(a)
         
         print(' ')
         print('#############')
