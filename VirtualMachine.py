@@ -8,8 +8,8 @@ class VirtualMachine:
         self.currentCuad = 0
 
     def PrintCuadruplos(self):
-         cont = 0
-         for cuad in range(len(self.Cuadruplos)):
+        cont = 0
+        for cuad in range(len(self.Cuadruplos)):
             print(cont,self.Cuadruplos[cuad])
             cont = cont + 1
 

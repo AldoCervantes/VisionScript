@@ -148,3 +148,15 @@ class FunctionDirectory:
             return self.funDirectory[functionId][0]
         else:
             return 'error'
+    
+    #Funcion que regresa cuantas variables globales existen
+    def returnGlobalCont(self):
+        return self.memGlobal
+    
+    #Funcion que regresa cuantas variables locales existen
+    def returnLocalCont(self):
+        return self.memLocal
+    
+    #Funcion que regresa cuantas variables globales existen
+    def returnConst(self):
+        return self.memConst

@@ -2,8 +2,9 @@ container a = [1,2,3]
 
 number b = a.get(10)
 
-void function add()
+void function add(number x)
 begin
+    print(x)
 return()
 end
 
@@ -28,4 +29,4 @@ begin
 return()
 end
 
-number x = adds()
+number x = add(1)

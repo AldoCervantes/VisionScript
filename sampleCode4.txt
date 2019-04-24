@@ -37,3 +37,7 @@ dos(a+b*2,b,f*3)
 print(a)
 print(b)
 print(f*2+1)
+
+a = "TEXT"
+
+b = false
