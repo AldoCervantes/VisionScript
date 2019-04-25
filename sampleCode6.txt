@@ -1,14 +1,6 @@
-number a  = 10 + 2 / 2 * 12 - 12
+container gg = [1,2]
 
-bool b = "ALDO" equal "ALDO"
+print(gg)
+read(gg)
+print(gg)
 
-print(a)
-
-print(b)
-
-read(a)
-print(a)
-
-text asd = "A"
-read(asd)
-print(asd)

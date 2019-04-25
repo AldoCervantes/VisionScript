@@ -479,7 +479,8 @@ class SemanticCube:
         'get':28,
         'get_back':29,
         'get_front':30,
-        'length':31
+        'length':31,
+        '[]':32
     }
 
     TypeToKey = {

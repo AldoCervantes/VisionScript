@@ -164,7 +164,7 @@ class Cuadruplos:
         result = self.memTemporal
         self.memTemporal = self.memTemporal + 1
         self.CurrentCotainer = result
-        cuadruplo = [SemanticCube.opToKey['='],'[]',-1,result]
+        cuadruplo = [SemanticCube.opToKey['[]'],-1,-1,result]
         self.Quad.append(cuadruplo)
 
     #Funcion que llena un contenedor
