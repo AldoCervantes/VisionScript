@@ -43,3 +43,12 @@ for key, value in myMap.items():
 
 
 print(myarr)
+
+temporal = input()
+
+try:
+  f = float(temporal)
+  print(f)
+except:
+  print("No se puede hacer un cast a float")
+

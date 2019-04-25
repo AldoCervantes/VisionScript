@@ -1,0 +1,14 @@
+number a  = 10 + 2 / 2 * 12 - 12
+
+bool b = "ALDO" equal "ALDO"
+
+print(a)
+
+print(b)
+
+read(a)
+print(a)
+
+text asd = "A"
+read(asd)
+print(asd)

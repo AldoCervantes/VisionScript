@@ -384,8 +384,8 @@ class VisionScriptParser ( Parser ):
             cuadruplos.printCuad()
             func_dir.showFunctionDirectory()
             vm.Cuadruplos = cuadruplos.ReturnCuads()
-            vm.PrintCuadruplos()
             vm.FillMemoryArrays(func_dir.returnGlobalCont(),func_dir.returnConstTable(),cuadruplos.returnTemporalCont())
+            vm.run()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

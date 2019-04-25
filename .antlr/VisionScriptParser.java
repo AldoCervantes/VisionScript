@@ -139,8 +139,8 @@ public class VisionScriptParser extends Parser {
 			cuadruplos.printCuad()
 			func_dir.showFunctionDirectory()
 			vm.Cuadruplos = cuadruplos.ReturnCuads()
-			vm.PrintCuadruplos()
 			vm.FillMemoryArrays(func_dir.returnGlobalCont(),func_dir.returnConstTable(),cuadruplos.returnTemporalCont())
+			vm.run()
 			}
 		}
 		catch (RecognitionException re) {

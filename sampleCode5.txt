@@ -9,22 +9,22 @@ return()
 end
 
 
-number function add1()
+number function add1(number x, number z , number o)
 begin
 return(10+2)
 end
 
-container function add2()
+container function add2(text a)
 begin
 return()
 end
 
-text function add3()
+text function add3(container x)
 begin
 return()
 end
 
-bool function add4()
+bool function add4(bool z)
 begin
 return()
 end
