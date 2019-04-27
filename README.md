@@ -112,8 +112,7 @@ number y = a + b
 
 
 TODO: 
-*Validar que el tipo de valor que regresa un op_contenedor sea igual al de la variable donde se va a guardar
-print("TODO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+X Validar que el tipo de valor que regresa un op_contenedor sea igual al de la variable donde se va a guardar
 
 *Hacer todo los relacionado a Funciones
 Pasos:

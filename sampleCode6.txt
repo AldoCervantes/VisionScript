@@ -1,6 +1,22 @@
-container a = [0,1,2,3,4,5,6,7,8,9,10]
+container a = [1,1.1,"A",False,True]
 
-print(a.length())
-print(a.get(5))
-print(a.get_back())
-print(a.get_front())
+number b = a.get(0)
+print(b)
+
+number c = a.get(1)
+print(c)
+
+text d = a.get(2)
+print(d)
+
+bool e = a.get(3)
+print(e)
+
+bool f = a.get(4)
+print(f)
+
+
+
+a.insert(-3,10000)
+print(a)
+

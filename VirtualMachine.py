@@ -7,7 +7,7 @@ class VirtualMachine:
         self.Constante = []
         self.Cuadruplos = []
         self.currentCuad = 0
-
+        self.keyToType = { 101:'number', 102:'text', 103:'bool', 104:'container' }
     #Funcion que rellena los arreglos de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
         for x in range(0, GlobalCont):
@@ -65,10 +65,25 @@ class VirtualMachine:
 
     #Funcion que realiza una asignacion de un valor a una variable [=,value,valueType,varId]
     def Assignacion(self,cuadruplo):
-        if cuadruplo[2] == 'op_container':
-            print("TODO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-            #TODO: HAY QUE VALIDAR QUE EL TIPO DE LA VARIABLE SEA IGUAL AL TIPO QUE EN DONDE SE QUIERE GUARDAR
-        self.setValue(cuadruplo[3],self.getValue(cuadruplo[1]))
+        value = self.getValue(cuadruplo[1])
+        targetType = self.keyToType[cuadruplo[2][1]]
+        if cuadruplo[2][0] == 106:
+            if type(value) == int or type(value) == float:
+                valueType = 'number'
+            elif type(value) == bool:
+                valueType = 'bool'
+            elif type(value) == str:
+                valueType = 'text'
+            elif type(value) == list:
+                valueType = 'container'
+        else:
+            valueType = self.keyToType[cuadruplo[2][0]]
+
+        if valueType == targetType:
+            self.setValue(cuadruplo[3],value)
+        else:
+            print('#Assignacion Error:Se esta intentando guardar un valor de tipo',valueType,'en una variable de tipo',targetType)
+            sys.exit()
 
     #Funcion que realiza las operaciones de + , - , * y / [+,arg1,arg2,resultado]
     def OperacionesAritmeticas(self, cuadruplo):
@@ -254,17 +269,29 @@ class VirtualMachine:
             if op == 32: #lenght
                 self.setValue(result,len(self.Global[direc - 10000]))
             else:
-                self.setValue(result,self.Global[direc - 10000][index])
+                try:
+                    self.setValue(result,self.Global[direc - 10000][index])
+                except:
+                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
+                    sys.exit()
         elif direc >= 20000 and direc < 30000: #memLocal
             if op == 32: #lenght
                 self.setValue(result,len(self.Local[direc - 20000]))
             else:
-                self.setValue(result,self.Local[direc - 20000][index])
+                try:
+                    self.setValue(result,self.Local[direc - 20000][index])
+                except:
+                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
+                    sys.exit()
         elif direc >= 30000 and direc < 40000: #memConst
             if op == 32: #lenght
                self.setValue(result,len(self.Constante[direc - 30000]))
             else:  
-                self.setValue(result,self.Constante[direc - 30000][index])
+                try:
+                    self.setValue(result,self.Constante[direc - 30000][index])
+                except:
+                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
+                    sys.exit()
         else:
             print('#OpContenedorReturns Error: la direceccion',direc,'no es valida.')
             sys.exit()

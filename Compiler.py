@@ -237,7 +237,7 @@ class Compiler:
             valueType = self.PTypes.pop()
             value = self.PilaO.pop()
             if valueType == targetType or valueType == 'op_container':
-                cuadruplo = [SemanticCube.opToKey['='],value,SemanticCube.TypeToKey[valueType],varId]
+                cuadruplo = [SemanticCube.opToKey['='],value,[SemanticCube.TypeToKey[valueType],SemanticCube.TypeToKey[targetType]],varId]
                 self.Quad.append(cuadruplo)
             else:
                 print("#GenerateAssignmentCuad Error: Se esta intentando asignar un valor de tipo",valueType,"a una variable de tipo",targetType)
