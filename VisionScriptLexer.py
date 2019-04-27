@@ -5,11 +5,9 @@ from typing.io import TextIO
 import sys
 
 
-from VisionScriptCompiler import FunctionDirectory
-from Cuadruplos import Cuadruplos
+from Compiler import Compiler
 from VirtualMachine import VirtualMachine
-func_dir = FunctionDirectory()
-cuadruplos = Cuadruplos() 
+compiler = Compiler()
 vm = VirtualMachine()
 
 
@@ -101,9 +99,9 @@ def serializedATN():
         buf.write("\7v\2\2\u00ab\u00ac\7g\2\2\u00ac\u00ad\7z\2\2\u00ad\u00ae")
         buf.write("\7v\2\2\u00ae&\3\2\2\2\u00af\u00b0\7d\2\2\u00b0\u00b1")
         buf.write("\7q\2\2\u00b1\u00b2\7q\2\2\u00b2\u00b3\7n\2\2\u00b3(\3")
-        buf.write("\2\2\2\u00b4\u00b5\7h\2\2\u00b5\u00b6\7c\2\2\u00b6\u00b7")
+        buf.write("\2\2\2\u00b4\u00b5\7H\2\2\u00b5\u00b6\7c\2\2\u00b6\u00b7")
         buf.write("\7n\2\2\u00b7\u00b8\7u\2\2\u00b8\u00b9\7g\2\2\u00b9*\3")
-        buf.write("\2\2\2\u00ba\u00bb\7v\2\2\u00bb\u00bc\7t\2\2\u00bc\u00bd")
+        buf.write("\2\2\2\u00ba\u00bb\7V\2\2\u00bb\u00bc\7t\2\2\u00bc\u00bd")
         buf.write("\7w\2\2\u00bd\u00be\7g\2\2\u00be,\3\2\2\2\u00bf\u00c0")
         buf.write("\7c\2\2\u00c0\u00c1\7p\2\2\u00c1\u00c2\7f\2\2\u00c2.\3")
         buf.write("\2\2\2\u00c3\u00c4\7q\2\2\u00c4\u00c5\7t\2\2\u00c5\60")
@@ -252,7 +250,7 @@ class VisionScriptLexer(Lexer):
     literalNames = [ "<INVALID>",
             "'='", "'('", "')'", "','", "'['", "']'", "'.'", "'read'", "'print'", 
             "'hear'", "'braille'", "'if'", "'else'", "'number'", "'text'", 
-            "'bool'", "'false'", "'true'", "'and'", "'or'", "'equal'", "'not_equal'", 
+            "'bool'", "'False'", "'True'", "'and'", "'or'", "'equal'", "'not_equal'", 
             "'container'", "'begin'", "'end'", "'repeat'", "'times'", "'until'", 
             "'function'", "'return'", "'get_back'", "'get_front'", "'get'", 
             "'insert_back'", "'insert_front'", "'insert'", "'void'", "'length'", 

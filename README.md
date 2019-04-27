@@ -71,10 +71,13 @@ X Validar que sea un number en las op_contenedor
 X Validar que el Return sea del mismo tipo que la funcion
 X COMO SE HACE UNA ASIGNACION DE UNA OP_CONTENEDOR
 X PREGUNTAR: COMO SE HACE UNA ASIGNACION DE UNA FUNCTION CALL
-
-- Generar los 4 arreglos (Global, Local, Constantes, Temporales)
-- Sumas, Resta, Multipliacion, Division
-- Prints
+X CAMBIAR LOS TEMPORALES A GLOBALES O LOCALES
+X PONER LA CANTIDAD DE VARIABLES LOCALES EN EL ERA
+X HACER EL CUADRUPLO DE ENDPROC
+X Generar los 3 arreglos (Global, Local, Constantes)
+X Sumas, Resta, Multipliacion, Division
+X Prints
+X Read
 
 
 #EJEMPLO
@@ -105,3 +108,17 @@ number y = a + b
 
 *** HAY QUE METER EN EL ERA CUANTAS VARIABLES LOCALES TIENE LA FUNCION ***
 *** HA QUE GENERAR EL CUADRUPLO PARA ENDPROC ****
+
+
+
+TODO: 
+*Validar que el tipo de valor que regresa un op_contenedor sea igual al de la variable donde se va a guardar
+print("TODO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
+*Hacer todo los relacionado a Funciones
+Pasos:
+return => Es guardar el valor en la variable
+ERA => Es generar un arreglo del tamaño que dice el era en la pila de Locales
+param => es asignar el valor a la variable de la funcion
+gosub => Es hacer un goto a la linea donde esta la funcion
+ENDPROC => es hacer un pop a la pila de locales

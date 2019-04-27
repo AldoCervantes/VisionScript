@@ -5,11 +5,9 @@ if __name__ is not None and "." in __name__:
 else:
     from VisionScriptParser import VisionScriptParser
 
-from VisionScriptCompiler import FunctionDirectory
-from Cuadruplos import Cuadruplos
+from Compiler import Compiler
 from VirtualMachine import VirtualMachine
-func_dir = FunctionDirectory()
-cuadruplos = Cuadruplos() 
+compiler = Compiler()
 vm = VirtualMachine()
 
 

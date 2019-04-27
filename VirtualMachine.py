@@ -5,17 +5,13 @@ class VirtualMachine:
         self.Global = []
         self.Local = []
         self.Constante = []
-        self.Temporal = []
         self.Cuadruplos = []
         self.currentCuad = 0
 
     #Funcion que rellena los arreglos de memoria
-    def FillMemoryArrays(self,GlobalCont,constTable,TemporalCont):
+    def FillMemoryArrays(self,GlobalCont,constTable):
         for x in range(0, GlobalCont):
             self.Global.append(0)
-        
-        for x in range(0, TemporalCont):
-            self.Temporal.append(0)
 
         for key, value in constTable.items():
             if value[0] == 'number':
@@ -26,10 +22,10 @@ class VirtualMachine:
                         a = float(key)
                         self.Constante.append(a)
             elif value[0] == 'bool':
-                    if key == 'true':
+                    if key == 'True':
                             a = True
                             self.Constante.append(a)
-                    elif key == 'false':
+                    elif key == 'False':
                             a = False
                             self.Constante.append(a)
             else:
@@ -51,8 +47,6 @@ class VirtualMachine:
             return self.Local[direc - 20000]
         elif direc >= 30000 and direc < 40000: #memConst
             return self.Constante[direc - 30000]
-        elif direc >= 40000: #memTemporal 
-            return self.Temporal[direc - 40000]
         else:
             print('#getValue Error: la direceccion',direc,'no es valida.')
             sys.exit()
@@ -65,8 +59,6 @@ class VirtualMachine:
             self.Local[direc - 20000] = value
         elif direc >= 30000 and direc < 40000: #memConst
             self.Constante[direc - 30000] = value
-        elif direc >= 40000: #memTemporal 
-            self.Temporal[direc - 40000] = value
         else:
             print('#setValue Error: la direceccion',direc,'no es valida.')
             sys.exit()
@@ -74,7 +66,7 @@ class VirtualMachine:
     #Funcion que realiza una asignacion de un valor a una variable [=,value,valueType,varId]
     def Assignacion(self,cuadruplo):
         if cuadruplo[2] == 'op_container':
-            print("TODO")
+            print("TODO >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
             #TODO: HAY QUE VALIDAR QUE EL TIPO DE LA VARIABLE SEA IGUAL AL TIPO QUE EN DONDE SE QUIERE GUARDAR
         self.setValue(cuadruplo[3],self.getValue(cuadruplo[1]))
 
@@ -124,16 +116,38 @@ class VirtualMachine:
         
         self.setValue(cuadruplo[3], result)
 
+    #Funcion que se encarga de validar la expresion si es y cambia el self.currentCuad al cuadruplo que dicta el GotoF 
+    #[SemanticCube.opToKey['GotoF'],result,-1,-1]
+    def GoToF(self,cuadruplo):
+        evaluate = self.getValue(cuadruplo[1])
+        if evaluate:
+            self.currentCuad = self.currentCuad
+        else:
+            self.currentCuad = cuadruplo[3] - 1
+    
+    #Funcion que se encarga de validar la expresion si es y cambia el self.currentCuad al cuadruplo que dicta el GotoV 
+    #[SemanticCube.opToKey['GotoV'],result,-1,-1]
+    def GoToV(self,cuadruplo):
+        evaluate = self.getValue(cuadruplo[1])
+        if evaluate:
+            self.currentCuad = cuadruplo[3] - 1
+        else:
+            self.currentCuad = self.currentCuad
+    
+    #Funcion que se encarga de cambiar el self.currentCuad al cuadruplo que dicta el Goto
+    def GoTo(self,cuadruplo):
+        self.currentCuad = cuadruplo[3] - 1
+
     #Funcion que imprime el valor de un cuadruplo [flag,value,-1,-1]
     def Write(self, cuadruplo):
         op = cuadruplo[0]
         value = self.getValue(cuadruplo[1])
-        if op == 15:
-            print(value)
-        elif op == 16:
-            #FALTA HACER EL HEAR
+        if op == 16:
             print(value)
         elif op == 17:
+            #FALTA HACER EL HEAR
+            print(value)
+        elif op == 18:
             #FALTA HACER EL BRAILLE
             print(value)
 
@@ -143,25 +157,28 @@ class VirtualMachine:
         tipo = cuadruplo[1]
         if tipo == 101:
             try:
-                temp = float(temporal)
+                if temporal.find(".") == -1:
+                    temp = int(float(temporal))
+                else:
+                    temp = float(temporal)
                 self.setValue(cuadruplo[3], temp)
             except:
-                print("La variable leida no es de tipo numerica")
+                print("#Read Error: La variable leida no es de tipo numerica")
                 sys.exit()
         elif tipo == 102:
             temp = str(temporal)
             self.setValue(cuadruplo[3], temp)
         elif tipo == 103:
-            ## HAY QUE VALIDAR QUE SI LO COMBIERTA A BOOLEANO Y QUE SI SEA BOOLEANO
-            temporal = temporal
+            if temporal == 'True':
+               temp = True
+            elif temporal == 'False':
+                temp = False
+            else:
+                print("#Read Error: La variable leida no es de tipo boolean (True/False)")
+                sys.exit()
             self.setValue(cuadruplo[3], temp)
-        elif tipo == 104:
-            ### HAY QUE VALIDAR QUE SI LO COMBIERTA A LISTA Y QUE NO MANDE LISTAS DE LISTAS
-            print(temporal)
-            self.setValue(cuadruplo[3], temporal)
         else:
-            print("ERROR:",temporal)
-
+            print("#Read Error: La variable no tiene un tipo registrado",temporal)
 
     #Funcion de que agrega un elemento a un arreglo ya existente ['append',value,-1,self.CurrentCotainer]
     def AppendElement(self,cuadruplo): 
@@ -173,37 +190,85 @@ class VirtualMachine:
             self.Local[direc - 20000].append(value)
         elif direc >= 30000 and direc < 40000: #memConst
             self.Constante[direc - 30000].append(value)
-        elif direc >= 40000: #memTemporal 
-            self.Temporal[direc - 40000].append(value)
         else:
-            print('#setValue Error: la direceccion',direc,'no es valida.')
+            print('#AppendElement Error: la direceccion',direc,'no es valida.')
             sys.exit()
 
-    def OperacionesContenedores(self,cuadruplo):
-        op = cuadruplo[0]
-        arr = []
-        if op == 'append':
-            arr.append(self.cuadruplo[1])
-        elif op == 'concat':
-            result = self.cuadruplo[1] + self.cuadruplo[2]
-        elif op == 'insert':
-            arr.insert(self.cuadruplo[1],self.cuadruplo[2])
-        elif op == 'insert_back':
-            arr.append(self.cuadruplo[1])
-        elif op == 'insert_front':
-            arr.insert(0,self.cuadruplo[1])
-        elif op == 'get':
-            arr[self.cuadruplo[2]]
-        elif op == 'get_back':
-            arr[len(arr)-1]
-        elif op == 'get_front':
-            arr[0]
-        elif op == 'length':
-            len(arr) 
+    #Funcion que concatena dos contenedores y almacena el resultado en la variable dicha por el cuadruplo
+    #[SemanticCube.opToKey['concat'],LeftContainer,RightContainer,result]
+    def ConcatContainers(self,cuadruplo):
+        LeftContainer = self.getValue(cuadruplo[1])
+        RightContainer = self.getValue(cuadruplo[2])
+        result = LeftContainer + RightContainer
+        self.setValue(cuadruplo[3],result)
 
     #Funcion que inicializa un contenedor en una variable
     def InicializaContenedor(self,cadruplo):
         self.setValue(cadruplo[3],[])
+
+    #Funcion que se encarga de las operaciones de contenedores que no regresan un valor
+    def OpContenedor(self,cuadruplo):
+        op = cuadruplo[0]
+        if op == 26: #insert [SemanticCube.opToKey[flag],index,element,varId]
+            index = self.getValue(cuadruplo[1])
+            element = self.getValue(cuadruplo[2])
+        elif op == 27: #insert_back [SemanticCube.opToKey[flag],value,-1,varId]
+            element = self.getValue(cuadruplo[1])
+        elif op == 28: #insert_front [SemanticCube.opToKey[flag],value,-1,varId]
+            index = 0
+            element = self.getValue(cuadruplo[1])
+        
+        direc = cuadruplo[3]
+        
+        if direc >= 10000 and direc < 20000: #memGlobal
+            if op == 27:
+                index = len(self.Global[direc - 10000])
+            self.Global[direc - 10000].insert(index, element)
+        elif direc >= 20000 and direc < 30000: #memLocal
+            if op == 27:
+                index = len(self.Local[direc - 20000])
+            self.Local[direc - 20000].insert(index, element)
+        elif direc >= 30000 and direc < 40000: #memConst
+            if op == 27:
+                index = len(self.Constante[direc - 30000])
+            self.Constante[direc - 30000].insert(index, element)
+        else:
+            print('#OpContenedor Error: la direceccion',direc,'no es valida.')
+            sys.exit()
+
+    #Funcion que se encarga de las operaciones de contenedores que regresan un valor 
+    def OpContenedorReturns(self,cuadruplo):
+        op = cuadruplo[0]
+        
+        if op == 29: #get [SemanticCube.opToKey[flag],value,varId,result] 
+            index = self.getValue(cuadruplo[1])
+        elif op == 30: #get_back [SemanticCube.opToKey[flag],-1,varId,result]
+            index = -1
+        elif op == 31: #get_front [SemanticCube.opToKey[flag],-1,varId,result]
+            index = 0
+
+        direc = cuadruplo[2]
+        result = cuadruplo[3]
+
+        if direc >= 10000 and direc < 20000: #memGlobal
+            if op == 32: #lenght
+                self.setValue(result,len(self.Global[direc - 10000]))
+            else:
+                self.setValue(result,self.Global[direc - 10000][index])
+        elif direc >= 20000 and direc < 30000: #memLocal
+            if op == 32: #lenght
+                self.setValue(result,len(self.Local[direc - 20000]))
+            else:
+                self.setValue(result,self.Local[direc - 20000][index])
+        elif direc >= 30000 and direc < 40000: #memConst
+            if op == 32: #lenght
+               self.setValue(result,len(self.Constante[direc - 30000]))
+            else:  
+                self.setValue(result,self.Constante[direc - 30000][index])
+        else:
+            print('#OpContenedorReturns Error: la direceccion',direc,'no es valida.')
+            sys.exit()
+
 
     def run(self):
         while self.Cuadruplos[self.currentCuad][0] != 777:
@@ -215,13 +280,15 @@ class VirtualMachine:
                 self.OperacionesAritmeticas(cuadruplo)
             elif  op >= 5 and op <= 12:
                 self.OperacionesLogicas(cuadruplo)
-            elif op == 'GotoF':
+            elif op == 13:
                 self.GoToF(cuadruplo)
-            elif op == 'Goto':
+            elif op == 14:
+                self.GoToV(cuadruplo)
+            elif op == 15:
                 self.GoTo(cuadruplo)
-            elif op >= 15 and op <= 17:
+            elif op >= 16 and op <= 18:
                 self.Write(cuadruplo)
-            elif op == 18:
+            elif op == 19:
                 self.Read(cuadruplo)
             elif op == 'return':
                 self.RETURN(cuadruplo)
@@ -231,15 +298,20 @@ class VirtualMachine:
                 self.PARAM(cuadruplo)
             elif op == 'gosub':
                 self.GOSUB(cuadruplo)
-            elif op == 23:
+            elif op == 24:
                 self.AppendElement(cuadruplo)
-            elif op == 'concat' or op == 'insert' or op == 'insert_back' or op == 'insert_front' or op == 'get' or op == 'get_back' or op == 'get_front' or op == 'length':
-                self.OperacionesContenedores(cuadruplo)
-            elif op == 32:
+            elif op == 25:
+                self.ConcatContainers(cuadruplo)
+            elif op >= 26 and op <= 28:
+                self.OpContenedor(cuadruplo)
+            elif op >= 29 and op <= 32:
+                self.OpContenedorReturns(cuadruplo)
+            elif op == 33:
                 self.InicializaContenedor(cuadruplo)
             else:
-                print('ERROR, cuadruplo invalido: ')
+                print('#run Error: cuadruplo invalido: ')
                 print(cuadruplo)
+                sys.exit()
             self.currentCuad = self.currentCuad + 1
 
     #Funcion para debugear
@@ -267,8 +339,8 @@ class VirtualMachine:
         print(self.Constante)
         print('==========================')
         print(' ')
-        print('...... TEMPORAL .......')
-        print(self.Temporal)
+        print('...... LOCAL .......')
+        print(self.Local)
         print('..........................')
         print(' ')
         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')

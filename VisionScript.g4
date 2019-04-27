@@ -1,11 +1,9 @@
 grammar VisionScript;
 
 @header {
-from VisionScriptCompiler import FunctionDirectory
-from Cuadruplos import Cuadruplos
+from Compiler import Compiler
 from VirtualMachine import VirtualMachine
-func_dir = FunctionDirectory()
-cuadruplos = Cuadruplos() 
+compiler = Compiler()
 vm = VirtualMachine()
 }
 /*
@@ -13,7 +11,7 @@ vm = VirtualMachine()
  */
 
 visionscript:
-	{func_dir.FuncDeclaration('@global','void')} programa EOF {cuadruplos.printCuad()} {func_dir.showFunctionDirectory()} {vm.Cuadruplos = cuadruplos.ReturnCuads()} {vm.FillMemoryArrays(func_dir.returnGlobalCont(),func_dir.returnConstTable(),cuadruplos.returnTemporalCont())} {vm.run()};
+	{compiler.FuncDeclaration('@global','void')} programa EOF {compiler.printCuad()} {compiler.showFunctionDirectory()} {vm.Cuadruplos = compiler.ReturnCuads()} {vm.FillMemoryArrays(compiler.returnGlobalCont(),compiler.returnConstTable())} {vm.run()};
 
 programa: (
 		variable
@@ -28,8 +26,8 @@ programa: (
 	)*;
 
 variable:
-	tipo ID '=' todo {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,$todo.text)} 
-	{cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))};
+	tipo ID '=' todo {compiler.VarDeclaration(compiler.currentFunction,$ID.text,$tipo.type,$todo.text)} 
+	{compiler.GenerateAssignmentCuad(compiler.returnIDAddress(compiler.currentFunction,$ID.text), compiler.returnIDType(compiler.currentFunction,$ID.text))};
 
 tipo
 	returns[Object type]:
@@ -49,16 +47,16 @@ casi_todo:
 	| op_contenedor_returns;
 
 asignacion:
-	ID '=' todo {func_dir.VarAssignment(func_dir.currentFunction,$ID.text,$todo.text)} 
-	{cuadruplos.GenerateAssignmentCuad(func_dir.returnIDAddress(func_dir.currentFunction,$ID.text), func_dir.returnIDType(func_dir.currentFunction,$ID.text))};
+	ID '=' todo {compiler.VarAssignment(compiler.currentFunction,$ID.text,$todo.text)} 
+	{compiler.GenerateAssignmentCuad(compiler.returnIDAddress(compiler.currentFunction,$ID.text), compiler.returnIDType(compiler.currentFunction,$ID.text))};
 
 condicion:
-	IF mega_expresion {cuadruplos.FuncionIF1()} BEGIN bloque ELSE {cuadruplos.FuncionIF2()} bloque
-		END {cuadruplos.FuncionIF3()};
+	IF mega_expresion {compiler.FuncionIF1()} BEGIN bloque ELSE {compiler.FuncionIF2()} bloque
+		END {compiler.FuncionIF3()};
 
 ciclo:
-	REPEAT UNTIL {cuadruplos.FuncionRepUntil1()} mega_expresion {cuadruplos.FuncionRepUntil2()} 
-	BEGIN bloque END {cuadruplos.FuncionRepUntil3()};
+	REPEAT UNTIL {compiler.FuncionRepUntil1()} mega_expresion {compiler.FuncionRepUntil2()} 
+	BEGIN bloque END {compiler.FuncionRepUntil3()};
 
 bloque: (
 		condicion
@@ -71,27 +69,27 @@ bloque: (
 	)*;
 
 read:
-	READ '(' ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))} 
-	')' {cuadruplos.GenerateReadCuad($READ.text,func_dir.returnIDType(func_dir.currentFunction,$ID.text))};
+	READ '(' ID {compiler.InsertIdType(compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.returnIDType(compiler.currentFunction, $ID.text))} 
+	')' {compiler.GenerateReadCuad($READ.text,compiler.returnIDType(compiler.currentFunction,$ID.text))};
 				
 imprimir
 	returns[Object flag]: (
 		BRAILLE {$flag = $BRAILLE.text}
 		| PRINT {$flag = $PRINT.text}
 		| HEAR {$flag = $HEAR.text}
-	) '(' todo ')' {cuadruplos.GeneratePrintCuad($flag)};
+	) '(' todo ')' {compiler.GeneratePrintCuad($flag)};
 
 mega_expresion:
-	expresion {cuadruplos.GenerateCuad('Mega_Expresion')} (
+	expresion {compiler.GenerateCuad('Mega_Expresion',compiler.currentFunction)} (
 		(
-			AND {cuadruplos.InsertOperator($AND.text)}
-			| OR {cuadruplos.InsertOperator($OR.text)}
-		) expresion {cuadruplos.GenerateCuad('Mega_Expresion')}
+			AND {compiler.InsertOperator($AND.text)}
+			| OR {compiler.InsertOperator($OR.text)}
+		) expresion {compiler.GenerateCuad('Mega_Expresion',compiler.currentFunction)}
 	)*;
 
 expresion:
 	exp (
-		exp_todo {cuadruplos.InsertOperator($exp_todo.text)} exp {cuadruplos.GenerateCuad('Expresion')
+		exp_todo {compiler.InsertOperator($exp_todo.text)} exp {compiler.GenerateCuad('Expresion',compiler.currentFunction)
 			}
 	)?;
 
@@ -104,40 +102,40 @@ exp_todo:
 	| NOT_EQUAL;
 
 exp:
-	termino {cuadruplos.GenerateCuad('Termino')} (
+	termino {compiler.GenerateCuad('Termino',compiler.currentFunction)} (
 		(
-			PLUS {cuadruplos.InsertOperator($PLUS.text)}
-			| MINUS {cuadruplos.InsertOperator($MINUS.text)}
-		) termino {cuadruplos.GenerateCuad('Termino')}
+			PLUS {compiler.InsertOperator($PLUS.text)}
+			| MINUS {compiler.InsertOperator($MINUS.text)}
+		) termino {compiler.GenerateCuad('Termino',compiler.currentFunction)}
 	)*;
 
 termino:
-	factor {cuadruplos.GenerateCuad('Factor')} (
+	factor {compiler.GenerateCuad('Factor',compiler.currentFunction)} (
 		(
-			MULTIPLICATION {cuadruplos.InsertOperator($MULTIPLICATION.text)}
-			| DIVISION {cuadruplos.InsertOperator($DIVISION.text)}
-		) factor {cuadruplos.GenerateCuad('Factor')}
+			MULTIPLICATION {compiler.InsertOperator($MULTIPLICATION.text)}
+			| DIVISION {compiler.InsertOperator($DIVISION.text)}
+		) factor {compiler.GenerateCuad('Factor',compiler.currentFunction)}
 	)*;
 
 factor:
-	'(' {cuadruplos.InsertParentesis()} mega_expresion ')' {cuadruplos.RemoveParentesis()}
-	| ct {cuadruplos.InsertIdType($ct.value,$ct.type)};
+	'(' {compiler.InsertParentesis()} mega_expresion ')' {compiler.RemoveParentesis()}
+	| ct {compiler.InsertIdType($ct.value,$ct.type)};
 
 ct
 	returns[Object type, value]:
-	MINUS CTN {$type = 'number'} {$value = func_dir.ConstDeclaration($type , '-'+$CTN.text )}
-	| CTN {$type = 'number'} {$value = func_dir.ConstDeclaration($type , $CTN.text )}
-	| CTBF {$type = 'bool'} {$value = func_dir.ConstDeclaration($type ,$CTBF.text )}
-	| CTBT {$type = 'bool'} {$value = func_dir.ConstDeclaration($type , $CTBT.text )}
-	| CTT {$type = 'text'} {$value = func_dir.ConstDeclaration($type , $CTT.text )}
-	| ID {$type = func_dir.returnIDType(func_dir.currentFunction, $ID.text)} {$value = func_dir.returnIDAddress(func_dir.currentFunction, $ID.text)};
+	MINUS CTN {$type = 'number'} {$value = compiler.ConstDeclaration($type , '-'+$CTN.text )}
+	| CTN {$type = 'number'} {$value = compiler.ConstDeclaration($type , $CTN.text )}
+	| CTBF {$type = 'bool'} {$value = compiler.ConstDeclaration($type ,$CTBF.text )}
+	| CTBT {$type = 'bool'} {$value = compiler.ConstDeclaration($type , $CTBT.text )}
+	| CTT {$type = 'text'} {$value = compiler.ConstDeclaration($type , $CTT.text )}
+	| ID {$type = compiler.returnIDType(compiler.currentFunction, $ID.text)} {$value = compiler.returnIDAddress(compiler.currentFunction, $ID.text)};
 
 function:
-	function_type FUNCTION ID {cuadruplos.GenerateFunGoto()} {func_dir.currentFunction = $ID.text} {func_dir.FuncDeclaration(func_dir.currentFunction,$function_type.type)} '(' (
-		tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)} (
-			',' tipo ID {func_dir.VarDeclaration(func_dir.currentFunction,$ID.text,$tipo.type,'@parameter')}{func_dir.ParamDeclaration(func_dir.currentFunction,$tipo.type)}
+	function_type FUNCTION ID {compiler.GenerateFunGoto()} {compiler.currentFunction = $ID.text} {compiler.FuncDeclaration(compiler.currentFunction,$function_type.type)} '(' (
+		tipo ID {compiler.VarDeclaration(compiler.currentFunction,$ID.text,$tipo.type,'@parameter')}{compiler.ParamDeclaration(compiler.currentFunction,$tipo.type)} (
+			',' tipo ID {compiler.VarDeclaration(compiler.currentFunction,$ID.text,$tipo.type,'@parameter')}{compiler.ParamDeclaration(compiler.currentFunction,$tipo.type)}
 		)*
-	)? ')' BEGIN func_bloque RETURN '(' (casi_todo {cuadruplos.GenerateFunReturns($function_type.type,func_dir.returnFuncReturnAddress(func_dir.currentFunction))})? ')' END {cuadruplos.FillFunGoto()} {func_dir.currentFunction = '@global'} {func_dir.memLocal = 9000};
+	)? ')' BEGIN func_bloque RETURN '(' (casi_todo {compiler.GenerateFunReturns($function_type.type,compiler.returnFuncReturnAddress(compiler.currentFunction))})? ')' END {compiler.FillFunGoto()} {compiler.RegisterLocalCont(compiler.currentFunction)} {compiler.GenerateEndProc()} {compiler.currentFunction = '@global'} {compiler.memLocal = 20000};
 
 function_type
 	returns[Object type]:
@@ -156,22 +154,22 @@ func_bloque: (
 	)*;
 
 function_call:
-	ID {cuadruplos.GenerateEra($ID.text)} '(' (casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)} (',' casi_todo {cuadruplos.GenerateParameter(func_dir.ReturnParams($ID.text),$ID.text)})*)? ')' {cuadruplos.VerifyParameters(func_dir.ReturnParams($ID.text),$ID.text)}{cuadruplos.addValueToStack(func_dir.returnFuncReturnAddress($ID.text),func_dir.returnFuncReturnType($ID.text))};
+	ID {compiler.GenerateEra($ID.text)} '(' (casi_todo {compiler.GenerateParameter(compiler.ReturnParams($ID.text),$ID.text)} (',' casi_todo {compiler.GenerateParameter(compiler.ReturnParams($ID.text),$ID.text)})*)? ')' {compiler.VerifyParameters(compiler.ReturnParams($ID.text),$ID.text)}{compiler.addValueToStack(compiler.returnFuncReturnAddress($ID.text),compiler.returnFuncReturnType($ID.text))};
 
-contenedor: '[' {cuadruplos.GenerateEmptyContainer()} ( mega_expresion {cuadruplos.GenerateFillContainer()} (',' mega_expresion {cuadruplos.GenerateFillContainer()})*)? ']' {cuadruplos.RegisterContainer()};
+contenedor: '[' {compiler.GenerateEmptyContainer(compiler.currentFunction)} ( mega_expresion {compiler.GenerateFillContainer()} (',' mega_expresion {compiler.GenerateFillContainer()})*)? ']' {compiler.RegisterContainer()};
 
 op_contenedor_returns 
 	returns[Object flag]:
-		ID '.' ( (GET_BACK {$flag = $GET_BACK.text} | GET_FRONT {$flag = $GET_FRONT.text}| LENGTH {$flag = $LENGTH.text}) '(' ')' {cuadruplos.FuncionOPContainer1($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
-			|GET {$flag = $GET.text} '(' mega_expresion ')' {cuadruplos.FuncionOPContainer2($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))} );
+		ID '.' ( (GET_BACK {$flag = $GET_BACK.text} | GET_FRONT {$flag = $GET_FRONT.text}| LENGTH {$flag = $LENGTH.text}) '(' ')' {compiler.FuncionOPContainer1($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.currentFunction)}
+			|GET {$flag = $GET.text} '(' mega_expresion ')' {compiler.FuncionOPContainer2($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.currentFunction)} );
 
 op_contenedor 
 	returns[Object flag]:
-		ID '.' ( (INSERT_BACK {$flag = $INSERT_BACK.text} | INSERT_FRONT {$flag = $INSERT_FRONT.text}) '(' mega_expresion ')' {cuadruplos.FuncionOPContainer3($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
-			| INSERT {$flag = $INSERT.text}'(' mega_expresion ',' mega_expresion ')' {cuadruplos.FuncionOPContainer4($flag,func_dir.returnIDAddress(func_dir.currentFunction, $ID.text))}
+		ID '.' ( (INSERT_BACK {$flag = $INSERT_BACK.text} | INSERT_FRONT {$flag = $INSERT_FRONT.text}) '(' mega_expresion ')' {compiler.FuncionOPContainer3($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text))}
+			| INSERT {$flag = $INSERT.text}'(' mega_expresion ',' mega_expresion ')' {compiler.FuncionOPContainer4($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text))}
 		);
 
-concat_contenedor: (ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))} | contenedor) (PLUS (ID {cuadruplos.InsertIdType(func_dir.returnIDAddress(func_dir.currentFunction, $ID.text),func_dir.returnIDType(func_dir.currentFunction, $ID.text))} | contenedor) {cuadruplos.GenerateConcatContainer()})+; 
+concat_contenedor: (ID {compiler.InsertIdType(compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.returnIDType(compiler.currentFunction, $ID.text))} | contenedor) (PLUS (ID {compiler.InsertIdType(compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.returnIDType(compiler.currentFunction, $ID.text))} | contenedor) {compiler.GenerateConcatContainer(compiler.currentFunction)})+; 
 
 /*
  * Lexer Rules
@@ -200,9 +198,9 @@ TEXT: 'text';
 
 BOOL: 'bool';
 
-CTBF: 'false';
+CTBF: 'False';
 
-CTBT: 'true';
+CTBT: 'True';
 
 AND: 'and';
 

@@ -1,4 +1,4 @@
-myMap = {}
+""" myMap = {}
 cont = 30000
 def ConstDeclaration(myMap , VarType , value):
         if VarType == 'number':
@@ -50,5 +50,13 @@ try:
   f = float(temporal)
   print(f)
 except:
-  print("No se puede hacer un cast a float")
+  print("No se puede hacer un cast a float") """
 
+
+arr = [1,2,3]
+
+arr2 = [4,5,6]
+
+arr3 = arr + arr2
+
+print(arr3)
