@@ -23,6 +23,7 @@ class Compiler:
         self.PJumps = [] #Pila de saltos
         self.paramCounter = 0 #Contador de Parametros de una funcion
         self.CurrentCotainer = 0 #Flag que indica la direccion del contenedor actual
+        self.FunLocalMems = {}
 
     #Funcion que regresa una direccion de memorial temporal relativa a el contexto donde se este usando
     def returnTemp(self,functionId):
@@ -142,6 +143,12 @@ class Compiler:
             print(key,"=>",value)
             print("______________")
         print("#####################################")
+        print(" ")
+        print(";;;;;; CANTIDAD DE FUNCIONES ;;;;;;;;")
+        for key , value in self.FunLocalMems.items():
+            print(key,"=>",value)
+            print("______________")
+        print(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;")
 
     #Funcion que regresa la direccion de memoria de una variable
     def returnIDAddress(self, functionId, varId):
@@ -195,6 +202,7 @@ class Compiler:
         LocalCont = self.memLocal - 20000
         if functionId in self.funDirectory:
             self.funDirectory[functionId][4] = LocalCont
+            self.FunLocalMems[functionId] = LocalCont
         else:
             print('#RegisterLocalCont Error: La funcion no existe.')
             sys.exit()
@@ -350,7 +358,7 @@ class Compiler:
 
     #Funcion que genera el cuadruplo ERA
     def GenerateEra(self,functionId):
-        cuadruplo = [SemanticCube.opToKey['ERA'],self.funDirectory[functionId][4],-1,functionId]
+        cuadruplo = [SemanticCube.opToKey['ERA'],-1,-1,functionId]
         self.Quad.append(cuadruplo)
     
     #Funcion que inicializa un contenedor

@@ -11,7 +11,7 @@ vm = VirtualMachine()
  */
 
 visionscript:
-	{compiler.FuncDeclaration('@global','void')} programa EOF {compiler.printCuad()} {compiler.showFunctionDirectory()} {vm.Cuadruplos = compiler.ReturnCuads()} {vm.FillMemoryArrays(compiler.returnGlobalCont(),compiler.returnConstTable())} {vm.run()};
+	{compiler.FuncDeclaration('@global','void')} programa EOF {compiler.printCuad()} {compiler.showFunctionDirectory()} {vm.FunSpaceMemTable = compiler.FunLocalMems } {vm.Cuadruplos = compiler.ReturnCuads()} {vm.FillMemoryArrays(compiler.returnGlobalCont(),compiler.returnConstTable())} {vm.run()};
 
 programa: (
 		variable

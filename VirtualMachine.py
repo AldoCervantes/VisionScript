@@ -10,6 +10,7 @@ class VirtualMachine:
         self.keyToType = { 101:'number', 102:'text', 103:'bool', 104:'container' }
         self.FuncitonJumps = []
         self.currentLocal = []
+        self.FunSpaceMemTable = {}
 
     #Funcion que rellena los arreglos de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
@@ -97,6 +98,9 @@ class VirtualMachine:
         if op == 1:
             result = arg1 + arg2
         elif op == 2:
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RESTA")
+            print(arg1,"-",arg2)
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
             result = arg1 - arg2
         elif op == 3:
             result = arg1 * arg2
@@ -301,8 +305,8 @@ class VirtualMachine:
             sys.exit()
 
     #Funcion que realiza el ERA (Generacion de un espacio de memoria para dicha funcion) 
-    def ERA(self,cuadruplo): #[SemanticCube.opToKey['ERA'],self.funDirectory[functionId][4],-1,functionId]
-        localMemSpace = cuadruplo[1]
+    def ERA(self,cuadruplo): #[SemanticCube.opToKey['ERA'],-1,-1,functionId]
+        localMemSpace = self.FunSpaceMemTable[cuadruplo[3]]
         memLocal = []
         for x in range(0, localMemSpace):
             memLocal.append(0)
@@ -310,6 +314,15 @@ class VirtualMachine:
 
     #Funcion que asigna el valor a un parametro
     def PARAM(self,cuadruplo): #['param',value,valueType,20000+self.paramCounter]
+        print('$$$$$$$$$$$$$$$$$$$$$$$$$')
+        print('LOCAL:')
+        print(self.Local)
+        print('Current:')
+        print(self.currentLocal)
+        print('$$$$$$$$$$$$$$$$$$$$$$$$$')
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARAM")
+        print(self.getValue(cuadruplo[1]))
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         self.Local[-1][cuadruplo[3]] = self.getValue(cuadruplo[1])
 
     #Funcion que realiza el gosub
@@ -333,6 +346,7 @@ class VirtualMachine:
     def run(self):
         while self.Cuadruplos[self.currentCuad][0] != 777:
             cuadruplo = self.Cuadruplos[self.currentCuad]
+            print(cuadruplo)
             op = cuadruplo[0]
             if op == 0:
                 self.Assignacion(cuadruplo)
