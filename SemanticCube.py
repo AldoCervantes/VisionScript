@@ -6,14 +6,16 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
 
                 },
                 'text':{ 
@@ -21,21 +23,32 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'text',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'container',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             '-':{
@@ -44,35 +57,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             '*':{
@@ -81,35 +107,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             '/':{
@@ -118,35 +157,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             '>':{
@@ -155,35 +207,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             '<':{
@@ -192,35 +257,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             '>=':{
@@ -229,35 +307,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             '<=':{
@@ -266,35 +357,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             'equal':{
@@ -303,35 +407,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'bool',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'bool',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             'not_equal':{
@@ -340,35 +457,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'bool',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'bool',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             'or':{
@@ -377,35 +507,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'bool',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             },
             'and':{
@@ -414,35 +557,48 @@ class SemanticCube:
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'bool':{ 
                             'number': 'error',
                             'bool'  : 'bool',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'text':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'container':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
                 },
                 'error':{ 
                             'number': 'error',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
-                            'error' : 'error'
+                            'error' : 'error',
+                            'void' : 'error'
+                },
+                'void':{ 
+                            'number': 'error',
+                            'bool'  : 'error',
+                            'text'  : 'error',
+                            'container': 'error',
+                            'error' : 'error',
+                            'void' : 'error'
                 }
             }
         }

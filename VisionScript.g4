@@ -65,7 +65,7 @@ bloque: (
 		| imprimir
 		| asignacion
 		| op_contenedor
-		| function_call
+		| retorno
 	)*;
 
 read:
@@ -89,8 +89,7 @@ mega_expresion:
 
 expresion:
 	exp (
-		exp_todo {compiler.InsertOperator($exp_todo.text)} exp {compiler.GenerateCuad('Expresion',compiler.currentFunction)
-			}
+		exp_todo {compiler.InsertOperator($exp_todo.text)} exp {compiler.GenerateCuad('Expresion',compiler.currentFunction)}
 	)?;
 
 exp_todo:
@@ -128,14 +127,17 @@ ct
 	| CTBF {$type = 'bool'} {$value = compiler.ConstDeclaration($type ,$CTBF.text )}
 	| CTBT {$type = 'bool'} {$value = compiler.ConstDeclaration($type , $CTBT.text )}
 	| CTT {$type = 'text'} {$value = compiler.ConstDeclaration($type , $CTT.text )}
-	| ID {$type = compiler.returnIDType(compiler.currentFunction, $ID.text)} {$value = compiler.returnIDAddress(compiler.currentFunction, $ID.text)};
+	| ID {$type = compiler.returnIDType(compiler.currentFunction, $ID.text)} {$value = compiler.returnIDAddress(compiler.currentFunction, $ID.text)}
+	| function_call {$type = $function_call.type} {$value = $function_call.value};
+
+retorno: RETURN '(' (todo {compiler.GenerateFunReturns(compiler.returnFuncReturnAddress(compiler.currentFunction))})? ')';
 
 function:
-	function_type FUNCTION ID {compiler.GenerateFunGoto()} {compiler.currentFunction = $ID.text} {compiler.FuncDeclaration(compiler.currentFunction,$function_type.type)} '(' (
+	function_type FUNCTION ID {compiler.currentFunction = $ID.text} {compiler.FuncDeclaration(compiler.currentFunction,$function_type.type)} {compiler.GenerateFunGoto()}  '(' (
 		tipo ID {compiler.VarDeclaration(compiler.currentFunction,$ID.text,$tipo.type,'@parameter')}{compiler.ParamDeclaration(compiler.currentFunction,$tipo.type)} (
 			',' tipo ID {compiler.VarDeclaration(compiler.currentFunction,$ID.text,$tipo.type,'@parameter')}{compiler.ParamDeclaration(compiler.currentFunction,$tipo.type)}
 		)*
-	)? ')' BEGIN func_bloque RETURN '(' (casi_todo {compiler.GenerateFunReturns($function_type.type,compiler.returnFuncReturnAddress(compiler.currentFunction))})? ')' END {compiler.FillFunGoto()} {compiler.RegisterLocalCont(compiler.currentFunction)} {compiler.GenerateEndProc()} {compiler.currentFunction = '@global'} {compiler.memLocal = 20000};
+	)? ')' BEGIN func_bloque END {compiler.GenerateEndProc()}{compiler.RegisterLocalCont(compiler.currentFunction)}{compiler.FillFunGoto()}{compiler.currentFunction = '@global'} {compiler.memLocal = 20000};
 
 function_type
 	returns[Object type]:
@@ -151,10 +153,11 @@ func_bloque: (
 		| asignacion
 		| op_contenedor
 		| function_call
+		| retorno
 	)*;
 
-function_call:
-	ID {compiler.GenerateEra($ID.text)} '(' (casi_todo {compiler.GenerateParameter(compiler.ReturnParams($ID.text),$ID.text)} (',' casi_todo {compiler.GenerateParameter(compiler.ReturnParams($ID.text),$ID.text)})*)? ')' {compiler.VerifyParameters(compiler.ReturnParams($ID.text),$ID.text)}{compiler.addValueToStack(compiler.returnFuncReturnAddress($ID.text),compiler.returnFuncReturnType($ID.text))};
+function_call returns[Object type, value]:
+	ID {compiler.GenerateEra($ID.text)} {$value = compiler.returnFuncReturnAddress($ID.text)} {$type = compiler.returnFuncReturnType($ID.text)} '(' (casi_todo {compiler.GenerateParameter(compiler.ReturnParams($ID.text),$ID.text)} (',' casi_todo {compiler.GenerateParameter(compiler.ReturnParams($ID.text),$ID.text)})*)? ')' {compiler.VerifyParameters(compiler.ReturnParams($ID.text),$ID.text)};
 
 contenedor: '[' {compiler.GenerateEmptyContainer(compiler.currentFunction)} ( mega_expresion {compiler.GenerateFillContainer()} (',' mega_expresion {compiler.GenerateFillContainer()})*)? ']' {compiler.RegisterContainer()};
 

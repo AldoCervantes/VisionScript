@@ -1,22 +1,11 @@
-container a = [1,1.1,"A",False,True]
+number function funcionFibonacci(number num)
+begin
+    if num equal 0 or num equal 1
+    begin
+        return(num)
+    else
+        return(funcionFibonacci(num - 1) + funcionFibonacci(num - 2))
+    end
+end
 
-number b = a.get(0)
-print(b)
-
-number c = a.get(1)
-print(c)
-
-text d = a.get(2)
-print(d)
-
-bool e = a.get(3)
-print(e)
-
-bool f = a.get(4)
-print(f)
-
-
-
-a.insert(-3,10000)
-print(a)
-
+print(funcionFibonacci(1))

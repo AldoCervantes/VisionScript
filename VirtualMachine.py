@@ -8,6 +8,9 @@ class VirtualMachine:
         self.Cuadruplos = []
         self.currentCuad = 0
         self.keyToType = { 101:'number', 102:'text', 103:'bool', 104:'container' }
+        self.FuncitonJumps = []
+        self.currentLocal = []
+
     #Funcion que rellena los arreglos de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
         for x in range(0, GlobalCont):
@@ -44,7 +47,7 @@ class VirtualMachine:
         if direc >= 10000 and direc < 20000: #memGlobal
             return self.Global[direc - 10000]
         elif direc >= 20000 and direc < 30000: #memLocal
-            return self.Local[direc - 20000]
+            return self.currentLocal[direc - 20000]
         elif direc >= 30000 and direc < 40000: #memConst
             return self.Constante[direc - 30000]
         else:
@@ -56,7 +59,7 @@ class VirtualMachine:
         if direc >= 10000 and direc < 20000: #memGlobal
             self.Global[direc - 10000] = value
         elif direc >= 20000 and direc < 30000: #memLocal
-            self.Local[direc - 20000] = value
+            self.Local[-1][direc - 20000] = value
         elif direc >= 30000 and direc < 40000: #memConst
             self.Constante[direc - 30000] = value
         else:
@@ -194,6 +197,7 @@ class VirtualMachine:
             self.setValue(cuadruplo[3], temp)
         else:
             print("#Read Error: La variable no tiene un tipo registrado",temporal)
+            sys.exit()
 
     #Funcion de que agrega un elemento a un arreglo ya existente ['append',value,-1,self.CurrentCotainer]
     def AppendElement(self,cuadruplo): 
@@ -202,7 +206,7 @@ class VirtualMachine:
         if direc >= 10000 and direc < 20000: #memGlobal
             self.Global[direc - 10000].append(value)
         elif direc >= 20000 and direc < 30000: #memLocal
-            self.Local[direc - 20000].append(value)
+            self.Local[-1][direc - 20000].append(value)
         elif direc >= 30000 and direc < 40000: #memConst
             self.Constante[direc - 30000].append(value)
         else:
@@ -210,7 +214,7 @@ class VirtualMachine:
             sys.exit()
 
     #Funcion que concatena dos contenedores y almacena el resultado en la variable dicha por el cuadruplo
-    #[SemanticCube.opToKey['concat'],LeftContainer,RightContainer,result]
+    #['concant',LeftContainer,RightContainer,result]
     def ConcatContainers(self,cuadruplo):
         LeftContainer = self.getValue(cuadruplo[1])
         RightContainer = self.getValue(cuadruplo[2])
@@ -241,8 +245,8 @@ class VirtualMachine:
             self.Global[direc - 10000].insert(index, element)
         elif direc >= 20000 and direc < 30000: #memLocal
             if op == 27:
-                index = len(self.Local[direc - 20000])
-            self.Local[direc - 20000].insert(index, element)
+                index = len(self.Local[-1][direc - 20000])
+            self.Local[-1][direc - 20000].insert(index, element)
         elif direc >= 30000 and direc < 40000: #memConst
             if op == 27:
                 index = len(self.Constante[direc - 30000])
@@ -276,10 +280,10 @@ class VirtualMachine:
                     sys.exit()
         elif direc >= 20000 and direc < 30000: #memLocal
             if op == 32: #lenght
-                self.setValue(result,len(self.Local[direc - 20000]))
+                self.setValue(result,len(self.currentLocal[direc - 20000]))
             else:
                 try:
-                    self.setValue(result,self.Local[direc - 20000][index])
+                    self.setValue(result,self.currentLocal[direc - 20000][index])
                 except:
                     print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
                     sys.exit()
@@ -296,6 +300,35 @@ class VirtualMachine:
             print('#OpContenedorReturns Error: la direceccion',direc,'no es valida.')
             sys.exit()
 
+    #Funcion que realiza el ERA (Generacion de un espacio de memoria para dicha funcion) 
+    def ERA(self,cuadruplo): #[SemanticCube.opToKey['ERA'],self.funDirectory[functionId][4],-1,functionId]
+        localMemSpace = cuadruplo[1]
+        memLocal = []
+        for x in range(0, localMemSpace):
+            memLocal.append(0)
+        self.Local.append(memLocal)
+
+    #Funcion que asigna el valor a un parametro
+    def PARAM(self,cuadruplo): #['param',value,valueType,20000+self.paramCounter]
+        self.Local[-1][cuadruplo[3]] = self.getValue(cuadruplo[1])
+
+    #Funcion que realiza el gosub
+    def GOSUB(self,cuadruplo):
+        self.currentLocal = self.Local[-1]
+        self.FuncitonJumps.append(self.currentCuad)
+        self.currentCuad = cuadruplo[3] - 1
+
+    #Funcion que realiza el ENDPROC
+    def ENDPROC(self,cuadruplo):
+        self.Local.pop()
+        if len(self.Local) > 0:
+            self.currentLocal = self.Local[-1] 
+        self.currentCuad = self.FuncitonJumps.pop()
+
+    #Funcion que realiza la asignacion de un return ['return',VarType,value,returnDir]
+    def RETURN(self,cuadruplo):
+        value = self.getValue(cuadruplo[2])
+        self.setValue(cuadruplo[3],value)
 
     def run(self):
         while self.Cuadruplos[self.currentCuad][0] != 777:
@@ -317,13 +350,13 @@ class VirtualMachine:
                 self.Write(cuadruplo)
             elif op == 19:
                 self.Read(cuadruplo)
-            elif op == 'return':
+            elif op == 20:
                 self.RETURN(cuadruplo)
-            elif op == 'ERA':
+            elif op == 21:
                 self.ERA(cuadruplo)
-            elif op == 'param':
+            elif op == 22:
                 self.PARAM(cuadruplo)
-            elif op == 'gosub':
+            elif op == 23:
                 self.GOSUB(cuadruplo)
             elif op == 24:
                 self.AppendElement(cuadruplo)
@@ -335,6 +368,8 @@ class VirtualMachine:
                 self.OpContenedorReturns(cuadruplo)
             elif op == 33:
                 self.InicializaContenedor(cuadruplo)
+            elif op == 34:
+                self.ENDPROC(cuadruplo)
             else:
                 print('#run Error: cuadruplo invalido: ')
                 print(cuadruplo)

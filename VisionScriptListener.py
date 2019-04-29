@@ -185,6 +185,15 @@ class VisionScriptListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by VisionScriptParser#retorno.
+    def enterRetorno(self, ctx:VisionScriptParser.RetornoContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#retorno.
+    def exitRetorno(self, ctx:VisionScriptParser.RetornoContext):
+        pass
+
+
     # Enter a parse tree produced by VisionScriptParser#function.
     def enterFunction(self, ctx:VisionScriptParser.FunctionContext):
         pass

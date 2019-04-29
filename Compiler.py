@@ -42,10 +42,10 @@ class Compiler:
             sys.exit()
         else:
             if FunctionType != 'void':
-                self.funDirectory[functionId] = [FunctionType, {}, [], self.memGlobal, 0]
+                self.funDirectory[functionId] = [FunctionType, {}, [], self.memGlobal, 0,0]
                 self.memGlobal = self.memGlobal + 1
             else:
-                self.funDirectory[functionId] = [FunctionType, {}, [],-1]
+                self.funDirectory[functionId] = [FunctionType, {}, [],-1,0,0]
 
     #Funcion que sirve para registrar los parametros
     def ParamDeclaration(self,functionId, ParamType):
@@ -177,6 +177,8 @@ class Compiler:
         if functionId in self.funDirectory:
             return self.funDirectory[functionId][3]
         else:
+            print('#returnFuncReturnAddress Error: La funcion',functionId,'no existe')
+            sys.exit()
             return -999
     
     #Funcion que regresa el tipo de una funcion
@@ -184,6 +186,8 @@ class Compiler:
         if functionId in self.funDirectory:
             return self.funDirectory[functionId][0]
         else:
+            print('#returnFuncReturnType Error: La funcion',functionId,'no existe')
+            sys.exit()
             return 'error'
     
     #Funcion que registra cuantas variables locales tiene una funcion
@@ -320,7 +324,8 @@ class Compiler:
         self.POper.pop()
 
     #Funcion para generar los cuadruplos de los RETURNS de las funciones
-    def GenerateFunReturns(self,funcType,returnDir):
+    def GenerateFunReturns(self,returnDir):
+        funcType = self.funDirectory[self.currentFunction][0]
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             VarType = self.PTypes.pop()
             value = self.PilaO.pop()
@@ -336,6 +341,7 @@ class Compiler:
         cuadruplo = [SemanticCube.opToKey['Goto'],-1,-1,-1]
         self.Quad.append(cuadruplo)
         self.PJumps.append(len(self.Quad) - 1)
+        self.funDirectory[self.currentFunction][5] = len(self.Quad)
 
     #Funcion que llena el Goto de una Funcion
     def FillFunGoto(self):
@@ -443,7 +449,7 @@ class Compiler:
                 value = self.PilaO.pop()
                 if self.paramCounter < len(parametros):
                     if parametros[self.paramCounter] == valueType:
-                        cuadruplo = [SemanticCube.opToKey['param'],value,SemanticCube.TypeToKey[valueType],20000+self.paramCounter]
+                        cuadruplo = [SemanticCube.opToKey['param'],value,SemanticCube.TypeToKey[valueType],self.paramCounter]
                         self.Quad.append(cuadruplo)
                     else:
                         print('#GenerateParameter Error: El tipo del parametro',self.paramCounter+1,'es',parametros[self.paramCounter],'y el tipo que se esta pasando es',valueType)
@@ -459,7 +465,7 @@ class Compiler:
     #Funcion que revisa si se mandaron todos los parametros y ademas resetea el contador de parametros y hace el GOSUB
     def VerifyParameters(self, parametros, funcionId):
         if len(parametros) == self.paramCounter:
-            cuadruplo = [SemanticCube.opToKey['gosub'],-1,-1,funcionId]
+            cuadruplo = [SemanticCube.opToKey['gosub'],-1,-1,self.funDirectory[funcionId][5]]
             self.Quad.append(cuadruplo)
         else:
             print('#VerifyParameters Error: faltan',len(parametros) - self.paramCounter,'parametro(s) an la llamada a la funcion',funcionId)
