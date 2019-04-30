@@ -130,14 +130,14 @@ ct
 	| ID {$type = compiler.returnIDType(compiler.currentFunction, $ID.text)} {$value = compiler.returnIDAddress(compiler.currentFunction, $ID.text)}
 	| {compiler.InsertParentesis()} function_call {$type = $function_call.type} {$value = $function_call.value} {compiler.RemoveParentesis()};
 
-retorno: RETURN '(' (todo {compiler.GenerateFunReturns(compiler.returnFuncReturnAddress(compiler.currentFunction))})? ')';
+retorno: RETURN '(' todo {compiler.GenerateFunReturns(compiler.returnFuncReturnAddress(compiler.currentFunction))} ')';
 
 function:
 	function_type FUNCTION ID {compiler.currentFunction = $ID.text} {compiler.FuncDeclaration(compiler.currentFunction,$function_type.type)} {compiler.GenerateFunGoto()}  '(' (
 		tipo ID {compiler.VarDeclaration(compiler.currentFunction,$ID.text,$tipo.type,'@parameter')}{compiler.ParamDeclaration(compiler.currentFunction,$tipo.type)} (
 			',' tipo ID {compiler.VarDeclaration(compiler.currentFunction,$ID.text,$tipo.type,'@parameter')}{compiler.ParamDeclaration(compiler.currentFunction,$tipo.type)}
 		)*
-	)? ')' BEGIN func_bloque END {compiler.GenerateEndProc()}{compiler.RegisterLocalCont(compiler.currentFunction)}{compiler.FillFunGoto()}{compiler.currentFunction = '@global'} {compiler.memLocal = 20000};
+	)? ')' BEGIN func_bloque END {compiler.verifyReturn()} {compiler.GenerateEndProc()}{compiler.RegisterLocalCont(compiler.currentFunction)}{compiler.FillFunGoto()}{compiler.currentFunction = '@global'} {compiler.memLocal = 20000};
 
 function_type
 	returns[Object type]:

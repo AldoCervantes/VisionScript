@@ -23,7 +23,7 @@ begin
    
     print(" ")
 
-    print("Quieres hacer otro calculo?")
+    print("Queres hacer otro calculo?")
     read(again)
     print(" ")
 end

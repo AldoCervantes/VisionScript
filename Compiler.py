@@ -24,6 +24,7 @@ class Compiler:
         self.paramCounter = 0 #Contador de Parametros de una funcion
         self.CurrentCotainer = 0 #Flag que indica la direccion del contenedor actual
         self.FunLocalMems = {}
+        self.haveReturn = False
 
     #Funcion que regresa una direccion de memorial temporal relativa a el contexto donde se este usando
     def returnTemp(self,functionId):
@@ -334,6 +335,15 @@ class Compiler:
     #Funcion para generar los cuadruplos de los RETURNS de las funciones
     def GenerateFunReturns(self,returnDir):
         funcType = self.funDirectory[self.currentFunction][0]
+        self.haveReturn = True
+        if self.currentFunction == '@global':
+            print("#GenerateFunReturns Error: Existe un return() que no forma parte de una funcion")
+            sys.exit()
+        else:
+            if funcType == 'void':
+                print('#GenerateFunReturns Error: Una funcion void no debe tener retorno')  
+                sys.exit()  
+
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             VarType = self.PTypes.pop()
             value = self.PilaO.pop()
@@ -343,6 +353,24 @@ class Compiler:
             else:
                 print('#GenerateFunReturns Error: Se esta intentando retornar un valor de tipo',VarType,'de una funcion tipo',funcType)
                 sys.exit()
+            
+            cuadruplo = [SemanticCube.opToKey['ENDPROC'],-1,-1,-1]
+            self.Quad.append(cuadruplo)
+        
+
+
+    #Funcion que valida que una funcion distinta a void tenga por lo menos un retorno
+    def verifyReturn(self):
+        funcType = self.funDirectory[self.currentFunction][0]
+        if funcType != 'void':
+            if self.haveReturn == False:
+                print('#verifyReturn Error: La funcion',self.currentFunction,' de tipo',funcType,'necesita por lo menos un return()')
+                sys.exit()
+        elif funcType == 'void' and self.haveReturn:
+            print('#verifyReturn Error: La funcion',self.currentFunction,' de tipo',funcType,'no debe tener return()')
+            sys.exit()
+        self.haveReturn = False
+
 
     #Funcion que genera el Goto de una Funcion
     def GenerateFunGoto(self):

@@ -114,10 +114,16 @@ number y = a + b
 TODO: 
 X Validar que el tipo de valor que regresa un op_contenedor sea igual al de la variable donde se va a guardar
 
-*Hacer todo los relacionado a Funciones
+XHacer todo los relacionado a Funciones
 Pasos:
 return => Es guardar el valor en la variable
 ERA => Es generar un arreglo del tamaño que dice el era en la pila de Locales
 param => es asignar el valor a la variable de la funcion
 gosub => Es hacer un goto a la linea donde esta la funcion
 ENDPROC => es hacer un pop a la pila de locales
+
+X VALIDAR QUE LAS FUNCIONES VOID NO TENGAN RETURN
+X VALIDAR QUE LAS FUNCIONES QUE NO SEAN VOID TENGAN POR LO MENOS UN RETURN
+X VALIDAR QUE NO EXISTAN VOIDS FUERA DE FUNCIONES
+X HACER QUE LAS FUNCTION CALLS PUEDAN SER USADAS COMO ELEMENTOS DE UNA MEGA_EXPRESION
+- HACER QUE LAS OP_CONTAINER_RETURN PUEDAN SER USADAS COMO ELEMENTOS DE UNA MEGA_EXPRESION
