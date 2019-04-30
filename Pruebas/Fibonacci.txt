@@ -4,10 +4,10 @@ begin
     begin
         return(num)
     else
-        return( (funcionFibonacci(num - 1)) + (funcionFibonacci(num -2)) )
+        return(funcionFibonacci(num - 1) + funcionFibonacci(num -2))
     end
 end
 
-print(funcionFibonacci(4))
+print(funcionFibonacci(12))
 
 

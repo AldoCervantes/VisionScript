@@ -11,6 +11,7 @@ class VirtualMachine:
         self.FuncitonJumps = []
         self.FunSpaceMemTable = {}
         self.newMemLocal = []
+        self.returnMem = []
 
     #Funcion que rellena los arreglos de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
@@ -51,6 +52,8 @@ class VirtualMachine:
             return self.Local[-1][direc - 20000]
         elif direc >= 30000 and direc < 40000: #memConst
             return self.Constante[direc - 30000]
+        elif direc == 99999:
+            return self.returnMem.pop()
         else:
             print('#getValue Error: la direceccion',direc,'no es valida.')
             sys.exit()
@@ -63,6 +66,8 @@ class VirtualMachine:
             self.Local[-1][direc - 20000] = value
         elif direc >= 30000 and direc < 40000: #memConst
             self.Constante[direc - 30000] = value
+        elif direc == 99999:
+            self.returnMem.append(value)
         else:
             print('#setValue Error: la direceccion',direc,'no es valida.')
             sys.exit()
@@ -210,6 +215,8 @@ class VirtualMachine:
             self.Local[-1][direc - 20000].append(value)
         elif direc >= 30000 and direc < 40000: #memConst
             self.Constante[direc - 30000].append(value)
+        elif direc == 99999:
+            self.returnMem[-1].append(value)
         else:
             print('#AppendElement Error: la direceccion',direc,'no es valida.')
             sys.exit()
@@ -252,6 +259,10 @@ class VirtualMachine:
             if op == 27:
                 index = len(self.Constante[direc - 30000])
             self.Constante[direc - 30000].insert(index, element)
+        elif direc == 99999:
+            if op == 27:
+                index = len(self.returnMem[-1])
+            self.returnMem[-1].insert(index,element)
         else:
             print('#OpContenedor Error: la direceccion',direc,'no es valida.')
             sys.exit()
@@ -297,6 +308,15 @@ class VirtualMachine:
                 except:
                     print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
                     sys.exit()
+        elif direc == 99999: #memConst
+            if op == 32: #lenght
+               self.setValue(result,len(self.returnMem[-1]))
+            else:  
+                try:
+                    self.setValue(result,self.returnMem[-1][index])
+                except:
+                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
+                    sys.exit()
         else:
             print('#OpContenedorReturns Error: la direceccion',direc,'no es valida.')
             sys.exit()
@@ -331,7 +351,6 @@ class VirtualMachine:
     def run(self):
         while self.Cuadruplos[self.currentCuad][0] != 777:
             cuadruplo = self.Cuadruplos[self.currentCuad]
-            print(cuadruplo)
             op = cuadruplo[0]
             if op == 0:
                 self.Assignacion(cuadruplo)

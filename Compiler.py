@@ -182,12 +182,12 @@ class Compiler:
     #Funcion que regresa la direccion de memoria para el retorno de una funcion
     def returnFuncReturnAddress(self,functionId):
         if functionId in self.funDirectory:
-            return self.funDirectory[functionId][3]
+            return 99999
         else:
             print('#returnFuncReturnAddress Error: La funcion',functionId,'no existe')
             sys.exit()
             return -999
-    
+
     #Funcion que regresa el tipo de una funcion
     def returnFuncReturnType(self,functionId):
         if functionId in self.funDirectory:

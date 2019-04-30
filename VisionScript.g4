@@ -128,7 +128,7 @@ ct
 	| CTBT {$type = 'bool'} {$value = compiler.ConstDeclaration($type , $CTBT.text )}
 	| CTT {$type = 'text'} {$value = compiler.ConstDeclaration($type , $CTT.text )}
 	| ID {$type = compiler.returnIDType(compiler.currentFunction, $ID.text)} {$value = compiler.returnIDAddress(compiler.currentFunction, $ID.text)}
-	| function_call {$type = $function_call.type} {$value = $function_call.value};
+	| {compiler.InsertParentesis()} function_call {$type = $function_call.type} {$value = $function_call.value} {compiler.RemoveParentesis()};
 
 retorno: RETURN '(' (todo {compiler.GenerateFunReturns(compiler.returnFuncReturnAddress(compiler.currentFunction))})? ')';
 

@@ -4,13 +4,13 @@ begin
     begin
         return(num)
     else
-        return( (funcionFibonacci(num - 1)) + (funcionFibonacci(num -2)) )
+        return( funcionFibonacci(num - 1) + funcionFibonacci(num -2))
     end
 end
 
 number function funcion2(number n)
 begin
-    return( (funcionFibonacci(4)) + (funcionFibonacci(1)) )
+    return( funcionFibonacci(4) + funcionFibonacci(1) )
 end
 
-print( (funcion2(4)) + (funcion2(4)))
+print( (funcion2(1)) + (funcion2(0)))
