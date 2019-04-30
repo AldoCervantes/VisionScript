@@ -8,9 +8,6 @@ begin
     end
 end
 
-number function funcion2(number n)
-begin
-    return( (funcionFibonacci(4)) + (funcionFibonacci(1)) )
-end
+print(funcionFibonacci(4))
 
-print( (funcion2(4)) + (funcion2(4)))
+

@@ -309,7 +309,7 @@ class VirtualMachine:
             self.newMemLocal.append(0)
 
     #Funcion que asigna el valor a un parametro
-    def PARAM(self,cuadruplo): #['param',value,valueType,20000+self.paramCounter]
+    def PARAM(self,cuadruplo): #['param',value,valueType,self.paramCounter]
         self.newMemLocal[cuadruplo[3]] = self.getValue(cuadruplo[1])
 
     #Funcion que realiza el gosub
@@ -331,6 +331,7 @@ class VirtualMachine:
     def run(self):
         while self.Cuadruplos[self.currentCuad][0] != 777:
             cuadruplo = self.Cuadruplos[self.currentCuad]
+            print(cuadruplo)
             op = cuadruplo[0]
             if op == 0:
                 self.Assignacion(cuadruplo)
