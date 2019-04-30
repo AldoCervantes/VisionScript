@@ -1,12 +1,11 @@
 number function join(number x , number y, number z, number r)
 begin
-    return()
+    return(x + y)
 end
 
 number function less(number x, number y)
 begin
-    join(x,y,2,3)
-    return()
+    return(join(5,5,x,y))
 end
 
 number function add(number x, text y, bool z, container o)
@@ -16,7 +15,7 @@ begin
     print(a)
     a = a + x - 1
     print(a)
-    return(1)
+    return(less(1,2) + less(1,2))
 end
 
 

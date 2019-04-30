@@ -9,8 +9,8 @@ class VirtualMachine:
         self.currentCuad = 0
         self.keyToType = { 101:'number', 102:'text', 103:'bool', 104:'container' }
         self.FuncitonJumps = []
-        self.currentLocal = []
         self.FunSpaceMemTable = {}
+        self.newMemLocal = []
 
     #Funcion que rellena los arreglos de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
@@ -48,7 +48,7 @@ class VirtualMachine:
         if direc >= 10000 and direc < 20000: #memGlobal
             return self.Global[direc - 10000]
         elif direc >= 20000 and direc < 30000: #memLocal
-            return self.currentLocal[direc - 20000]
+            return self.Local[-1][direc - 20000]
         elif direc >= 30000 and direc < 40000: #memConst
             return self.Constante[direc - 30000]
         else:
@@ -67,7 +67,7 @@ class VirtualMachine:
             print('#setValue Error: la direceccion',direc,'no es valida.')
             sys.exit()
 
-    #Funcion que realiza una asignacion de un valor a una variable [=,value,valueType,varId]
+    #Funcion que realiza una asignacion de un valor a una variable  a = 10 => [=,10,[number,number],a]
     def Assignacion(self,cuadruplo):
         value = self.getValue(cuadruplo[1])
         targetType = self.keyToType[cuadruplo[2][1]]
@@ -98,9 +98,6 @@ class VirtualMachine:
         if op == 1:
             result = arg1 + arg2
         elif op == 2:
-            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RESTA")
-            print(arg1,"-",arg2)
-            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
             result = arg1 - arg2
         elif op == 3:
             result = arg1 * arg2
@@ -173,7 +170,7 @@ class VirtualMachine:
             #FALTA HACER EL BRAILLE
             print(value)
 
-    #Funcion que lee de la terminal y guarda su valor en una variable  [SemanticCube.opToKey[flag],SemanticCube.TypeToKey[VarType],-1,self.PilaO.pop()]
+    #Funcion que lee de la terminal y guarda su valor en una variable  ['read',tipo de a,-1,dir de a]  number a = 0 read(a)
     def Read(self, cuadruplo):
         temporal = input()
         tipo = cuadruplo[1]
@@ -204,7 +201,7 @@ class VirtualMachine:
             sys.exit()
 
     #Funcion de que agrega un elemento a un arreglo ya existente ['append',value,-1,self.CurrentCotainer]
-    def AppendElement(self,cuadruplo): 
+    def AppendElement(self,cuadruplo):
         value = self.getValue(cuadruplo[1])
         direc = cuadruplo[3]
         if direc >= 10000 and direc < 20000: #memGlobal
@@ -284,10 +281,10 @@ class VirtualMachine:
                     sys.exit()
         elif direc >= 20000 and direc < 30000: #memLocal
             if op == 32: #lenght
-                self.setValue(result,len(self.currentLocal[direc - 20000]))
+                self.setValue(result,len(self.Local[-1][direc - 20000]))
             else:
                 try:
-                    self.setValue(result,self.currentLocal[direc - 20000][index])
+                    self.setValue(result,self.Local[-1][direc - 20000][index])
                 except:
                     print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
                     sys.exit()
@@ -307,35 +304,23 @@ class VirtualMachine:
     #Funcion que realiza el ERA (Generacion de un espacio de memoria para dicha funcion) 
     def ERA(self,cuadruplo): #[SemanticCube.opToKey['ERA'],-1,-1,functionId]
         localMemSpace = self.FunSpaceMemTable[cuadruplo[3]]
-        memLocal = []
+        self.newMemLocal = []
         for x in range(0, localMemSpace):
-            memLocal.append(0)
-        self.Local.append(memLocal)
+            self.newMemLocal.append(0)
 
     #Funcion que asigna el valor a un parametro
     def PARAM(self,cuadruplo): #['param',value,valueType,20000+self.paramCounter]
-        print('$$$$$$$$$$$$$$$$$$$$$$$$$')
-        print('LOCAL:')
-        print(self.Local)
-        print('Current:')
-        print(self.currentLocal)
-        print('$$$$$$$$$$$$$$$$$$$$$$$$$')
-        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ PARAM")
-        print(self.getValue(cuadruplo[1]))
-        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-        self.Local[-1][cuadruplo[3]] = self.getValue(cuadruplo[1])
+        self.newMemLocal[cuadruplo[3]] = self.getValue(cuadruplo[1])
 
     #Funcion que realiza el gosub
     def GOSUB(self,cuadruplo):
-        self.currentLocal = self.Local[-1]
+        self.Local.append(self.newMemLocal)
         self.FuncitonJumps.append(self.currentCuad)
         self.currentCuad = cuadruplo[3] - 1
 
     #Funcion que realiza el ENDPROC
     def ENDPROC(self,cuadruplo):
         self.Local.pop()
-        if len(self.Local) > 0:
-            self.currentLocal = self.Local[-1] 
         self.currentCuad = self.FuncitonJumps.pop()
 
     #Funcion que realiza la asignacion de un return ['return',VarType,value,returnDir]
@@ -346,7 +331,6 @@ class VirtualMachine:
     def run(self):
         while self.Cuadruplos[self.currentCuad][0] != 777:
             cuadruplo = self.Cuadruplos[self.currentCuad]
-            print(cuadruplo)
             op = cuadruplo[0]
             if op == 0:
                 self.Assignacion(cuadruplo)
