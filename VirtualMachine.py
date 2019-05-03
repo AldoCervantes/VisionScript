@@ -101,18 +101,29 @@ class VirtualMachine:
         arg2 = self.getValue(cuadruplo[2])
 
         if op == 1:
-            result = arg1 + arg2
-        elif op == 2:
-            result = arg1 - arg2
-        elif op == 3:
-            result = arg1 * arg2
-        elif op == 4:
-            if(arg2 == 0):
-                print('#OperacionesAritmeticas Error:',arg1,'/',arg2,'genera error.')
+            try:
+                result = arg1 + arg2
+            except:
+                print('# Error: la operacion',arg1,'+',arg2,'no es valida')
                 sys.exit()
-            else: 
+        elif op == 2:
+            try:
+                result = arg1 - arg2
+            except:
+                print('# Error: la operacion',arg1,'-',arg2,'no es valida')
+                sys.exit()
+        elif op == 3:
+            try:
+                result = arg1 * arg2
+            except:
+                print('# Error: la operacion',arg1,'*',arg2,'no es valida')
+                sys.exit()
+        elif op == 4:
+            try:
                 result = arg1 / arg2
-        
+            except:
+                print('# Error: la operacion',arg1,'/',arg2,'no es valida')
+                sys.exit()
         self.setValue(cuadruplo[3], result)
 
     #Funcion que realiza operaciones Logicas > , < , >= , <= , == , != , and , or [>,arg1,arg2,resultado]
@@ -122,22 +133,53 @@ class VirtualMachine:
         arg2 = self.getValue(cuadruplo[2])
             
         if op == 5:
-            result = arg1 > arg2
+            try:
+                result = arg1 > arg2
+            except:
+                print('# Error: la operacion',arg1,'>',arg2,'no es valida')
+                sys.exit()
         elif op == 6:
-            result = arg1 < arg2
+            try:
+                result = arg1 < arg2
+            except:
+                print('# Error: la operacion',arg1,'<',arg2,'no es valida')
+                sys.exit()
         elif op == 7:
-            result = arg1 >= arg2
+            try:
+                result = arg1 >= arg2
+            except:
+                print('# Error: la operacion',arg1,'>=',arg2,'no es valida')
+                sys.exit()
         elif op == 8:
-            result = arg1 <= arg2
+            try:
+                result = arg1 <= arg2
+            except:
+                print('# Error: la operacion',arg1,'<=',arg2,'no es valida')
+                sys.exit()
         elif op == 9:
-            result = arg1 == arg2
+            try:
+                result = arg1 == arg2
+            except:
+                print('# Error: la operacion',arg1,'equal',arg2,'no es valida')
+                sys.exit()
         elif op == 10:
-            result = arg1 != arg2
+            try:
+                result = arg1 != arg2
+            except:
+                print('# Error: la operacion',arg1,'not_equal',arg2,'no es valida')
+                sys.exit()
         elif op == 11:
-            result = arg1 and arg2
+            try:
+                result = arg1 and arg2
+            except:
+                print('# Error: la operacion',arg1,'and',arg2,'no es valida')
+                sys.exit()
         elif op == 12:
-            result = arg1 or arg2 
-        
+            try:
+                result = arg1 or arg2 
+            except:
+                print('# Error: la operacion',arg1,'or',arg2,'no es valida')
+                sys.exit()
         self.setValue(cuadruplo[3], result)
 
     #Funcion que se encarga de validar la expresion si es y cambia el self.currentCuad al cuadruplo que dicta el GotoF 
@@ -238,6 +280,11 @@ class VirtualMachine:
         op = cuadruplo[0]
         if op == 26: #insert [SemanticCube.opToKey[flag],index,element,varId]
             index = self.getValue(cuadruplo[1])
+            if type(index) == int or type(index) == float:
+                index = int(float(index))
+            else:
+                print("#OpContenedor Error: El indice",index,"no es de tipo number")
+                sys.exit()
             element = self.getValue(cuadruplo[2])
         elif op == 27: #insert_back [SemanticCube.opToKey[flag],value,-1,varId]
             element = self.getValue(cuadruplo[1])
@@ -330,7 +377,25 @@ class VirtualMachine:
 
     #Funcion que asigna el valor a un parametro
     def PARAM(self,cuadruplo): #['param',value,valueType,self.paramCounter]
-        self.newMemLocal[cuadruplo[3]] = self.getValue(cuadruplo[1])
+        value = self.getValue(cuadruplo[1])
+        targetType = self.keyToType[cuadruplo[2][1]]
+        if cuadruplo[2][0] == 106:
+            if type(value) == int or type(value) == float:
+                valueType = 'number'
+            elif type(value) == bool:
+                valueType = 'bool'
+            elif type(value) == str:
+                valueType = 'text'
+            elif type(value) == list:
+                valueType = 'container'
+        else:
+            valueType = self.keyToType[cuadruplo[2][0]]
+
+        if valueType == targetType:
+            self.newMemLocal[cuadruplo[3]] = self.getValue(cuadruplo[1])
+        else:
+            print('#PARAM Error:Se esta intentando mandar un valor de tipo',valueType,'a un parametro de tipo',targetType)
+            sys.exit()
 
     #Funcion que realiza el gosub
     def GOSUB(self,cuadruplo):

@@ -43,8 +43,7 @@ todo:
 casi_todo: 
 	mega_expresion
 	| concat_contenedor
-	| contenedor
-	| op_contenedor_returns;
+	| contenedor;
 
 asignacion:
 	ID '=' todo {compiler.VarAssignment(compiler.currentFunction,$ID.text,$todo.text)} 
@@ -128,7 +127,8 @@ ct
 	| CTBT {$type = 'bool'} {$value = compiler.ConstDeclaration($type , $CTBT.text )}
 	| CTT {$type = 'text'} {$value = compiler.ConstDeclaration($type , $CTT.text )}
 	| ID {$type = compiler.returnIDType(compiler.currentFunction, $ID.text)} {$value = compiler.returnIDAddress(compiler.currentFunction, $ID.text)}
-	| {compiler.InsertParentesis()} function_call {$type = $function_call.type} {$value = $function_call.value} {compiler.RemoveParentesis()};
+	| {compiler.InsertParentesis()} function_call {$type = $function_call.type} {$value = $function_call.value} {compiler.RemoveParentesis()}
+	| {compiler.InsertParentesis()} op_contenedor_returns {$type = 'op_container'} {$value = $op_contenedor_returns.result} {compiler.RemoveParentesis()};
 
 retorno: RETURN '(' todo {compiler.GenerateFunReturns(compiler.returnFuncReturnAddress(compiler.currentFunction))} ')';
 
@@ -162,9 +162,9 @@ function_call returns[Object type, value]:
 contenedor: '[' {compiler.GenerateEmptyContainer(compiler.currentFunction)} ( mega_expresion {compiler.GenerateFillContainer()} (',' mega_expresion {compiler.GenerateFillContainer()})*)? ']' {compiler.RegisterContainer()};
 
 op_contenedor_returns 
-	returns[Object flag]:
-		ID '.' ( (GET_BACK {$flag = $GET_BACK.text} | GET_FRONT {$flag = $GET_FRONT.text}| LENGTH {$flag = $LENGTH.text}) '(' ')' {compiler.FuncionOPContainer1($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.currentFunction)}
-			|GET {$flag = $GET.text} '(' mega_expresion ')' {compiler.FuncionOPContainer2($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.currentFunction)} );
+	returns[Object flag,result]:
+		ID '.' ( (GET_BACK {$flag = $GET_BACK.text} | GET_FRONT {$flag = $GET_FRONT.text}| LENGTH {$flag = $LENGTH.text}) '(' ')' {$result = compiler.FuncionOPContainer1($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.currentFunction)}
+			|GET {$flag = $GET.text} '(' mega_expresion ')' {$result = compiler.FuncionOPContainer2($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.currentFunction)} );
 
 op_contenedor 
 	returns[Object flag]:

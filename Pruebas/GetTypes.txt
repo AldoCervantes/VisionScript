@@ -19,4 +19,3 @@ print(f)
 
 a.insert(-3,10000)
 print(a)
-

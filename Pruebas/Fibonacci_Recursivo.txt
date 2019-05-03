@@ -8,6 +8,10 @@ begin
     end
 end
 
-print(funcionFibonacci(12))
+number cont = 0
+
+print("Cual es el numero que desea encontrar:")
+read(cont)
+print(funcionFibonacci(cont))
 
 

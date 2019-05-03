@@ -233,7 +233,10 @@ class Compiler:
                     left_operand = self.PilaO.pop()
                     left_type = self.PTypes.pop()
                     operator = self.POper.pop()
-                    result_type = SemanticCube.semanticCube[operator][left_type][right_type]
+                    if left_type == 'op_container' or right_type == 'op_container':
+                        result_type = 'op_container'
+                    else:
+                        result_type = SemanticCube.semanticCube[operator][left_type][right_type]
                     if result_type != 'error':
                         result = self.returnTemp(functionId)
                         cuadruplo = [SemanticCube.opToKey[operator], left_operand, right_operand, result]
@@ -261,7 +264,7 @@ class Compiler:
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             result = self.PilaO.pop()
             exp_type = self.PTypes.pop()
-            if exp_type == 'bool':
+            if exp_type == 'bool' or exp_type == 'op_container':
                 cuadruplo = [SemanticCube.opToKey['GotoF'],result,-1,-1]
                 self.Quad.append(cuadruplo)
                 self.PJumps.append(len(self.Quad) - 1 )
@@ -291,7 +294,7 @@ class Compiler:
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             result = self.PilaO.pop()
             exp_type = self.PTypes.pop()
-            if exp_type == 'bool':
+            if exp_type == 'bool' or exp_type == 'op_container':
                 cuadruplo = [SemanticCube.opToKey['GotoV'],result,-1,-1]
                 self.Quad.append(cuadruplo)
                 self.PJumps.append(len(self.Quad) - 1 )
@@ -347,7 +350,7 @@ class Compiler:
         if len(self.PilaO) > 0 and len(self.PTypes) > 0:
             VarType = self.PTypes.pop()
             value = self.PilaO.pop()
-            if VarType == funcType:
+            if VarType == funcType or VarType == 'op_container':
                 cuadruplo = [SemanticCube.opToKey['return'],SemanticCube.TypeToKey[VarType],value,returnDir]
                 self.Quad.append(cuadruplo)
             else:
@@ -434,8 +437,7 @@ class Compiler:
         # Aqui hay que resaltar que el tipo que se introduce es:
         # "El que se espera, no necesariamente es el tipo del valor que regresa"
         # *** SE TIENE QUE VALIDAR EL TIPO EN LA MAQUINA VIRTUAL ***
-        self.PilaO.append(result)
-        self.PTypes.append('op_container')
+        return result
     
     #Funcion para generar un cuadruplo de get
     def FuncionOPContainer2(self,flag,varId,functionId):
@@ -443,17 +445,16 @@ class Compiler:
             result = self.returnTemp(functionId)
             valueType = self.PTypes.pop()
             value = self.PilaO.pop()
-            if valueType == 'number':
+            if valueType == 'number' or valueType == 'op_container':
                 cuadruplo = [SemanticCube.opToKey[flag],value,varId,result]
                 self.Quad.append(cuadruplo)
                 # Aqui hay que resaltar que el tipo que se introduce es:
                 # "El que se espera, no necesariamente es el tipo del valor que regresa"
                 # *** SE TIENE QUE VALIDAR EL TIPO EN LA MAQUINA VIRTUAL ***
-                self.PilaO.append(result)
-                self.PTypes.append('op_container')
             else:
                 print('#FuncionOPContainer2 Error: El indice proporcionado no es de tipo numerico')
                 sys.exit()
+            return result
     
     #Funcion para generar un cuadruplo de insert_back y insert_front
     def FuncionOPContainer3(self,flag,varId):
@@ -470,7 +471,7 @@ class Compiler:
             elementType = self.PTypes.pop()
             index = self.PilaO.pop()
             indexType = self.PTypes.pop()
-            if indexType == 'number':
+            if indexType == 'number' or indexType == 'op_container':
                 cuadruplo = [SemanticCube.opToKey[flag],index,element,varId]
                 self.Quad.append(cuadruplo)
             else:
@@ -484,8 +485,8 @@ class Compiler:
                 valueType = self.PTypes.pop()
                 value = self.PilaO.pop()
                 if self.paramCounter < len(parametros):
-                    if parametros[self.paramCounter] == valueType:
-                        cuadruplo = [SemanticCube.opToKey['param'],value,SemanticCube.TypeToKey[valueType],self.paramCounter]
+                    if parametros[self.paramCounter] == valueType or valueType == 'op_container':
+                        cuadruplo = [SemanticCube.opToKey['param'],value,[SemanticCube.TypeToKey[valueType],SemanticCube.TypeToKey[parametros[self.paramCounter]]],self.paramCounter]
                         self.Quad.append(cuadruplo)
                     else:
                         print('#GenerateParameter Error: El tipo del parametro',self.paramCounter+1,'es',parametros[self.paramCounter],'y el tipo que se esta pasando es',valueType)
