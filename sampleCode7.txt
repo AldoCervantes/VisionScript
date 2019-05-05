@@ -2,9 +2,9 @@ number a = 10
 
 if a > 1
 begin
-    print(True)
+    braille(True)
 else
-    print(False)
+    braille(False)
 end
 
-print(a>1)
+braille(a>1)

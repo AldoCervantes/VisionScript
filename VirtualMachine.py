@@ -1,4 +1,7 @@
 import sys
+from gtts import gTTS
+from pygame import mixer
+import os
 
 class VirtualMachine:
     def __init__(self):
@@ -207,15 +210,20 @@ class VirtualMachine:
     #Funcion que imprime el valor de un cuadruplo [flag,value,-1,-1]
     def Write(self, cuadruplo):
         op = cuadruplo[0]
-        value = self.getValue(cuadruplo[1])
+        value = str(self.getValue(cuadruplo[1]))
         if op == 16:
             print(value)
         elif op == 17:
-            #FALTA HACER EL HEAR
-            print(value)
+            tts = gTTS(text= value, lang='es')
+            tts.save("audio.mp3")
+            mixer.init()
+            mixer.music.load("audio.mp3")
+            mixer.music.play()
         elif op == 18:
-            #FALTA HACER EL BRAILLE
-            print(value)
+            intab = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"	
+            outtab = " ⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵"
+            transtab = str.maketrans(intab, outtab)
+            print(value.translate(transtab))
 
     #Funcion que lee de la terminal y guarda su valor en una variable  ['read',tipo de a,-1,dir de a]  number a = 0 read(a)
     def Read(self, cuadruplo):
