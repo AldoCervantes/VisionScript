@@ -2,16 +2,16 @@ import sys
 
 class VirtualMachine:
     def __init__(self):
-        self.Global = []
-        self.Local = []
-        self.Constante = []
-        self.Cuadruplos = []
-        self.currentCuad = 0
-        self.keyToType = { 101:'number', 102:'text', 103:'bool', 104:'container' }
-        self.FuncitonJumps = []
-        self.FunSpaceMemTable = {}
-        self.newMemLocal = []
-        self.returnMem = []
+        self.Global = [] #Es el espacio de memoria que almacena el valor de las globales
+        self.Local = [] #Es el espacio de memoria que almacena el valor de las locales
+        self.Constante = [] #Es el espacio de memoria que almacena el valor de las constantes
+        self.Cuadruplos = [] #Es un arreglo que contiene todos los cuadruplos creados por compiler
+        self.currentCuad = 0 #contador de el cuadruplo actual
+        self.keyToType = { 101:'number', 102:'text', 103:'bool', 104:'container' } #Hacer conversiones claves a tipos
+        self.FuncitonJumps = [] #Pila de jumps que se usa con los gosubs
+        self.FunSpaceMemTable = {} #Diccionario que almacena las funciones y su cantidad de variables locales y temporales
+        self.newMemLocal = [] #Es un arreglo que hace referencia al nuevo arreglo creado por los ERA
+        self.returnMem = [] #Es una pila que almacena los valores de los retuns para ser usados por las function calls
 
     #Funcion que rellena los arreglos de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
@@ -278,7 +278,7 @@ class VirtualMachine:
     #Funcion que se encarga de las operaciones de contenedores que no regresan un valor
     def OpContenedor(self,cuadruplo):
         op = cuadruplo[0]
-        if op == 26: #insert [SemanticCube.opToKey[flag],index,element,varId]
+        if op == 26 or op == 35: #insert [SemanticCube.opToKey[flag],index,element,varId]
             index = self.getValue(cuadruplo[1])
             if type(index) == int or type(index) == float:
                 index = int(float(index))
@@ -297,19 +297,31 @@ class VirtualMachine:
         if direc >= 10000 and direc < 20000: #memGlobal
             if op == 27:
                 index = len(self.Global[direc - 10000])
-            self.Global[direc - 10000].insert(index, element)
+            elif op == 35:
+                self.Global[direc - 10000][index] = element
+            else:
+                self.Global[direc - 10000].insert(index, element)
         elif direc >= 20000 and direc < 30000: #memLocal
             if op == 27:
                 index = len(self.Local[-1][direc - 20000])
-            self.Local[-1][direc - 20000].insert(index, element)
+            elif op == 35:
+                self.Local[-1][direc - 20000][index] = element
+            else:
+                self.Local[-1][direc - 20000].insert(index, element)
         elif direc >= 30000 and direc < 40000: #memConst
             if op == 27:
                 index = len(self.Constante[direc - 30000])
-            self.Constante[direc - 30000].insert(index, element)
+            elif op == 35:
+                self.Constante[direc - 30000][index] = element
+            else:
+                self.Constante[direc - 30000].insert(index, element)
         elif direc == 99999:
             if op == 27:
                 index = len(self.returnMem[-1])
-            self.returnMem[-1].insert(index,element)
+            elif op == 35:
+                self.returnMem[-1][index] = element
+            else:
+                self.returnMem[-1].insert(index,element)
         else:
             print('#OpContenedor Error: la direceccion',direc,'no es valida.')
             sys.exit()
@@ -445,7 +457,7 @@ class VirtualMachine:
                 self.AppendElement(cuadruplo)
             elif op == 25:
                 self.ConcatContainers(cuadruplo)
-            elif op >= 26 and op <= 28:
+            elif (op >= 26 and op <= 28) or op == 35:
                 self.OpContenedor(cuadruplo)
             elif op >= 29 and op <= 32:
                 self.OpContenedorReturns(cuadruplo)

@@ -23,7 +23,7 @@ class Compiler:
         self.PJumps = [] #Pila de saltos
         self.paramCounter = 0 #Contador de Parametros de una funcion
         self.CurrentCotainer = 0 #Flag que indica la direccion del contenedor actual
-        self.FunLocalMems = {}
+        self.FunLocalMems = {} #Diccionario que almacena las funciones y su cantidad de variables locales y temporales
         self.haveReturn = False
 
     #Funcion que regresa una direccion de memorial temporal relativa a el contexto donde se este usando
@@ -44,8 +44,7 @@ class Compiler:
             sys.exit()
         else:
             if FunctionType != 'void':
-                self.funDirectory[functionId] = [FunctionType, {}, [], self.memGlobal, 0,0]
-                self.memGlobal = self.memGlobal + 1
+                self.funDirectory[functionId] = [FunctionType, {}, [],0, 0,0]
             else:
                 self.funDirectory[functionId] = [FunctionType, {}, [],-1,0,0]
 

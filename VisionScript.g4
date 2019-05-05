@@ -65,6 +65,7 @@ bloque: (
 		| asignacion
 		| op_contenedor
 		| retorno
+		| function_call
 	)*;
 
 read:
@@ -169,7 +170,7 @@ op_contenedor_returns
 op_contenedor 
 	returns[Object flag]:
 		ID '.' ( (INSERT_BACK {$flag = $INSERT_BACK.text} | INSERT_FRONT {$flag = $INSERT_FRONT.text}) '(' mega_expresion ')' {compiler.FuncionOPContainer3($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text))}
-			| INSERT {$flag = $INSERT.text}'(' mega_expresion ',' mega_expresion ')' {compiler.FuncionOPContainer4($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text))}
+			| (INSERT {$flag = $INSERT.text} | REPLACE {$flag = $REPLACE.text}) '(' mega_expresion ',' mega_expresion ')' {compiler.FuncionOPContainer4($flag,compiler.returnIDAddress(compiler.currentFunction, $ID.text))}
 		);
 
 concat_contenedor: (ID {compiler.InsertIdType(compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.returnIDType(compiler.currentFunction, $ID.text))} | contenedor) (PLUS (ID {compiler.InsertIdType(compiler.returnIDAddress(compiler.currentFunction, $ID.text),compiler.returnIDType(compiler.currentFunction, $ID.text))} | contenedor) {compiler.GenerateConcatContainer(compiler.currentFunction)})+; 
@@ -221,8 +222,6 @@ END: 'end';
 
 REPEAT: 'repeat';
 
-TIMES: 'times';
-
 UNTIL: 'until';
 
 FUNCTION: 'function';
@@ -244,6 +243,8 @@ INSERT: 'insert';
 VOID: 'void';
 
 LENGTH: 'length';
+
+REPLACE: 'replace';
 
 ID: (UPPERCASE | LOWERCASE)+ (
 		UPPERCASE

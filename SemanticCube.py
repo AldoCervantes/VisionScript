@@ -638,7 +638,8 @@ class SemanticCube:
         'get_front':31,
         'length':32,
         '[]':33,
-        'ENDPROC':34
+        'ENDPROC':34,
+        'replace': 35
     }
 
     TypeToKey = {

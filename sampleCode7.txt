@@ -1,0 +1,10 @@
+number a = 10
+
+if a > 1
+begin
+    print(True)
+else
+    print(False)
+end
+
+print(a>1)
