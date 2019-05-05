@@ -1,4 +1,4 @@
-container a = [1,1.1,"A",False,True]
+container a = [1,1.1,"A",false,true]
 
 number b = a.get(0)
 print(b)

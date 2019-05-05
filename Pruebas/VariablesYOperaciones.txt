@@ -12,7 +12,7 @@ bool f = 10 >= 9
 
 bool g = 10 <= 10
 
-bool h = 10 <= 10 and "Aldo" equal "Aldo" or False
+bool h = 10 <= 10 and "Aldo" equal "Aldo" or false
 
 text i = "Aldo"
 

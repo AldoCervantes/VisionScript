@@ -1,4 +1,4 @@
-container a = [False,True,1,2,3,4,5,6,7,"Aldo","$"]
+container a = [false,true,1,2,3,4,5,6,7,"Aldo","$"]
 
 text find = ""
 
@@ -6,9 +6,9 @@ print("De que tipo es el elemento que quires buscar: (T -> Text, N -> Number y B
 read(find)
 
 number num = 0
-bool bo = False
+bool bo = false
 number i = 0
-bool encontrado = False
+bool encontrado = false
 number pos = 0
 
 if find equal "T"
@@ -19,7 +19,7 @@ begin
   begin
     if a.get(i) equal find
     begin
-      encontrado = True
+      encontrado = true
       pos = i
       i = a.length()
     else
@@ -35,7 +35,7 @@ else
     begin
       if a.get(i) equal num
       begin
-        encontrado = True
+        encontrado = true
         pos = i
         i = a.length()
       else
@@ -51,7 +51,7 @@ else
       begin
         if a.get(i) equal bo
         begin
-          encontrado = True
+          encontrado = true
           pos = i
           i = a.length()
         else

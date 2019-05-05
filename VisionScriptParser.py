@@ -235,8 +235,8 @@ class VisionScriptParser ( Parser ):
 
     literalNames = [ "<INVALID>", "'='", "'('", "')'", "','", "'['", "']'", 
                      "'.'", "'read'", "'print'", "'hear'", "'braille'", 
-                     "'if'", "'else'", "'number'", "'text'", "'bool'", "'False'", 
-                     "'True'", "'and'", "'or'", "'equal'", "'not_equal'", 
+                     "'if'", "'else'", "'number'", "'text'", "'bool'", "'false'", 
+                     "'true'", "'and'", "'or'", "'equal'", "'not_equal'", 
                      "'container'", "'begin'", "'end'", "'repeat'", "'until'", 
                      "'function'", "'return'", "'get_back'", "'get_front'", 
                      "'get'", "'insert_back'", "'insert_front'", "'insert'", 

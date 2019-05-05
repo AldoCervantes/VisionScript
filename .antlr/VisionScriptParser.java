@@ -49,7 +49,7 @@ public class VisionScriptParser extends Parser {
 	private static final String[] _LITERAL_NAMES = {
 		null, "'='", "'('", "')'", "','", "'['", "']'", "'.'", "'read'", "'print'", 
 		"'hear'", "'braille'", "'if'", "'else'", "'number'", "'text'", "'bool'", 
-		"'False'", "'True'", "'and'", "'or'", "'equal'", "'not_equal'", "'container'", 
+		"'false'", "'true'", "'and'", "'or'", "'equal'", "'not_equal'", "'container'", 
 		"'begin'", "'end'", "'repeat'", "'until'", "'function'", "'return'", "'get_back'", 
 		"'get_front'", "'get'", "'insert_back'", "'insert_front'", "'insert'", 
 		"'void'", "'length'", "'replace'", null, null, null, "'+'", "'-'", "'/'", 

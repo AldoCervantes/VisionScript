@@ -2,9 +2,9 @@ number a = 10
 
 if a > 1
 begin
-    braille(True)
+    braille(true)
 else
-    braille(False)
+    braille(false)
 end
 
 braille(a>1)

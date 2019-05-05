@@ -38,9 +38,9 @@ begin
 end
 
 
-container arr = [10,0,7,6,3,2,1,9,8,5,4]
+container c = [10,0,7,6,3,2,1,9,8,5,4]
 number low = 0
-number high = arr.length() - 1 
+number high = c.length() - 1 
   
-quickSort(arr,low,high) 
-print(arr)
+quickSort(c,low,high) 
+print(c)

@@ -19,5 +19,5 @@ begin
 end
 
 
-number a = add(16,"2",True,[])
+number a = add(16,"2",true,[])
 print(a)

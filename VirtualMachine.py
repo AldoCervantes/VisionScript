@@ -15,7 +15,7 @@ class VirtualMachine:
         self.FunSpaceMemTable = {} #Diccionario que almacena las funciones y su cantidad de variables locales y temporales
         self.newMemLocal = [] #Es un arreglo que hace referencia al nuevo arreglo creado por los ERA
         self.returnMem = [] #Es una pila que almacena los valores de los retuns para ser usados por las function calls
-
+        self.Audiocont = 0
     #Funcion que rellena los arreglos de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
         for x in range(0, GlobalCont):
@@ -30,10 +30,10 @@ class VirtualMachine:
                         a = float(key)
                         self.Constante.append(a)
             elif value[0] == 'bool':
-                    if key == 'True':
+                    if key == 'true':
                             a = True
                             self.Constante.append(a)
-                    elif key == 'False':
+                    elif key == 'false':
                             a = False
                             self.Constante.append(a)
             else:
@@ -215,13 +215,16 @@ class VirtualMachine:
             print(value)
         elif op == 17:
             tts = gTTS(text= value, lang='es')
-            tts.save("audio.mp3")
+            tts.save(f'speech{self.Audiocont%2}.mp3')
             mixer.init()
-            mixer.music.load("audio.mp3")
+            mixer.music.load(f'speech{self.Audiocont%2}.mp3')
             mixer.music.play()
+            while mixer.music.get_busy() == True:
+                continue
+            self.Audiocont += 1
         elif op == 18:
-            intab = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"	
-            outtab = " ⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵"
+            intab = " !#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz"
+            outtab = ' ⠮⠼⠫⠩⠯⠄⠷⠾⠡⠬⠠⠤⠨⠌⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⠱⠰⠣⠿⠜⠹⠈⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠪⠳⠻⠘⠸⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'
             transtab = str.maketrans(intab, outtab)
             print(value.translate(transtab))
 
@@ -243,12 +246,12 @@ class VirtualMachine:
             temp = str(temporal)
             self.setValue(cuadruplo[3], temp)
         elif tipo == 103:
-            if temporal == 'True':
+            if temporal == 'true':
                temp = True
-            elif temporal == 'False':
+            elif temporal == 'false':
                 temp = False
             else:
-                print("#Read Error: La variable leida no es de tipo boolean (True/False)")
+                print("#Read Error: La variable leida no es de tipo boolean (true/false)")
                 sys.exit()
             self.setValue(cuadruplo[3], temp)
         else:
@@ -305,6 +308,7 @@ class VirtualMachine:
         if direc >= 10000 and direc < 20000: #memGlobal
             if op == 27:
                 index = len(self.Global[direc - 10000])
+                self.Global[direc - 10000].insert(index, element)
             elif op == 35:
                 self.Global[direc - 10000][index] = element
             else:
@@ -312,6 +316,7 @@ class VirtualMachine:
         elif direc >= 20000 and direc < 30000: #memLocal
             if op == 27:
                 index = len(self.Local[-1][direc - 20000])
+                self.Local[-1][direc - 20000].insert(index, element)
             elif op == 35:
                 self.Local[-1][direc - 20000][index] = element
             else:
@@ -319,6 +324,7 @@ class VirtualMachine:
         elif direc >= 30000 and direc < 40000: #memConst
             if op == 27:
                 index = len(self.Constante[direc - 30000])
+                self.Constante[direc - 30000].insert(index, element)
             elif op == 35:
                 self.Constante[direc - 30000][index] = element
             else:
@@ -326,6 +332,7 @@ class VirtualMachine:
         elif direc == 99999:
             if op == 27:
                 index = len(self.returnMem[-1])
+                self.returnMem[-1].insert(index,element)
             elif op == 35:
                 self.returnMem[-1][index] = element
             else:

@@ -7,7 +7,7 @@ print(a)
 a.insert_front(12)
 print(a)
 
-a.insert_back(10)
+a.insert_back(11)
 print(a)
 
 a.insert(-3,66)

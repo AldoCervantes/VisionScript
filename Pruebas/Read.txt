@@ -3,7 +3,7 @@ number a = 0
 print("Escribe un numero")
 read(a)
 
-bool b = True
+bool b = true
 print("Escribe un booleano")
 read(b)
 

@@ -202,9 +202,9 @@ TEXT: 'text';
 
 BOOL: 'bool';
 
-CTBF: 'False';
+CTBF: 'false';
 
-CTBT: 'True';
+CTBT: 'true';
 
 AND: 'and';
 
