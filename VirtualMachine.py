@@ -1,6 +1,8 @@
 import sys
 from gtts import gTTS
-from pygame import mixer
+import contextlib
+with contextlib.redirect_stdout(None):
+    from pygame import mixer
 import os
 
 class VirtualMachine:
@@ -43,8 +45,8 @@ class VirtualMachine:
         cuadruplo = [777,777,777,777]
         self.Cuadruplos.append(cuadruplo)
 
-        self.PrintCuadruplos()
-        self.PrintMemArrays()
+        #self.PrintCuadruplos()
+        #self.PrintMemArrays()
 
 
     #Funcion que regresa el valor de una direceccion de memoria

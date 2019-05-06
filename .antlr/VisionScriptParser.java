@@ -135,8 +135,8 @@ public class VisionScriptParser extends Parser {
 			programa();
 			setState(58);
 			match(EOF);
-			compiler.printCuad()
-			compiler.showFunctionDirectory()
+			#compiler.printCuad()
+			#compiler.showFunctionDirectory()
 			vm.FunSpaceMemTable = compiler.FunLocalMems 
 			vm.Cuadruplos = compiler.ReturnCuads()
 			vm.FillMemoryArrays(compiler.returnGlobalCont(),compiler.returnConstTable())

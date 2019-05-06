@@ -392,8 +392,8 @@ class VisionScriptParser ( Parser ):
             self.programa()
             self.state = 58
             self.match(VisionScriptParser.EOF)
-            compiler.printCuad()
-            compiler.showFunctionDirectory()
+            #compiler.printCuad()
+            #compiler.showFunctionDirectory()
             vm.FunSpaceMemTable = compiler.FunLocalMems 
             vm.Cuadruplos = compiler.ReturnCuads()
             vm.FillMemoryArrays(compiler.returnGlobalCont(),compiler.returnConstTable())
