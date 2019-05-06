@@ -1,12 +1,12 @@
 # VisionScript
 ## Versiones
-## Antlr4
+### Antlr4
 ANTLR Parser Generator  Version 4.7.2
-## Java
+### Java
 Javac 1.8.0_144
-## Python
+### Python
 Python 3.7.2
-## PIP
+### PIP
 Pip version 19.0.2
 ### PIP Packages
 | Package                |      Version     |
@@ -29,3 +29,8 @@ Pip version 19.0.2
 |six                    |1.12.0|
 |soupsieve              |1.9.1|
 |urllib3                |1.24.3|
+
+## Ejecutar
+Pasos:
+1. antlr4 -Dlanguage=Python3 VisionScript.g4
+2. python VisionScriptRunner.py NombredelArchivo.vs
