@@ -1,6 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from collections import deque
 from SemanticCube import SemanticCube
 import sys
+
 
 #Clase para crear el directorio de funciones
 class Compiler:

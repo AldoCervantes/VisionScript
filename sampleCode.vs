@@ -9,5 +9,6 @@ end
 
 print(a > 1)
 
-container n = [0,0,0,0,0,0,0]
-print( [1,2,3] * -100 )
+container n = [1,0,0,0,0,0,0]
+print( n * - 100 )
+hear("Hola Adrián")

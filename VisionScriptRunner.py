@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import sys
 from antlr4 import *
 from VisionScriptLexer import VisionScriptLexer
@@ -6,7 +9,7 @@ from VisionScriptParser import VisionScriptParser
 
 def main(argv):
     # Tipo de entrada: Archivo de texto recibido como parametro 
-    inputFile = FileStream(argv[1])
+    inputFile = FileStream(argv[1], encoding = 'utf8')
     lexer = VisionScriptLexer(inputFile)
     stream = CommonTokenStream(lexer)
     parser = VisionScriptParser(stream)
