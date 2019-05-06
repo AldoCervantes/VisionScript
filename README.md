@@ -173,7 +173,7 @@ print(arr)
 ```
 
 ##### Contenedor.replace(indice,elemento)
-Sirve para reemplazar un elemento a un contenedor. Esta función no regresa ningun valor. 
+Sirve para reemplazar un elemento a un contenedor. Esta función no regresa ningun valor. Es importante que el indice este dentro del rango del tamaño del arreglo de lo contrario genera un error.
 Dicha función tiene la siguiente sintaxis: ```nombre_del_contenedor.replace(indice,elemento)```
 
 ###### Ejemplo:
