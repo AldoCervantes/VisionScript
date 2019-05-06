@@ -77,7 +77,7 @@ console.configure(background='black',foreground="green")
 console.pack()
 
 #define icon images
-play=PhotoImage(file="play.png")
+play=PhotoImage(file="savefile.png")
 braille=PhotoImage(file="braille.png")
 hear=PhotoImage(file="hear.png")
 text=PhotoImage(file="text.png")
