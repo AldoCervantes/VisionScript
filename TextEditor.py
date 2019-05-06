@@ -64,13 +64,17 @@ root = Tk(className = " VisionScript Beta")
 root.resizable(False, False)
 
 #define code area
-codeArea = Text(root, height=30)
+codeArea = Text(root, height=15)
 codeArea.configure(background='white')
 codeArea.pack()
 
+#define bar
+bar = Frame(root, height=60)
+bar.pack()
 #define console area
 console = Text(root, height=15)
 console.configure(background='black',foreground="green")
+console.pack()
 
 #define icon images
 play=PhotoImage(file="play.png")
@@ -80,23 +84,22 @@ text=PhotoImage(file="text.png")
 
 #define play button
 playButton = Button(root)
-playButton.place(x=0,y=400)
+playButton.place(x=0,y=243)
 playButton.config(image=play,width="50",height="57",command=SaveFile)
 
 #define braille button
 brailleButton = Button(root)
-brailleButton.place(x=411,y=400)
+brailleButton.place(x=469,y=243)
 brailleButton.config(image=braille,width="52",height="57",command=TextToBraille)
 
 #define hear button
 hearButton = Button(root)
-hearButton.place(x=461,y=400)
+hearButton.place(x=527,y=243)
 hearButton.config(image=hear,width="52",height="57",command=TextToSpeech)
 
 #define text button
 textButton = Button(root)
-textButton.place(x=511,y=400)
+textButton.place(x=585,y=243)
 textButton.config(image=text,width="52",height="57",command=BrailleToText)
 
-console.pack()
 root.mainloop()
