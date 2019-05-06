@@ -490,6 +490,7 @@ class VirtualMachine:
                 print(cuadruplo)
                 sys.exit()
             self.currentCuad = self.currentCuad + 1
+            #print(cuadruplo)
 
     #Funcion para debugear
     def PrintCuadruplos(self):

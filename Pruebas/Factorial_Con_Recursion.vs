@@ -15,7 +15,7 @@ number n = 0
 
 repeat until again equal "no" or again equal "n" or again equal "N" or again equal "NO" or again equal "No"
 begin
-    print("Introduzca numero: ")
+    print("Introduzca número: ")
     read(n)
 
     print("factorial: ")
@@ -23,7 +23,7 @@ begin
    
     print(" ")
 
-    print("Quieres hacer otro calculo?")
+    print("¿Quiéres hacer otro cálculo?")
     read(again)
     print(" ")
 end

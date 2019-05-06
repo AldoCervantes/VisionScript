@@ -9,6 +9,8 @@ end
 
 print(a > 1)
 
-container n = [1,0,0,0,0,0,0]
-print( n * - 100 )
-hear("Hola Adrián")
+container n = [0,1,2] 
+n.insert(-1,10)
+print("A" * 3)
+
+
