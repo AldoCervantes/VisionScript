@@ -7,6 +7,7 @@ import contextlib
 with contextlib.redirect_stdout(None):
     from pygame import mixer
 import os
+import mmap
 
 class VirtualMachine:
     def __init__(self):
@@ -20,7 +21,7 @@ class VirtualMachine:
         self.FunSpaceMemTable = {} #Diccionario que almacena las funciones y su cantidad de variables locales y temporales
         self.newMemLocal = [] #Es un arreglo que hace referencia al nuevo arreglo creado por los ERA
         self.returnMem = [] #Es una pila que almacena los valores de los retuns para ser usados por las function calls
-        self.Audiocont = 0
+
     #Funcion que rellena los arreglos de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
         for x in range(0, GlobalCont):
@@ -219,14 +220,28 @@ class VirtualMachine:
         if op == 16:
             print(value)
         elif op == 17:
+            #Generación del archivo .mp3
             tts = gTTS(text= value, lang='es')
-            tts.save(f'speech{self.Audiocont%2}.mp3')
+            tts.save('speech.mp3')
+            #Carga el archivo .mp3 a memoria
+            with open('speech.mp3') as f: 
+                PlayedMp3File = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) 
+            #Enciende el mixer
             mixer.init()
-            mixer.music.load(f'speech{self.Audiocont%2}.mp3')
+            #carga el audio al mixer
+            mixer.music.load(PlayedMp3File)
+            #Reproduce el audio
             mixer.music.play()
+            #Mientras el audio se esta reproduciendo espera
             while mixer.music.get_busy() == True:
                 continue
-            self.Audiocont += 1
+            #Cierra el archivo .mp3
+            PlayedMp3File.close()
+            #Apaga el mixer
+            mixer.quit()
+            #Si el archivo existe borralo
+            if os.path.exists('speech.mp3'):
+                os.remove('speech.mp3')
         elif op == 18:
             intab = ' !#$%&"()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz'
             outtab = ' ⠮⠼⠫⠩⠯⠄⠷⠾⠡⠬⠠⠤⠨⠌⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⠱⠰⠣⠿⠜⠹⠈⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠪⠳⠻⠘⠸⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'

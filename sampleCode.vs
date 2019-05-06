@@ -13,4 +13,7 @@ container n = [0,1,2]
 n.insert(-1,10)
 print("A" * 3)
 
+number ai = 10
+read(ai)
+print(ai)
 
