@@ -6,8 +6,8 @@ from VisionScriptParser import VisionScriptParser
 
 def main(argv):
     # Tipo de entrada: Archivo de texto recibido como parametro 
-    input = FileStream(argv[1])
-    lexer = VisionScriptLexer(input)
+    inputFile = FileStream(argv[1])
+    lexer = VisionScriptLexer(inputFile)
     stream = CommonTokenStream(lexer)
     parser = VisionScriptParser(stream)
     # Nombre de la primer regla de la gramática

@@ -5,11 +5,9 @@ if __name__ is not None and "." in __name__:
 else:
     from VisionScriptParser import VisionScriptParser
 
-from VisionScriptCompiler import FunctionDirectory
-from Cuadruplos import Cuadruplos
+from Compiler import Compiler
 from VirtualMachine import VirtualMachine
-func_dir = FunctionDirectory()
-cuadruplos = Cuadruplos() 
+compiler = Compiler()
 vm = VirtualMachine()
 
 
@@ -184,6 +182,15 @@ class VisionScriptListener(ParseTreeListener):
 
     # Exit a parse tree produced by VisionScriptParser#ct.
     def exitCt(self, ctx:VisionScriptParser.CtContext):
+        pass
+
+
+    # Enter a parse tree produced by VisionScriptParser#retorno.
+    def enterRetorno(self, ctx:VisionScriptParser.RetornoContext):
+        pass
+
+    # Exit a parse tree produced by VisionScriptParser#retorno.
+    def exitRetorno(self, ctx:VisionScriptParser.RetornoContext):
         pass
 
 
