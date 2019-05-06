@@ -8,6 +8,9 @@ import mmap
 
 #text to speech function
 def TextToSpeech():
+    console.delete(1.0, END)
+    console.insert(END, 'Reproduciendo Audio')
+
     toBraille = codeArea.get("1.0",'end-1c')
     intab = ' ⠮⠼⠫⠩⠯⠄⠷⠾⠡⠬⠠⠤⠨⠌⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⠱⠰⠣⠿⠜⠹⠈⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠪⠳⠻⠘⠸⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'
     outtab = ' !#$%&"()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz'
@@ -31,6 +34,7 @@ def TextToSpeech():
     if os.path.exists('speech.mp3'):
         os.remove('speech.mp3')
 
+
 #text to braille function
 def TextToBraille():
     toBraille = codeArea.get("1.0",'end-1c')
@@ -38,7 +42,8 @@ def TextToBraille():
     outtab = ' ⠮⠼⠫⠩⠯⠄⠷⠾⠡⠬⠠⠤⠨⠌⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⠱⠰⠣⠿⠜⠹⠈⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠪⠳⠻⠘⠸⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'
     transtab = str.maketrans(intab, outtab)
     result = toBraille.translate(transtab)
-    print(result)
+    console.delete(1.0, END)
+    console.insert(END, result)
 
 #braille to text function
 def BrailleToText():
@@ -47,7 +52,8 @@ def BrailleToText():
     outtab = ' !#$%&"()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz'
     transtab = str.maketrans(intab, outtab)
     result = toBraille.translate(transtab)
-    print(result)
+    console.delete(1.0,END)
+    console.insert(END, result)
     
 #text to braille function
 def SaveFile():
@@ -56,7 +62,7 @@ def SaveFile():
     f = open(file_name, 'w')
     f.write(text)
     f.close()
-    print("se ejecuto")
+    print("Archivo guardado")
 
 
 #define root
@@ -64,16 +70,17 @@ root = Tk(className = " VisionScript Beta")
 root.resizable(False, False)
 
 #define code area
-codeArea = Text(root, height=15)
-codeArea.configure(background='white')
+codeArea = Text(root, height=20, width=70)
+codeArea.configure(background='black',foreground="white",font=("Helvetica", 15))
 codeArea.pack()
 
 #define bar
 bar = Frame(root, height=60)
 bar.pack()
+
 #define console area
-console = Text(root, height=15)
-console.configure(background='black',foreground="green")
+console = Text(root, height=10, width=70)
+console.configure(background='grey',foreground="black",font=("Helvetica", 15))
 console.pack()
 
 #define icon images
@@ -84,22 +91,24 @@ text=PhotoImage(file="text.png")
 
 #define play button
 playButton = Button(root)
-playButton.place(x=0,y=243)
+playButton.place(x=0,y=462)
 playButton.config(image=play,width="50",height="57",command=SaveFile)
 
 #define braille button
 brailleButton = Button(root)
-brailleButton.place(x=469,y=243)
+brailleButton.place(x=599,y=462)
 brailleButton.config(image=braille,width="52",height="57",command=TextToBraille)
 
 #define hear button
 hearButton = Button(root)
-hearButton.place(x=527,y=243)
+hearButton.place(x=657,y=462)
 hearButton.config(image=hear,width="52",height="57",command=TextToSpeech)
 
 #define text button
 textButton = Button(root)
-textButton.place(x=585,y=243)
+textButton.place(x=715,y=462)
 textButton.config(image=text,width="52",height="57",command=BrailleToText)
 
 root.mainloop()
+
+#469-527-585
