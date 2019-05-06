@@ -4,10 +4,10 @@ import contextlib
 with contextlib.redirect_stdout(None):
     from pygame import mixer
 import os
-import VisionScriptRunner
 
 #text to speech function
 def TextToSpeech():
+    os.remove("speech.mp3")
     toBraille = codeArea.get("1.0",'end-1c')
     intab = ' ⠮⠼⠫⠩⠯⠄⠷⠾⠡⠬⠠⠤⠨⠌⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⠱⠰⠣⠿⠜⠹⠈⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠪⠳⠻⠘⠸⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'
     outtab = ' !#$%&"()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz'
@@ -18,9 +18,6 @@ def TextToSpeech():
     mixer.init()
     mixer.music.load(f'speech.mp3')
     mixer.music.play()
-    while mixer.music.get_busy() == True:
-        continue
-    #Deberia de existir una forma de borrar el speech.p3 o sino usar el cont
 
 #text to braille function
 def TextToBraille():
@@ -28,7 +25,26 @@ def TextToBraille():
     intab = ' ⠮⠼⠫⠩⠯⠄⠷⠾⠡⠬⠠⠤⠨⠌⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⠱⠰⠣⠿⠜⠹⠈⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠪⠳⠻⠘⠸⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'
     outtab = ' !#$%&"()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz'
     transtab = str.maketrans(intab, outtab)
-    print(toBraille.translate(transtab))
+    result = toBraille.translate(transtab)
+    print(result)
+
+#braille to text function
+def BrailleToText():
+    toBraille = codeArea.get("1.0",'end-1c')
+    outtab = ' ⠮⠼⠫⠩⠯⠄⠷⠾⠡⠬⠠⠤⠨⠌⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⠱⠰⠣⠿⠜⠹⠈⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠪⠳⠻⠘⠸⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵'
+    intab = ' !#$%&"()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_abcdefghijklmnopqrstuvwxyz'
+    transtab = str.maketrans(intab, outtab)
+    result = toBraille.translate(transtab)
+    print(result)
+    
+#text to braille function
+def SaveFile():
+    text = codeArea.get("1.0",'end-1c')
+    file_name = 'VisionScriptCode.vs'
+    f = open(file_name, 'w')
+    f.write(text)
+    f.close()
+    print("se ejecuto")
 
 
 #define root
@@ -54,7 +70,7 @@ text=PhotoImage(file="text.png")
 #define play button
 playButton = Button(root)
 playButton.place(x=0,y=400)
-playButton.config(image=play,width="50",height="57")
+playButton.config(image=play,width="50",height="57",command=SaveFile)
 
 #define braille button
 brailleButton = Button(root)
@@ -69,7 +85,7 @@ hearButton.config(image=hear,width="52",height="57",command=TextToSpeech)
 #define text button
 textButton = Button(root)
 textButton.place(x=511,y=400)
-textButton.config(image=text,width="52",height="57")
+textButton.config(image=text,width="52",height="57",command=BrailleToText)
 
 console.pack()
 root.mainloop()
