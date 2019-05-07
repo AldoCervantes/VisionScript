@@ -67,6 +67,52 @@ container ContenedorVacio = []
 ### Operaciones
 ```VisionScript``` posee los operadores basicos para realizar operaciones matematicas: ```+, -, *, /``` y los operadores logicos como ```<, >, <=, >=, equal, not_equal```
 
+### Ciclos y Condicionales
+#### If Else
+```VisionScript``` posee el tipico ```if else```, sin embargo a diferencia de otros lenguajes ```VisionScript``` no usa ```{}``` para definir lo que esta dentro del rango de cada condicion, para definir esto se utilizan las palabras ```begin``` y ```end```, otro punto importante a destacar es todos los if's deben de ir acompañados de un else, esto con el objetivo de que las personas con discapacidad visual no tengan problemas al momento de escuchar o leer condiciones muy largas o anidadas.
+
+###### Ejemplo:
+```
+number a = 10
+number b = 12
+if a > b
+begin
+    print(a)
+else
+    print(b)
+end
+```
+###### Output:
+```
+12
+```
+
+#### Repeat Until
+Otro aspecto muy importante es a la hora de definir un ciclo, a diferencia de otros lenguajes ```VisionScript``` no tiene un ```while```, este es substituido por un ```repeat until``` el cual funciona de la manera opuesta a un ```while```. En este caso un ```repeat until``` va a iterar hasta que la expresion proporcionada se vuela falsa.
+
+###### Ejemplo:
+```
+number i = 0
+repeat until i > 10
+begin
+    print(i)
+    i = i + 1
+end
+```
+###### Output:
+```
+0 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10
+```
 ### Contenedores
 Como ya se menciono un contenedor es una lista ordenada de elementos de distintos tipos (```number```,```bool```ó```text```) que pueden ser intercambiables. Los contenedores aceptan valores repetidos y es posible crear contenedores vacios asigando el valor de ```[]``` a la variable.
 
