@@ -1,8 +1,8 @@
-number a = 10
-number b = 12
-if a > b
+number function add(number x, number y)
 begin
-    print(a)
-else
-    print(b)
+    return(x + y)
 end
+
+number a = add(1,2)
+
+print(a)

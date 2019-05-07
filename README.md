@@ -75,6 +75,7 @@ container ContenedorVacio = []
 ```
 number a = 10
 number b = 12
+
 if a > b
 begin
     print(a)
@@ -86,7 +87,6 @@ end
 ```
 12
 ```
-
 #### Repeat Until
 Otro aspecto muy importante es a la hora de definir un ciclo, a diferencia de otros lenguajes ```VisionScript``` no tiene un ```while```, este es substituido por un ```repeat until``` el cual funciona de la manera opuesta a un ```while```. En este caso un ```repeat until``` va a iterar hasta que la expresion proporcionada se vuela falsa.
 
@@ -113,6 +113,36 @@ end
 9 
 10
 ```
+
+### Funciones
+En ```VisionScript``` es posible definir funciones y hacer uso de ellas por medio de llamadas. Al igual que otros lenguajes exiten diferentes tipos de funciones las que tienen un valor de retorno y las que no. Las funciones pueden tener distintos tipos de parametros.
+
+Tipos de Funciones:
+- ```void```    Se usa cuando una función no tiene valor de retorno
+- ``` number``` Se usa cuando una función regresa un valor numerico
+- ``` bool```   Se usa cuando una función regresa un valor booleano
+- ``` text```   Se usa cuando una función regresa un texto
+- ``` container``` Se usa cuando una función regresa un contenedor
+
+Para llamar a una función solo se necesita poner su nombre seguido de parentesis con los valores de los parametros. 
+
+Es posible declarar variables dentro de una función, pero hay que tener en cuenta de que estas solo podran ser usadas dentro de la función.
+###### Ejemplo:
+```
+number function add(number x, number y)
+begin
+    return(x + y)
+end
+
+number a = add(1,2)
+
+print(a)
+```
+###### Output:
+```
+3
+```
+
 ### Contenedores
 Como ya se menciono un contenedor es una lista ordenada de elementos de distintos tipos (```number```,```bool```ó```text```) que pueden ser intercambiables. Los contenedores aceptan valores repetidos y es posible crear contenedores vacios asigando el valor de ```[]``` a la variable.
 
