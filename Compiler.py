@@ -236,10 +236,13 @@ class Compiler:
                     left_operand = self.PilaO.pop()
                     left_type = self.PTypes.pop()
                     operator = self.POper.pop()
-                    if left_type == 'op_container' or right_type == 'op_container':
+                    if (left_type == 'op_container' or right_type == 'op_container') and (left_type != 'error' and right_type != 'error') :
                         result_type = 'op_container'
-                    else:
+                    elif left_type != 'error' and right_type != 'error':
                         result_type = SemanticCube.semanticCube[operator][left_type][right_type]
+                    else:
+                        print("#GenerateCuad Error:",left_type,operator,right_type,"genera",result_type)
+                        sys.exit()
                     if result_type != 'error':
                         result = self.returnTemp(functionId)
                         cuadruplo = [SemanticCube.opToKey[operator], left_operand, right_operand, result]

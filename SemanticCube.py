@@ -22,8 +22,8 @@ class SemanticCube:
 
                 },
                 'text':{ 
-                            'number': 'error',
-                            'bool'  : 'error',
+                            'number': 'text',
+                            'bool'  : 'text',
                             'text'  : 'text',
                             'container': 'error',
                             'error' : 'error',

@@ -37,7 +37,7 @@ Pip ```version 19.0.2```
 ## Ejecutar
 Pasos:
 1. ```antlr4 -Dlanguage=Python3 VisionScript.g4```
-2. ```python VisionScriptRunner.py NombredelArchivo.vs```
+2. ```python VisionScriptRunner.py VisionScriptCode.vs```
 
 
 ## Manual de Usuario
@@ -68,6 +68,68 @@ container ContenedorVacio = []
 
 ### Operaciones
 ```VisionScript``` posee los operadores básicos para realizar operaciones matemáticas: ```+, -, *, /``` y los operadores lógicos como ```<, >, <=, >=, equal, not_equal```
+
+En ```VisionScript``` es posible sumar una variable o un dato de tipo ```text``` con una variable o dato de tipo ```number, text o bool```. Produciendo un nuevo texto con la concatenación de los demás elementos. Esto resulta útil a la hora de **imprimir o escuchar** un resultado.
+
+###### Ejemplo:
+```
+print("Vision" + "Script")
+print("" + 10 + 10)
+print("" + (10 10))
+```
+###### Output:
+```
+VisionScript
+1010
+20
+```
+
+```VisionScript``` también permite concatenar variables o elementos de tipo  ```container```, para ello se utiliza el operador de ```+```, generando un nuevo ```container``` con la concatenación ambos.
+
+###### Ejemplo:
+```
+print([1,2,3] + [4,5,6])
+```
+###### Output:
+```
+[1,2,3,4,5,6]
+```
+
+Otro aspecto importan en  ```VisionScript``` es la multiplicación de una variable o un dato de tipo ```text``` por un número entero. Si el número es positivo el resultado será que ese texto se multiplique una cantidad de veces igual al número, y si el número es negativo se genera un texto vacío ```""```.
+
+###### Ejemplo:
+```
+print("A" * 3)
+print("A" * -3)
+```
+###### Output:
+```
+AAA
+
+```
+
+Finalmente en  ```VisionScript``` es posible multiplicar una variable de tipo ```container``` por un número entero. Si el número es positivo el resultado será que el contenedor almacenado en esa variable se multiplica una cantidad de veces igual al número, y si el número es negativo se genera un contenedor vacío ```[]```.
+
+###### Ejemplo:
+```
+print([1] * 3)
+```
+###### Output:
+```
+Error! El contenedor debe estar almacenado en una variable.
+```
+
+###### Ejemplo:
+```
+container arr = [1]
+print(arr * 3)
+print(arr * -3)
+```
+###### Output:
+```
+[1, 1, 1]
+[]
+```
 
 ### Input/Output
 ```VisionScript``` cuenta con funciones especiales para leer valores desde la terminal y desplegar valores desde la terminal.Además de esto ```VisionScript``` cuenta con funciones especiales para imprimir resultados en formato braille e incluso convertir valores a audio y escuchar dicho audio.
@@ -137,9 +199,9 @@ number b = 12
 
 if a > b
 begin
-   print(a)
+  print(a)
 else
-   print(b)
+  print(b)
 end
 ```
 ###### Output:
@@ -154,8 +216,8 @@ Otro aspecto muy importante es a la hora de definir un ciclo, a diferencia de ot
 number i = 0
 repeat until i > 10
 begin
-   print(i)
-   i = i + 1
+  print(i)
+  i = i + 1
 end
 ```
 ###### Output:
@@ -190,7 +252,7 @@ Es posible declarar variables dentro de una función, pero hay que tener en cuen
 ```
 number function add(number x, number y)
 begin
-   return(x + y)
+  return(x + y)
 end
 
 number a = add(1,2)
@@ -458,3 +520,5 @@ Algo que hace único a ```VisionScript``` es que tiene su propio editor de texto
 
 
 ![Editor de Textos](https://github.com/AldoCervantes/VisionScript/blob/develop/TextEditorTutorial.png)
+
+

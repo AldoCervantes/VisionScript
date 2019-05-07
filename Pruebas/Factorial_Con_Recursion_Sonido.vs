@@ -18,10 +18,7 @@ begin
     hear("Introduce el número del que quieres saber su factorial: ")
     read(n)
 
-    hear("la factorial de")
-    hear(n)
-    hear("es")
-    hear(factorial(n))
+    hear("la factorial de" + n + "es" + factorial(n))
 
     hear("¿Quiéres hacer otro cálculo?")
     read(again)

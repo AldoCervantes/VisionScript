@@ -110,6 +110,8 @@ class VirtualMachine:
         arg2 = self.getValue(cuadruplo[2])
 
         if op == 1:
+            if type(arg1) == str:
+                arg2 = str(arg2)
             try:
                 result = arg1 + arg2
             except:
