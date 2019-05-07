@@ -67,6 +67,63 @@ container ContenedorVacio = []
 ### Operaciones
 ```VisionScript``` posee los operadores básicos para realizar operaciones matemáticas: ```+, -, *, /``` y los operadores lógicos como ```<, >, <=, >=, equal, not_equal```
 
+### Input/Output
+```VisionScript``` cuenta con funciones especiales para leer valores desde la terminal y desplegar valores desde la terminal.Además de esto ```VisionScript``` cuenta con funciones especiales para imprimir resultados en formato braille e incluso convertir valores a audio y escuchar dicho audio.
+
+#### Read
+Está función permite guardar el valor leido desde terminal a una variable previamente definida.
+
+###### Ejemplo:
+```
+number a = 0
+
+read(a)
+
+print(a + 1)
+```
+###### Input:
+```
+10
+```
+###### Output:
+```
+11
+```
+#### Print
+Está función permite desplegar el valor dado dentro de los paréntesis en consola utilizando el formato del alfabeto latino.
+
+###### Ejemplo:
+```
+print("Hola Mundo!")
+```
+###### Output:
+```
+Hola Mundo!
+```
+
+#### Braille
+Está función permite desplegar el valor dado dentro de los paréntesis en consola utilizando el formato del alfabeto braille.
+
+###### Ejemplo:
+```
+braille("Hola Mundo!")
+```
+###### Output:
+```
+⠓⠕⠇⠁ ⠍⠥⠝⠙⠕⠮
+```
+#### Hear
+Está función permite escuchar el valor dado dentro de los paréntesis.
+
+###### Ejemplo:
+```
+hear("Hola Mundo!")
+```
+###### Output:
+```
+Sonido por los altavoces: Hola Mundo!
+```
+
 ### Ciclos y Condicionales
 #### If Else
 ```VisionScript``` posee el típico ```if else```, sin embargo a diferencia de otros lenguajes ```VisionScript``` no usa ```{}``` para definir lo que está dentro del rango de cada condición, para definir esto se utilizan las palabras ```begin``` y ```end```, otro punto importante a destacar es todos los if's deben de ir acompañados de un else, esto con el objetivo de que las personas con discapacidad visual no tengan problemas al momento de escuchar o leer condiciones muy largas o anidadas.
@@ -141,62 +198,6 @@ print(a)
 ###### Output:
 ```
 3
-```
-### Input/Output
-```VisionScript``` cuenta con funciones especiales para leer valores desde la terminal y desplegar valores desde la terminal.Además de esto ```VisionScript``` cuenta con funciones especiales para imprimir resultados en formato braille e incluso convertir valores a audio y escuchar dicho audio.
-
-#### Read
-Está función permite guardar el valor leido desde terminal a una variable previamente definida.
-
-###### Ejemplo:
-```
-number a = 0
-
-read(a)
-
-print(a + 1)
-```
-###### Input:
-```
-10
-```
-###### Output:
-```
-11
-```
-#### Print
-Está función permite desplegar el valor dado dentro de los paréntesis en consola utilizando el formato del alfabeto latino.
-
-###### Ejemplo:
-```
-print("Hola Mundo!")
-```
-###### Output:
-```
-Hola Mundo!
-```
-
-#### Braille
-Está función permite desplegar el valor dado dentro de los paréntesis en consola utilizando el formato del alfabeto braille.
-
-###### Ejemplo:
-```
-braille("Hola Mundo!")
-```
-###### Output:
-```
-⠓⠕⠇⠁ ⠍⠥⠝⠙⠕⠮
-```
-#### Hear
-Está función permite escuchar el valor dado dentro de los paréntesis.
-
-###### Ejemplo:
-```
-hear("Hola Mundo!")
-```
-###### Output:
-```
-Sonido por los altavoces: Hola Mundo!
 ```
 
 ### Contenedores
