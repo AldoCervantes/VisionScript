@@ -173,7 +173,7 @@ print(arr)
 ```
 
 ##### Contenedor.replace(indice,elemento)
-Sirve para reemplazar un elemento a un contenedor. Esta función no regresa ningun valor. Es importante que el indice este dentro del rango del tamaño del arreglo de lo contrario genera un error.
+Sirve para reemplazar un elemento a un contenedor. Esta función no regresa ningun valor. Es importante que el indice este dentro del rango del tamaño del contenedor de lo contrario genera un error.
 Dicha función tiene la siguiente sintaxis: ```nombre_del_contenedor.replace(indice,elemento)```
 
 ###### Ejemplo:
@@ -235,4 +235,86 @@ print(arr)
 ###### Output:
 ```
 Error! indice fuera del rango.
+```
+##### Contenedor.get(indice)
+Sirve para obtener un elemento de un contenedor. Esta función regresa el valor en el indice dado. Es importante que el indice este dentro del rango del tamaño del contenedor de lo contrario genera un error.
+Dicha función tiene la siguiente sintaxis: ```nombre_del_contenedor.get(indice)```
+
+###### Ejemplo:
+```
+container arr = [0,1,2]
+
+print(arr.get(0))
+
+```
+###### Output:
+```
+0
+```
+###### Ejemplo:
+```
+container arr = [0,1,2]
+
+print(arr.get(-1))
+
+```
+###### Output:
+```
+2
+```
+###### Ejemplo:
+```
+container arr = [0,1,2]
+
+print(arr.get(-100))
+
+```
+###### Output:
+```
+Error! indice fuera del rango.
+```
+##### Contenedor.get_back()
+Sirve para obtener el ultimo elemento de un contenedor. Esta función regresa el valor del ultimo elemento de un contenedor.
+Dicha función tiene la siguiente sintaxis: ```nombre_del_contenedor.get_back()```
+
+###### Ejemplo:
+```
+container arr = [0,1,2]
+
+print(arr.get_back())
+
+```
+###### Output:
+```
+2
+```
+##### Contenedor.get_front()
+Sirve para obtener el primer elemento de un contenedor. Esta función regresa el valor del primer elemento de un contenedor.
+Dicha función tiene la siguiente sintaxis: ```nombre_del_contenedor.get_front()```
+
+###### Ejemplo:
+```
+container arr = [0,1,2]
+
+print(arr.get_front())
+
+```
+###### Output:
+```
+0
+```
+##### Contenedor.length()
+Sirve para obtener el primer elemento de un contenedor. Esta función regresa el valor del primer elemento de un contenedor.
+Dicha función tiene la siguiente sintaxis: ```nombre_del_contenedor.get_front()```
+
+###### Ejemplo:
+```
+container arr = [0,1,2]
+
+print(arr.length())
+
+```
+###### Output:
+```
+3
 ```

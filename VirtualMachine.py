@@ -14,15 +14,15 @@ class VirtualMachine:
         self.Global = [] #Es el espacio de memoria que almacena el valor de las globales
         self.Local = [] #Es el espacio de memoria que almacena el valor de las locales
         self.Constante = [] #Es el espacio de memoria que almacena el valor de las constantes
-        self.Cuadruplos = [] #Es un arreglo que contiene todos los cuadruplos creados por compiler
+        self.Cuadruplos = [] #Es un contenedor que contiene todos los cuadruplos creados por compiler
         self.currentCuad = 0 #contador de el cuadruplo actual
         self.keyToType = { 101:'number', 102:'text', 103:'bool', 104:'container' } #Hacer conversiones claves a tipos
         self.FuncitonJumps = [] #Pila de jumps que se usa con los gosubs
         self.FunSpaceMemTable = {} #Diccionario que almacena las funciones y su cantidad de variables locales y temporales
-        self.newMemLocal = [] #Es un arreglo que hace referencia al nuevo arreglo creado por los ERA
+        self.newMemLocal = [] #Es un contenedor que hace referencia al nuevo contenedor creado por los ERA
         self.returnMem = [] #Es una pila que almacena los valores de los retuns para ser usados por las function calls
 
-    #Funcion que rellena los arreglos de memoria
+    #Funcion que rellena los contenedors de memoria
     def FillMemoryArrays(self,GlobalCont,constTable):
         for x in range(0, GlobalCont):
             self.Global.append(0)
@@ -278,7 +278,7 @@ class VirtualMachine:
             print("#Read Error: La variable no tiene un tipo registrado",temporal)
             sys.exit()
 
-    #Funcion de que agrega un elemento a un arreglo ya existente ['append',value,-1,self.CurrentCotainer]
+    #Funcion de que agrega un elemento a un contenedor ya existente ['append',value,-1,self.CurrentCotainer]
     def AppendElement(self,cuadruplo):
         value = self.getValue(cuadruplo[1])
         direc = cuadruplo[3]
@@ -330,7 +330,11 @@ class VirtualMachine:
                 index = len(self.Global[direc - 10000])
                 self.Global[direc - 10000].insert(index, element)
             elif op == 35:
-                self.Global[direc - 10000][index] = element
+                try:
+                    self.Global[direc - 10000][index] = element
+                except:
+                    print('#OpContenedor Error: El indice',index,'no se encuentra dentro del rango del contenedor')
+                    sys.exit()
             else:
                 self.Global[direc - 10000].insert(index, element)
         elif direc >= 20000 and direc < 30000: #memLocal
@@ -338,7 +342,11 @@ class VirtualMachine:
                 index = len(self.Local[-1][direc - 20000])
                 self.Local[-1][direc - 20000].insert(index, element)
             elif op == 35:
-                self.Local[-1][direc - 20000][index] = element
+                try:
+                    self.Local[-1][direc - 20000][index] = element
+                except:
+                    print('#OpContenedor Error: El indice',index,'no se encuentra dentro del rango del contenedor')
+                    sys.exit()
             else:
                 self.Local[-1][direc - 20000].insert(index, element)
         elif direc >= 30000 and direc < 40000: #memConst
@@ -346,7 +354,11 @@ class VirtualMachine:
                 index = len(self.Constante[direc - 30000])
                 self.Constante[direc - 30000].insert(index, element)
             elif op == 35:
-                self.Constante[direc - 30000][index] = element
+                try:
+                    self.Constante[direc - 30000][index] = element
+                except:
+                    print('#OpContenedor Error: El indice',index,'no se encuentra dentro del rango del contenedor')
+                    sys.exit()
             else:
                 self.Constante[direc - 30000].insert(index, element)
         elif direc == 99999:
@@ -354,7 +366,11 @@ class VirtualMachine:
                 index = len(self.returnMem[-1])
                 self.returnMem[-1].insert(index,element)
             elif op == 35:
-                self.returnMem[-1][index] = element
+                try:
+                    self.returnMem[-1][index] = element
+                except:
+                    print('#OpContenedor Error: El indice',index,'no se encuentra dentro del rango del contenedor')
+                    sys.exit()
             else:
                 self.returnMem[-1].insert(index,element)
         else:
@@ -382,7 +398,7 @@ class VirtualMachine:
                 try:
                     self.setValue(result,self.Global[direc - 10000][index])
                 except:
-                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
+                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del contenedor')
                     sys.exit()
         elif direc >= 20000 and direc < 30000: #memLocal
             if op == 32: #lenght
@@ -391,7 +407,7 @@ class VirtualMachine:
                 try:
                     self.setValue(result,self.Local[-1][direc - 20000][index])
                 except:
-                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
+                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del contenedor')
                     sys.exit()
         elif direc >= 30000 and direc < 40000: #memConst
             if op == 32: #lenght
@@ -400,7 +416,7 @@ class VirtualMachine:
                 try:
                     self.setValue(result,self.Constante[direc - 30000][index])
                 except:
-                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
+                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del contenedor')
                     sys.exit()
         elif direc == 99999: #memConst
             if op == 32: #lenght
@@ -409,7 +425,7 @@ class VirtualMachine:
                 try:
                     self.setValue(result,self.returnMem[-1][index])
                 except:
-                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del arreglo')
+                    print('#OpContenedorReturns Error: El indice',index,'no se encuentra dentro del rango del contenedor')
                     sys.exit()
         else:
             print('#OpContenedorReturns Error: la direceccion',direc,'no es valida.')
