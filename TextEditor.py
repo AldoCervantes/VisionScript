@@ -71,7 +71,7 @@ root.resizable(False, False)
 
 #define code area
 codeArea = Text(root, height=20, width=70)
-codeArea.configure(background='black',foreground="white",font=("Helvetica", 15))
+codeArea.configure(background='black',foreground="white",font=("Helvetica", 15), insertbackground='white')
 codeArea.pack()
 
 #define bar
@@ -80,7 +80,7 @@ bar.pack()
 
 #define console area
 console = Text(root, height=10, width=70)
-console.configure(background='grey',foreground="black",font=("Helvetica", 15))
+console.configure(background='grey',foreground="black",font=("Helvetica", 15),insertbackground='white')
 console.pack()
 
 #define icon images
