@@ -519,6 +519,6 @@ print(arr.length())
 Algo que hace único a ```VisionScript``` es que tiene su propio editor de texto, el cual es utilizado para escribir código, que posteriormente puede ser ejecutado desde la terminal. Lo que hace único a este editor es que tiene botones especiales para traducir el código de alfabeto latino a braille y viceversa, e incluso reproducir el código en formato de audio, permitiendo que las personas con discapacidad visual tengan mayor facilidad de escribir código en ```VisionScript```.
 
 
-![Editor de Textos](https://github.com/AldoCervantes/VisionScript/blob/develop/TextEditorTutorial.png)
+![Editor de Textos](https://raw.githubusercontent.com/AldoCervantes/VisionScript/develop/TextEditorTutorial.png)
 
 
