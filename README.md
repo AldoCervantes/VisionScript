@@ -451,4 +451,8 @@ print(arr.length())
 ```
 3
 ```
+### Editor de Textos
+Algo que hace único a ```VisionScript``` es que tiene su propio editor de texto, el cual es utilizado para escribir código, que posteriormente puede ser ejecutado desde la terminal. Lo que hace único a este editor es que tiene botones especiales para traducir el código de alfabeto latino a braille y viceversa, e incluso reproducir el código en formato de audio, permitiendo que las personas con discapacidad visual tengan mayor facilidad de escribir código en ```VisionScript```.
 
+
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)

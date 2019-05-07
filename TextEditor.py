@@ -66,7 +66,7 @@ def SaveFile():
 
 
 #define root
-root = Tk(className = " VisionScript Beta")
+root = Tk(className = " VisionScript Text Editor")
 root.resizable(False, False)
 
 #define code area
