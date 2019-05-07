@@ -2,7 +2,7 @@ container a = [false,true,1,2,3,4,5,6,7,"Aldo","$"]
 
 text find = ""
 
-print("De que tipo es el elemento que quires buscar: (T -> Text, N -> Number y B -> Bool) ")
+print("De que tipo es el elemento que quieres buscar: (T -> Text, N -> Number y B -> Bool) ")
 read(find)
 
 number num = 0
@@ -13,7 +13,7 @@ number pos = 0
 
 if find equal "T"
 begin
-  print("Escribe que texto quieres que busque:")
+  print("Escribe qué texto quieres que busque:")
   read(find)
   repeat until i >= a.length()
   begin
@@ -29,7 +29,7 @@ begin
 else
   if find equal "N"
   begin
-    print("Escribe que numero quieres que busque:")
+    print("Escribe qué número quieres que busque:")
     read(num)
     repeat until i >= a.length()
     begin
@@ -59,15 +59,15 @@ else
         end
       end
     else
-      print("Lo siento, el tipo de dato que solicitas no es valido")
+      print("Lo siento, el tipo de dato que solicitas no es válido")
     end
   end
 end
 
 if encontrado
 begin
-  print("Encontre tu elemento en la posicion:")
+  print("Encontre tu elemento en la posición:")
   print(pos)
 else
-  print("El elemento no esta dentro del contenedor")
+  print("El elemento no está dentro del contenedor")
 end

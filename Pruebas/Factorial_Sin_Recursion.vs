@@ -2,7 +2,7 @@ number i = 1
 number fact = 1
 number numero = 0
 
-print("ingresa un numero: ")
+print("ingresa un número: ")
 read(numero)
 
 if numero < 0

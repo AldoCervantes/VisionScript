@@ -4,7 +4,7 @@ number cont = 0
 number temp = 0
 container a = [0,1]
 
-print("Cual es el numero que desea encontrar:")
+print("Cual es el número que desea encontrar:")
 read(n)
  
 repeat until i >= n - 1 

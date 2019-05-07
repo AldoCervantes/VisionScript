@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 class SemanticCube:
     semanticCube = {
             '+':{
@@ -105,8 +108,8 @@ class SemanticCube:
                 'number':{ 
                             'number': 'number',
                             'bool'  : 'error',
-                            'text'  : 'error',
-                            'container': 'error',
+                            'text'  : 'text',
+                            'container': 'container',
                             'error' : 'error',
                             'void' : 'error'
                 },
@@ -119,7 +122,7 @@ class SemanticCube:
                             'void' : 'error'
                 },
                 'text':{ 
-                            'number': 'error',
+                            'number': 'text',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',
@@ -127,7 +130,7 @@ class SemanticCube:
                             'void' : 'error'
                 },
                 'container':{ 
-                            'number': 'error',
+                            'number': 'container',
                             'bool'  : 'error',
                             'text'  : 'error',
                             'container': 'error',

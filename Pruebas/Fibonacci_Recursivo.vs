@@ -10,7 +10,7 @@ end
 
 number cont = 0
 
-print("Cual es el numero que desea encontrar:")
+print("Cual es el número que desea encontrar:")
 read(cont)
 print(funcionFibonacci(cont))
 

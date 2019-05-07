@@ -15,15 +15,14 @@ number n = 0
 
 repeat until again equal "no" or again equal "n" or again equal "N" or again equal "NO" or again equal "No"
 begin
-    print("Introduzca número: ")
+    hear("Introduce el número del que quieres saber su factorial: ")
     read(n)
 
-    print("factorial: ")
-    print(factorial(n))
-   
-    print(" ")
+    hear("la factorial de")
+    hear(n)
+    hear("es")
+    hear(factorial(n))
 
-    print("¿Quiéres hacer otro cálculo?")
+    hear("¿Quiéres hacer otro cálculo?")
     read(again)
-    print(" ")
 end
