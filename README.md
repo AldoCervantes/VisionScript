@@ -10,7 +10,9 @@ Javac ```1.8.0_144```
 Python ```3.7.2```
 ### PIP
 Pip ```version 19.0.2```
+
 ### PIP Packages
+
 | Package                |      Version     |
 | -------------          | -------------    |
 |antlr4-python3-runtime |4.7.2|
